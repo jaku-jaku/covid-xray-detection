@@ -1,2 +1,6 @@
 data/test/*
+data/train/*.DS_Store
+*.DS_Store
+*.vscode
+data/train/*
 data/train/*
