@@ -75,19 +75,44 @@ def filename_to_abspath(filenames, tag):
 TRAIN_DATA_LUT["img_abs_path"] = filename_to_abspath(filenames=TRAIN_DATA_LUT["[filename]"], tag="train")
 VALID_DATA_LUT["img_abs_path"] = filename_to_abspath(filenames=VALID_DATA_LUT["[filename]"], tag="test")
 
+# report status:
+def report_status(data, tag):
+    tp, tn = np.sum(data["Y"] == 1), np.sum(data["Y"] == 0)
+    print("{}: +:{}, -:{}".format(tag, tp, tn))
+
+report_status(data=TRAIN_DATA_LUT, tag="train")
+report_status(data=VALID_DATA_LUT, tag="valid")
+# %% BALANCE TRAINING DATASET -------------------------------- ####
+"""
+    Since we notice the imbalance in training dataset, let's try random downsampling.
+"""
+train_pos = TRAIN_DATA_LUT[TRAIN_DATA_LUT["Y"] == 1]
+train_neg = TRAIN_DATA_LUT[TRAIN_DATA_LUT["Y"] == 0]
+N_balanced = min(len(train_pos), len(train_neg))
+# shuffle and resample:
+train_pos = train_pos[0:N_balanced]
+train_neg = train_neg[0:N_balanced]
+NEW_TRAIN_DATA_LUT = pd.concat([train_pos, train_neg])
+report_status(data=train_pos, tag="new:train_pos")
+report_status(data=train_neg, tag="new:train_neg")
+report_status(data=NEW_TRAIN_DATA_LUT, tag="new:train")
+TRAIN_DATA_LUT = NEW_TRAIN_DATA_LUT
 
 # %% USER DEFINE: ----- ----- ----- ----- ----- ----- ----- ----- ----- #
 @dataclass
 class PredictorConfiguration:
     MODEL_TAG            : str              = "default"
     OUT_DIR              : str              = ""
+    OUT_DIR_MODELS       : str              = ""
     VERSION              : str              = "default"
     # Settings:
     TOTAL_NUM_EPOCHS     : int              = 5
     LEARNING_RATE        : float            = 0.001
-    BATCH_SIZE           : int              = 10
+    BATCH_SIZE           : int              = 100
     LOSS_FUNC            : nn               = nn.NLLLoss()
     OPTIMIZER            : optim            = None
+    # early stopping:
+    EARLY_STOPPING_DECLINE_CRITERION  : int = 5
 
 SELECTED_TARGET = "1LAYER" # <--- select model !!!
 
@@ -106,7 +131,7 @@ MODEL_DICT = {
         "config":
             PredictorConfiguration(
                 VERSION="v1",
-                OPTIMIZER=optim.Nll,
+                OPTIMIZER=optim.SGD,
             ),
     },
     # "VGG11": {
@@ -145,9 +170,11 @@ SELECTED_NET_CONFIG.OPTIMIZER = SELECTED_NET_CONFIG.OPTIMIZER(
 OUT_DIR = abspath("output")
 MODEL_OUT_DIR = "{}/{}".format(OUT_DIR, SELECTED_TARGET)
 SELECTED_NET_CONFIG.OUT_DIR = "{}/{}".format(MODEL_OUT_DIR, SELECTED_NET_CONFIG.VERSION)
+SELECTED_NET_CONFIG.OUT_DIR_MODELS = "{}/{}".format(SELECTED_NET_CONFIG.OUT_DIR, "models")
 jx_lib.create_folder(DIR=OUT_DIR)
 jx_lib.create_folder(DIR=MODEL_OUT_DIR)
 jx_lib.create_folder(DIR=SELECTED_NET_CONFIG.OUT_DIR)
+jx_lib.create_folder(DIR=SELECTED_NET_CONFIG.OUT_DIR_MODELS)
 
 # define logger:
 def _print(content):
@@ -238,15 +265,18 @@ _print("> Valid Dataset: {}".format(valid_dataloader.dataset._report()))
 
 
 # %% PRINT SAMPLE: ----- ----- ----- ----- ----- ----- ---
-def plot_sample_from_dataloader(dataloader, tag:str, N_COLS = 5):
-    N_ROWS = int(np.ceil(SELECTED_NET_CONFIG.BATCH_SIZE/N_COLS))
+def plot_sample_from_dataloader(dataloader, tag:str, N_COLS = 5, N_MAX=20):
+    N_MAX = min(SELECTED_NET_CONFIG.BATCH_SIZE, N_MAX)
+    N_ROWS = int(np.ceil(N_MAX/N_COLS))
     fig, axes = plt.subplots(
         figsize=(N_COLS * 4, N_ROWS * 4), 
         ncols=N_COLS, nrows=N_ROWS
     )
+    _print("=== Print Sample Data ({}) [n_display:{} / batch_size:{}]".format(
+        tag, N_MAX, SELECTED_NET_CONFIG.BATCH_SIZE))
     # get one batch:
     images, labels = next(iter(dataloader))
-    for i in range(SELECTED_NET_CONFIG.BATCH_SIZE):
+    for i in range(N_MAX):
         ax = axes[int(i/N_COLS), i%N_COLS]
         ax.imshow(images[i][0])
         ax.set_title(
@@ -274,7 +304,9 @@ report = CNN_MODEL_TRAINER.train_and_monitor(
     loss_func=SELECTED_NET_CONFIG.LOSS_FUNC,
     net=SELECTED_NET_MODEL,
     num_epochs=SELECTED_NET_CONFIG.TOTAL_NUM_EPOCHS,
-    max_data_samples=10,
+    model_output_path=SELECTED_NET_CONFIG.OUT_DIR_MODELS,
+    early_stopping_n_epochs_consecutive_decline=SELECTED_NET_CONFIG.EARLY_STOPPING_DECLINE_CRITERION,
+    # max_data_samples=20,
     verbose_level= VerboseLevel.HIGH,
     _print=_print,
 )
@@ -284,4 +316,3 @@ report.output_progress_plot(
     tag=SELECTED_NET_CONFIG.VERSION,
     verbose_level=VerboseLevel.HIGH
 )
-

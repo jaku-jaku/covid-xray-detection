@@ -216,9 +216,9 @@ class CNN_MODEL_TRAINER:
                 if i >= max_data_samples:
                     break
                 if verbose_level >= VerboseLevel.HIGH:
-                    print("\r   >[{}/{}]".format(i, max_data_samples),  end='')
+                    print("\r   >[{}/{}]".format(i+1, max_data_samples),  end='')
             elif verbose_level >= VerboseLevel.HIGH:
-                print("\r   >[{}/{}]".format(i, len(test_dataset)),  end='')
+                print("\r   >[{}/{}]".format(i+1, len(test_dataset)),  end='')
             
             # hardware-acceleration
             if device != None:
@@ -264,9 +264,9 @@ class CNN_MODEL_TRAINER:
                 if i >= max_data_samples:
                     break
                 if verbose_level >= VerboseLevel.HIGH:
-                    print("\r   >[{}/{}]".format(i, max_data_samples), end='')
+                    print("\r   >[{}/{}]".format(i+1, max_data_samples), end='')
             elif verbose_level >= VerboseLevel.HIGH:
-                print("\r   >[{}/{}]".format(i, len(train_dataset)),  end='')
+                print("\r   >[{}/{}]".format(i+1, len(train_dataset)),  end='')
             
             # 1: Clear PyTorch Cache
             net.zero_grad()
@@ -304,13 +304,18 @@ class CNN_MODEL_TRAINER:
         optimizer, 
         loss_func,
         net, 
+        model_output_path,
         num_epochs: int,
+        early_stopping_n_epochs_consecutive_decline: int = 3,
         # history_epoch_resolution: float = 1.0, TODO: mini-batches progress!!!
         max_data_samples: Optional[int] = None,
         verbose_level: VerboseLevel = VerboseLevel.LOW,
         _print=print,
     ):
         report = ProgressReport()
+        n_decline = 0
+        best_test_acc = 0
+        best_net = None
         # Cross entropy
         for epoch in range(num_epochs):
             if verbose_level >= VerboseLevel.LOW:
@@ -350,4 +355,20 @@ class CNN_MODEL_TRAINER:
                 test_time     = test_ellapse,
                 learning_rate = optimizer.param_groups[0]["lr"],
             )))
+
+            if test_acc > best_test_acc:
+                best_net = net
+                best_test_acc = test_acc
+                path = "{}/best_state_dict_{}:{}.pth".format(model_output_path, epoch + 1, num_epochs)
+                t.save(net.state_dict(), path)
+                _print("> Found Best Model State Dict saved @{} \n".format(path))
+            else:
+                n_decline += 1
+            
+            # early stopping:
+            if n_decline > early_stopping_n_epochs_consecutive_decline:
+                break
+
+        # Store the best model:
+        t.save(best_net, "{}/best_model_{}.pth \n".format(model_output_path, epoch + 1))
         return report

@@ -158,3 +158,209 @@ Parameter Group 0
 [2021-06-02 22:20:22.388869]:   >> Learning (wip) 
 [2021-06-02 22:20:24.763884]:   >> Testing (wip) 
 [2021-06-02 22:20:31.154817]:     epoch 5 > Training: [LOSS: -0.9118 | ACC: 0.9200] | Testing: [LOSS: -0.6628 | ACC: 0.6600] Ellapsed: 2.37 s | rate:6.38998
+
+[2021-06-02 22:30:13.804737]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 22:30:13.805361]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[2021-06-02 22:30:13.876631]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-02 22:30:15.869891]: === Dataset Loaded:
+[2021-06-02 22:30:15.871619]: > Train Dataset: +: 2158/15951 (13.53%)  -: 13793/15951 (86.47%) [UNBALANCED !!!]
+[2021-06-02 22:30:15.872034]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-02 22:31:11.390868]: > epoch 1/5:
+[2021-06-02 22:31:11.391787]:   >> Learning (wip) 
+[2021-06-02 22:31:53.700132]:   >> Testing (wip) 
+[2021-06-02 22:32:16.522494]:     epoch 1 > Training: [LOSS: -0.8278 | ACC: 0.8195] | Testing: [LOSS: -0.5000 | ACC: 0.5000] Ellapsed: 42.30 s | rate:22.82166
+
+[2021-06-02 22:32:16.522888]: > epoch 2/5:
+[2021-06-02 22:32:16.523569]:   >> Learning (wip) 
+[2021-06-02 22:32:58.560585]:   >> Testing (wip) 
+[2021-06-02 22:33:19.811375]:     epoch 2 > Training: [LOSS: -0.8339 | ACC: 0.8345] | Testing: [LOSS: -0.5003 | ACC: 0.5000] Ellapsed: 42.03 s | rate:21.25002
+
+[2021-06-02 22:33:19.811801]: > epoch 3/5:
+[2021-06-02 22:33:19.812831]:   >> Learning (wip) 
+[2021-06-02 22:34:00.493618]:   >> Testing (wip) 
+[2021-06-02 22:34:21.768620]:     epoch 3 > Training: [LOSS: -0.8582 | ACC: 0.8590] | Testing: [LOSS: -0.5003 | ACC: 0.5000] Ellapsed: 40.68 s | rate:21.27443
+
+[2021-06-02 22:34:21.769113]: > epoch 4/5:
+[2021-06-02 22:34:21.769687]:   >> Learning (wip) 
+[2021-06-02 22:35:03.030499]:   >> Testing (wip) 
+[2021-06-02 22:35:24.375182]:     epoch 4 > Training: [LOSS: -0.8725 | ACC: 0.8725] | Testing: [LOSS: -0.5005 | ACC: 0.5000] Ellapsed: 41.26 s | rate:21.34414
+
+[2021-06-02 22:35:24.375533]: > epoch 5/5:
+[2021-06-02 22:35:24.376248]:   >> Learning (wip) 
+[2021-06-02 22:36:03.500615]:   >> Testing (wip) 
+[2021-06-02 22:36:24.691469]:     epoch 5 > Training: [LOSS: -0.8666 | ACC: 0.8665] | Testing: [LOSS: -0.5004 | ACC: 0.5000] Ellapsed: 39.12 s | rate:21.19019
+
+[2021-06-02 22:59:56.857108]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 22:59:56.857605]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[2021-06-02 22:59:56.947698]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-02 22:59:58.900742]: === Dataset Loaded:
+[2021-06-02 22:59:58.901369]: > Train Dataset: +: 2158/4316 (50.00%)  -: 2158/4316 (50.00%) [BALANCED.]
+[2021-06-02 22:59:58.902386]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-02 23:00:18.704907]: > epoch 1/5:
+[2021-06-02 23:00:18.705419]:   >> Learning (wip) 
+[2021-06-02 23:02:44.958400]:   >> Testing (wip) 
+[2021-06-02 23:03:06.567448]:     epoch 1 > Training: [LOSS: -0.7236 | ACC: 0.7588] | Testing: [LOSS: -0.7104 | ACC: 0.7150] Ellapsed: 146.25 s | rate:21.60836
+
+[2021-06-02 23:03:06.568011]: > epoch 2/5:
+[2021-06-02 23:03:06.568873]:   >> Learning (wip) 
+[2021-06-02 23:05:27.929895]:   >> Testing (wip) 
+[2021-06-02 23:05:49.337132]:     epoch 2 > Training: [LOSS: -0.7808 | ACC: 0.8054] | Testing: [LOSS: -0.6898 | ACC: 0.6975] Ellapsed: 141.36 s | rate:21.40641
+
+[2021-06-02 23:05:49.337469]: > epoch 3/5:
+[2021-06-02 23:05:49.337752]:   >> Learning (wip) 
+[2021-06-02 23:08:10.870566]:   >> Testing (wip) 
+[2021-06-02 23:08:32.103243]:     epoch 3 > Training: [LOSS: -0.7932 | ACC: 0.8158] | Testing: [LOSS: -0.7184 | ACC: 0.7200] Ellapsed: 141.53 s | rate:21.23212
+
+[2021-06-02 23:08:32.103702]: > epoch 4/5:
+[2021-06-02 23:08:32.104308]:   >> Learning (wip) 
+[2021-06-02 23:10:55.457900]:   >> Testing (wip) 
+[2021-06-02 23:11:16.977743]:     epoch 4 > Training: [LOSS: -0.8020 | ACC: 0.8221] | Testing: [LOSS: -0.7148 | ACC: 0.7150] Ellapsed: 143.35 s | rate:21.51942
+
+[2021-06-02 23:11:16.978208]: > epoch 5/5:
+[2021-06-02 23:11:16.979995]:   >> Learning (wip) 
+[2021-06-02 23:13:39.352446]:   >> Testing (wip) 
+[2021-06-02 23:14:00.605105]:     epoch 5 > Training: [LOSS: -0.8080 | ACC: 0.8269] | Testing: [LOSS: -0.7069 | ACC: 0.7300] Ellapsed: 142.37 s | rate:21.25218
+
+[2021-06-02 23:18:28.003691]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 23:18:28.004524]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[2021-06-02 23:18:28.166079]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-02 23:18:28.461616]: === Dataset Loaded:
+[2021-06-02 23:18:28.463048]: > Train Dataset: +: 2158/4316 (50.00%)  -: 2158/4316 (50.00%) [BALANCED.]
+[2021-06-02 23:18:28.464263]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-02 23:18:49.089689]: > epoch 1/5:
+[2021-06-02 23:18:49.090346]:   >> Learning (wip) 
+[2021-06-02 23:21:15.238395]:   >> Testing (wip) 
+[2021-06-02 23:21:36.649234]:     epoch 1 > Training: [LOSS: -0.7282 | ACC: 0.7676] | Testing: [LOSS: -0.7085 | ACC: 0.7125] Ellapsed: 146.15 s | rate:21.41026
+
+[2021-06-02 23:21:36.649513]: > epoch 2/5:
+[2021-06-02 23:21:36.649787]:   >> Learning (wip) 
+[2021-06-02 23:24:01.137712]:   >> Testing (wip) 
+[2021-06-02 23:24:23.064914]:     epoch 2 > Training: [LOSS: -0.7781 | ACC: 0.8072] | Testing: [LOSS: -0.6914 | ACC: 0.6800] Ellapsed: 144.49 s | rate:21.92675
+
+[2021-06-02 23:24:23.065927]: > epoch 3/5:
+[2021-06-02 23:24:23.066554]:   >> Learning (wip) 
+[2021-06-02 23:26:48.893612]:   >> Testing (wip) 
+[2021-06-02 23:27:11.871672]:     epoch 3 > Training: [LOSS: -0.7931 | ACC: 0.8116] | Testing: [LOSS: -0.7077 | ACC: 0.7375] Ellapsed: 145.83 s | rate:22.97748
+
+[2021-06-02 23:27:11.872477]: > epoch 4/5:
+[2021-06-02 23:27:11.873164]:   >> Learning (wip) 
+[2021-06-02 23:29:40.388041]:   >> Testing (wip) 
+[2021-06-02 23:30:02.635878]:     epoch 4 > Training: [LOSS: -0.8012 | ACC: 0.8163] | Testing: [LOSS: -0.7127 | ACC: 0.7200] Ellapsed: 148.51 s | rate:22.24717
+
+[2021-06-02 23:30:02.636469]: > epoch 5/5:
+[2021-06-02 23:30:02.636995]:   >> Learning (wip) 
+[2021-06-02 23:32:28.306898]:   >> Testing (wip) 
+[2021-06-02 23:32:50.560351]:     epoch 5 > Training: [LOSS: -0.8023 | ACC: 0.8214] | Testing: [LOSS: -0.7203 | ACC: 0.7275] Ellapsed: 145.67 s | rate:22.25309
+
+[2021-06-02 23:32:58.270298]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 23:32:58.270782]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', OUT_DIR_MODELS='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1/models', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=5)
+[2021-06-02 23:32:58.429867]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-02 23:32:58.578381]: === Dataset Loaded:
+[2021-06-02 23:32:58.579434]: > Train Dataset: +: 2158/4316 (50.00%)  -: 2158/4316 (50.00%) [BALANCED.]
+[2021-06-02 23:32:58.580696]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-02 23:33:40.816393]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 23:33:40.817146]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', OUT_DIR_MODELS='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1/models', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=5)
+[2021-06-02 23:33:40.920341]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-02 23:33:41.066906]: === Dataset Loaded:
+[2021-06-02 23:33:41.067753]: > Train Dataset: +: 2158/4316 (50.00%)  -: 2158/4316 (50.00%) [BALANCED.]
+[2021-06-02 23:33:41.068142]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-02 23:36:19.484322]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 23:36:19.485524]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', OUT_DIR_MODELS='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1/models', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=5)
+[2021-06-02 23:36:19.579362]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-02 23:36:19.740636]: === Dataset Loaded:
+[2021-06-02 23:36:19.741698]: > Train Dataset: +: 2158/4316 (50.00%)  -: 2158/4316 (50.00%) [BALANCED.]
+[2021-06-02 23:36:19.742718]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-02 23:36:20.178790]: === Print Sample Data (training-sample) [n_display:20 / batch_size:100]
+[2021-06-02 23:36:26.995873]: === Print Sample Data (validation-sample) [n_display:20 / batch_size:100]
+[2021-06-02 23:36:40.143061]: > epoch 1/5:
+[2021-06-02 23:36:40.143738]:   >> Learning (wip) 
+[2021-06-02 23:39:06.620220]:   >> Testing (wip) 
+[2021-06-02 23:39:28.131704]:     epoch 1 > Training: [LOSS: -0.7289 | ACC: 0.7653] | Testing: [LOSS: -0.7129 | ACC: 0.7325] Ellapsed: 146.48 s | rate:21.51098
+
+[2021-06-02 23:39:28.137169]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1/models/best_state_dict_1:5.pth
+[2021-06-02 23:39:28.137565]: > epoch 2/5:
+[2021-06-02 23:39:28.138155]:   >> Learning (wip) 
+[2021-06-02 23:41:52.739587]:   >> Testing (wip) 
+[2021-06-02 23:42:14.616811]:     epoch 2 > Training: [LOSS: -0.7834 | ACC: 0.8112] | Testing: [LOSS: -0.6705 | ACC: 0.6725] Ellapsed: 144.60 s | rate:21.87674
+
+[2021-06-02 23:42:14.617688]: > epoch 3/5:
+[2021-06-02 23:42:14.618645]:   >> Learning (wip) 
+[2021-06-02 23:44:39.519335]:   >> Testing (wip) 
+[2021-06-02 23:45:01.169508]:     epoch 3 > Training: [LOSS: -0.7898 | ACC: 0.8119] | Testing: [LOSS: -0.7195 | ACC: 0.7450] Ellapsed: 144.90 s | rate:21.64959
+
+[2021-06-02 23:45:01.171172]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1/models/best_state_dict_3:5.pth
+[2021-06-02 23:45:01.171703]: > epoch 4/5:
+[2021-06-02 23:45:01.172283]:   >> Learning (wip) 
+[2021-06-02 23:47:26.222121]:   >> Testing (wip) 
+[2021-06-02 23:47:48.024969]:     epoch 4 > Training: [LOSS: -0.7977 | ACC: 0.8232] | Testing: [LOSS: -0.7123 | ACC: 0.7350] Ellapsed: 145.05 s | rate:21.80229
+
+[2021-06-02 23:47:48.025159]: > epoch 5/5:
+[2021-06-02 23:47:48.025523]:   >> Learning (wip) 
+[2021-06-02 23:50:14.190188]:   >> Testing (wip) 
+[2021-06-02 23:50:35.709466]:     epoch 5 > Training: [LOSS: -0.8066 | ACC: 0.8232] | Testing: [LOSS: -0.7059 | ACC: 0.7150] Ellapsed: 146.16 s | rate:21.51881

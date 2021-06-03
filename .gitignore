@@ -5,3 +5,5 @@ data/train/*.DS_Store
 data/train/*
 data/train/*
 src_code/__pycache__/*
+*/models/*
+**/models/*
