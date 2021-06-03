@@ -1,0 +1,160 @@
+
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=10, LOSS_FUNC=NLLLoss(), OPTIMIZER=<class 'torch.optim.sgd.SGD'>)
+[ALERT] Attempt to use GPU => CUDA:0
+=== Dataset Loaded:
+> Train Dataset: +: 2158/15951 (13.53%)  -: 13793/15951 (86.47%) [UNBALANCED !!!]
+> Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+> epoch 1/5:
+> epoch 1/5:
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=10, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[ALERT] Attempt to use GPU => CUDA:0
+=== Dataset Loaded:
+> Train Dataset: +: 2158/15951 (13.53%)  -: 13793/15951 (86.47%) [UNBALANCED !!!]
+> Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+> epoch 1/5:
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=10, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[ALERT] Attempt to use GPU => CUDA:0
+=== Dataset Loaded:
+> Train Dataset: +: 2158/15951 (13.53%)  -: 13793/15951 (86.47%) [UNBALANCED !!!]
+> Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+> epoch 1/5:
+> epoch 1/5:
+> epoch 1/5:
+> epoch 2/5:
+> epoch 3/5:
+> epoch 4/5:
+> epoch 5/5:
+> epoch 1/5:
+> epoch 2/5:
+> epoch 3/5:
+> epoch 4/5:
+> epoch 5/5:
+> epoch 1/5:
+    epoch 2 > Training: [LOSS: -0.9590 | ACC: 0.9600] | Testing: [LOSS: -0.6294 | ACC: 0.6300] Ellapsed: 1.94 s | rate:6.49495
+> epoch 2/5:
+    epoch 3 > Training: [LOSS: -0.8910 | ACC: 0.8900] | Testing: [LOSS: -0.6522 | ACC: 0.6400] Ellapsed: 2.25 s | rate:6.36105
+> epoch 3/5:
+    epoch 4 > Training: [LOSS: -0.8574 | ACC: 0.8600] | Testing: [LOSS: -0.7419 | ACC: 0.7600] Ellapsed: 2.11 s | rate:6.03121
+> epoch 4/5:
+    epoch 5 > Training: [LOSS: -0.8476 | ACC: 0.8500] | Testing: [LOSS: -0.7408 | ACC: 0.7300] Ellapsed: 2.43 s | rate:5.73988
+> epoch 5/5:
+    epoch 6 > Training: [LOSS: -0.8938 | ACC: 0.9000] | Testing: [LOSS: -0.7870 | ACC: 0.8000] Ellapsed: 2.99 s | rate:6.03031
+> epoch 1/5:
+  >> Learning (wip) 
+> epoch 1/5:
+  >> Learning (wip) 
+  >> Testing (wip) 
+    epoch 1 > Training: [LOSS: -0.9297 | ACC: 0.9300] | Testing: [LOSS: -0.6719 | ACC: 0.6400] Ellapsed: 2.11 s | rate:6.64839
+
+> epoch 2/5:
+  >> Learning (wip) 
+  >> Testing (wip) 
+    epoch 2 > Training: [LOSS: -0.8677 | ACC: 0.8800] | Testing: [LOSS: -0.6888 | ACC: 0.6600] Ellapsed: 2.54 s | rate:6.32015
+
+> epoch 3/5:
+  >> Learning (wip) 
+  >> Testing (wip) 
+    epoch 3 > Training: [LOSS: -0.9134 | ACC: 0.9100] | Testing: [LOSS: -0.6575 | ACC: 0.6400] Ellapsed: 2.12 s | rate:6.34913
+
+> epoch 4/5:
+  >> Learning (wip) 
+  >> Testing (wip) 
+    epoch 4 > Training: [LOSS: -0.8572 | ACC: 0.8400] | Testing: [LOSS: -0.6461 | ACC: 0.6000] Ellapsed: 2.79 s | rate:6.23128
+
+> epoch 5/5:
+  >> Learning (wip) 
+  >> Testing (wip) 
+    epoch 5 > Training: [LOSS: -0.8761 | ACC: 0.8800] | Testing: [LOSS: -0.7008 | ACC: 0.6900] Ellapsed: 2.38 s | rate:5.59471
+
+(<built-in method strftime of datetime.datetime object at 0x7f03736ec900>): Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+(<built-in method strftime of datetime.datetime object at 0x7f03736ec6c0>): PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=10, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+(2021-06-02 22:19:03.216879): Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+(2021-06-02 22:19:03.219409): PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=10, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[2021-06-02 22:19:35.677791]: Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=50176, out_features=2, bias=True)
+  (2): Softmax(dim=None)
+)
+[2021-06-02 22:19:35.680024]: PredictorConfiguration(MODEL_TAG='1LAYER', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/1LAYER/v1', VERSION='v1', TOTAL_NUM_EPOCHS=5, LEARNING_RATE=0.001, BATCH_SIZE=10, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+))
+[2021-06-02 22:19:47.998894]: > epoch 1/5:
+[2021-06-02 22:19:47.999450]:   >> Learning (wip) 
+[2021-06-02 22:19:51.312973]:   >> Testing (wip) 
+[2021-06-02 22:19:57.524556]:     epoch 1 > Training: [LOSS: -0.8009 | ACC: 0.8000] | Testing: [LOSS: -0.6710 | ACC: 0.6800] Ellapsed: 3.31 s | rate:6.21099
+
+[2021-06-02 22:19:57.524946]: > epoch 2/5:
+[2021-06-02 22:19:57.526033]:   >> Learning (wip) 
+[2021-06-02 22:19:59.999326]:   >> Testing (wip) 
+[2021-06-02 22:20:06.536545]:     epoch 2 > Training: [LOSS: -0.9203 | ACC: 0.9200] | Testing: [LOSS: -0.6606 | ACC: 0.6500] Ellapsed: 2.47 s | rate:6.53666
+
+[2021-06-02 22:20:06.537182]: > epoch 3/5:
+[2021-06-02 22:20:06.538552]:   >> Learning (wip) 
+[2021-06-02 22:20:08.581858]:   >> Testing (wip) 
+[2021-06-02 22:20:14.208859]:     epoch 3 > Training: [LOSS: -0.8646 | ACC: 0.8600] | Testing: [LOSS: -0.6755 | ACC: 0.6800] Ellapsed: 2.04 s | rate:5.62651
+
+[2021-06-02 22:20:14.209808]: > epoch 4/5:
+[2021-06-02 22:20:14.209927]:   >> Learning (wip) 
+[2021-06-02 22:20:16.407550]:   >> Testing (wip) 
+[2021-06-02 22:20:22.387714]:     epoch 4 > Training: [LOSS: -0.9016 | ACC: 0.9100] | Testing: [LOSS: -0.6595 | ACC: 0.6300] Ellapsed: 2.20 s | rate:5.97929
+
+[2021-06-02 22:20:22.388040]: > epoch 5/5:
+[2021-06-02 22:20:22.388869]:   >> Learning (wip) 
+[2021-06-02 22:20:24.763884]:   >> Testing (wip) 
+[2021-06-02 22:20:31.154817]:     epoch 5 > Training: [LOSS: -0.9118 | ACC: 0.9200] | Testing: [LOSS: -0.6628 | ACC: 0.6600] Ellapsed: 2.37 s | rate:6.38998
