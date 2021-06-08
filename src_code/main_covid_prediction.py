@@ -32,9 +32,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.utils.data import Dataset
-
-# debugger:
-from icecream import ic
+import torchvision.models as models
 
 ## USER DEFINED:
 ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
@@ -108,13 +106,14 @@ class PredictorConfiguration:
     # Settings:
     TOTAL_NUM_EPOCHS     : int              = 5
     LEARNING_RATE        : float            = 0.001
-    BATCH_SIZE           : int              = 100
+    BATCH_SIZE           : int              = 1000
     LOSS_FUNC            : nn               = nn.NLLLoss()
     OPTIMIZER            : optim            = None
     # early stopping:
     EARLY_STOPPING_DECLINE_CRITERION  : int = 5
 
-SELECTED_TARGET = "1LAYER" # <--- select model !!!
+# SELECTED_TARGET = "1LAYER" # <--- select model !!!
+SELECTED_TARGET = "CUSTOM-MODEL" # <--- select model !!!
 
 # %% INIT: ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #
 ### MODEL ###
@@ -132,35 +131,103 @@ MODEL_DICT = {
             PredictorConfiguration(
                 VERSION="v1",
                 OPTIMIZER=optim.SGD,
+                BATCH_SIZE=1000,
             ),
+        "transformation":
+            transforms.Compose([
+                # transforms.RandomHorizontalFlip(p=0.5),
+                # transforms.RandomVerticalFlip(p=0.5),
+                # transforms.RandomPerspective(),
+                # transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
+                transforms.Resize(255),
+                transforms.CenterCrop(224),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5), (0.5)),
+                transforms.Grayscale() # apply gray scale
+            ]),
     },
-    # "VGG11": {
-    #     "model":
-    #         nn.Sequential(
-    #             ## CNN Feature Extraction
-    #             nn.Conv2d(  1,  64, 3, 1, 1), nn.BatchNorm2d( 64), nn.ReLU(), nn.MaxPool2d(2,2),
-    #             nn.Conv2d( 64, 128, 3, 1, 1), nn.BatchNorm2d(128), nn.ReLU(), nn.MaxPool2d(2,2),
-    #             nn.Conv2d(128, 256, 3, 1, 1), nn.BatchNorm2d(256), nn.ReLU(),
-    #             nn.Conv2d(256, 256, 3, 1, 1), nn.BatchNorm2d(256), nn.ReLU(), nn.MaxPool2d(2,2),
-    #             nn.Conv2d(256, 512, 3, 1, 1), nn.BatchNorm2d(512), nn.ReLU(),
-    #             nn.Conv2d(512, 512, 3, 1, 1), nn.BatchNorm2d(512), nn.ReLU(), nn.MaxPool2d(2,2),
-    #             nn.Conv2d(512, 512, 3, 1, 1), nn.BatchNorm2d(512), nn.ReLU(),
-    #             nn.Conv2d(512, 512, 3, 1, 1), nn.BatchNorm2d(512), nn.ReLU(), nn.MaxPool2d(2,2),
-    #             # Classifier
-    #             nn.Flatten(1),
-    #             nn.Linear( 512, 4096), nn.ReLU(), nn.Dropout(0.5),
-    #             nn.Linear(4096, 4096), nn.ReLU(), nn.Dropout(0.5),
-    #             nn.Linear(4096,   2),
-    #         ),
-    #     "config":
-    #         PredictorConfiguration(VERSION="v1"),
-    # },
+    "4LAYER": {
+        "model":
+            nn.Sequential(
+                # Classifier
+                nn.Flatten(1),
+                nn.Linear(50176, 1000),
+                nn.Linear(1000, 1000),
+                nn.Linear(1000, 100),
+                nn.Linear(100,   2),
+                nn.Softmax()
+            ),
+        "config":
+            PredictorConfiguration(
+                VERSION="v1",
+                OPTIMIZER=optim.SGD,
+                BATCH_SIZE=200,
+                TOTAL_NUM_EPOCHS=20
+            ),
+        "transformation":
+            transforms.Compose([
+                # transforms.RandomHorizontalFlip(p=0.5),
+                # transforms.RandomVerticalFlip(p=0.5),
+                # transforms.RandomPerspective(),
+                # transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
+                transforms.Resize(255),
+                transforms.CenterCrop(224),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5), (0.5)),
+                transforms.Grayscale() # apply gray scale
+            ]),
+    },
+    "CUSTOM-MODEL": {
+        "model":
+            nn.Sequential(
+                # Classifier
+                # CNN:
+                nn.Conv2d(1, 4, kernel_size=3, stride=1, padding=1),
+                    nn.BatchNorm2d(4),
+                    nn.ReLU(inplace=True),
+                    nn.MaxPool2d(kernel_size=2, stride=2),
+                # FC:
+                nn.Flatten(1),
+                nn.Linear(50176, 1000),
+                    nn.Linear(1000, 100),
+                # Classification:
+                nn.Linear(100,   2),
+                    nn.Softmax()
+            ),
+        "config":
+            PredictorConfiguration(
+                VERSION="v1",
+                OPTIMIZER=optim.SGD,
+                BATCH_SIZE=200,
+                TOTAL_NUM_EPOCHS=20
+            ),
+        "transformation":
+            transforms.Compose([
+                # transforms.RandomHorizontalFlip(p=0.5),
+                # transforms.RandomVerticalFlip(p=0.5),
+                # transforms.RandomPerspective(),
+                # transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
+                transforms.Resize(255),
+                transforms.CenterCrop(255),
+                transforms.ToTensor(),
+                transforms.Normalize((0.5), (0.5)),
+                # transforms.Grayscale() # apply gray scale
+            ]),
+    },
 }
 
+# MODEL_DICT["Inception"]["model"].fc = nn.Sequential(
+#     nn.Linear(2048, 512),
+#     nn.ReLU(),
+#     nn.Dropout(0.2),
+#     nn.Linear(512, 2),
+#     nn.LogSoftmax(dim=1)
+# )
 
 # select model:
 SELECTED_NET_MODEL = MODEL_DICT[SELECTED_TARGET]["model"]
 SELECTED_NET_CONFIG = MODEL_DICT[SELECTED_TARGET]["config"]
+SELECTED_NET_TRANSFORMATION = MODEL_DICT[SELECTED_TARGET]["transformation"]
 # model specific declaration:
 SELECTED_NET_CONFIG.MODEL_TAG = SELECTED_TARGET
 SELECTED_NET_CONFIG.OPTIMIZER = SELECTED_NET_CONFIG.OPTIMIZER(
@@ -228,25 +295,14 @@ class CTscanDataSet(Dataset):
             N_total, N_pos, N_neg, N_pos/N_total*100, N_neg/N_total*100, tag 
         )
 
-TRANSFORMATION = transforms.Compose([
-    transforms.Resize(255),
-    transforms.CenterCrop(224),
-    transforms.ToTensor(),
-    transforms.Normalize(
-        mean=[0.485, 0.456, 0.406],
-        std=[0.229, 0.224, 0.225]
-    ),
-    transforms.Grayscale() # apply gray scale
-])
-
 # load image:
 img_dataset_train = CTscanDataSet(
     list_of_img_dir=TRAIN_DATA_LUT["img_abs_path"], 
-    transform=TRANSFORMATION, labels=TRAIN_DATA_LUT["Y"]
+    transform=SELECTED_NET_TRANSFORMATION, labels=TRAIN_DATA_LUT["Y"]
 )
 img_dataset_valid = CTscanDataSet(
     list_of_img_dir=VALID_DATA_LUT["img_abs_path"], 
-    transform=TRANSFORMATION, labels=VALID_DATA_LUT["Y"]
+    transform=SELECTED_NET_TRANSFORMATION, labels=VALID_DATA_LUT["Y"]
 )
 
 # Prep. dataloader
@@ -265,11 +321,12 @@ _print("> Valid Dataset: {}".format(valid_dataloader.dataset._report()))
 
 
 # %% PRINT SAMPLE: ----- ----- ----- ----- ----- ----- ---
-def plot_sample_from_dataloader(dataloader, tag:str, N_COLS = 5, N_MAX=20):
+def plot_sample_from_dataloader(dataloader, tag:str, N_COLS = 4, N_MAX=20):
     N_MAX = min(SELECTED_NET_CONFIG.BATCH_SIZE, N_MAX)
-    N_ROWS = int(np.ceil(N_MAX/N_COLS))
+    N_COLS = min(N_COLS, N_MAX)
+    N_ROWS = int(np.ceil(N_MAX/N_COLS)) * 2
     fig, axes = plt.subplots(
-        figsize=(N_COLS * 4, N_ROWS * 4), 
+        figsize=(N_COLS * 8, N_ROWS * 8), 
         ncols=N_COLS, nrows=N_ROWS
     )
     _print("=== Print Sample Data ({}) [n_display:{} / batch_size:{}]".format(
@@ -277,16 +334,56 @@ def plot_sample_from_dataloader(dataloader, tag:str, N_COLS = 5, N_MAX=20):
     # get one batch:
     images, labels = next(iter(dataloader))
     for i in range(N_MAX):
-        ax = axes[int(i/N_COLS), i%N_COLS]
-        ax.imshow(images[i][0])
+        print("\r   >[{}/{}]".format(i+1,N_MAX),  end='')
+        # Plot img:
+        id_ = i * 2
+        ax = axes[int(id_/N_COLS), id_%N_COLS]
+        # show remapped image, since the range was distorted by normalization
+        ax.imshow((np.dstack((images[i][0], images[i][1], images[i][2])) + 1)/2, vmin=0, vmax=1)
         ax.set_title(
             "{}".format(INT_TO_LABEL_LUT[int(labels[i])]),
             color="red" if int(labels[i]) else "blue"
         )
+
+        # Plot Hist:
+        id_ += 1
+        ax = axes[int(id_/N_COLS), id_%N_COLS]
+        ax.hist(np.ravel(images[i][0]), bins=256, color='r', alpha = 0.5, range=[-1, 1])
+        ax.hist(np.ravel(images[i][1]), bins=256, color='g', alpha = 0.5, range=[-1, 1])
+        ax.hist(np.ravel(images[i][2]), bins=256, color='b', alpha = 0.5, range=[-1, 1])
+        ax.legend(['R', 'G', 'B'])
+        ax.set_title("<- Histogram")
+        
     fig.savefig("{}/plot_{}.png".format(SELECTED_NET_CONFIG.OUT_DIR, tag), bbox_inches = 'tight')
 
 plot_sample_from_dataloader(train_dataloader, tag="training-sample")
 plot_sample_from_dataloader(valid_dataloader, tag="validation-sample")
+
+
+# # %% Playground
+# images, labels = next(iter(train_dataloader))
+# img = images[0]
+
+# # %% T
+# fig, axes = plt.subplots(figsize=(20, 12), ncols=3, nrows=2)
+# axes[0,0].imshow(np.dstack((img[0], img[0], img[0])))
+# axes[0,1].imshow(np.dstack((img[1], img[1], img[1])))
+# axes[0,2].imshow(np.dstack((img[2], img[2], img[2])))
+
+# # do sth:
+# import cv2
+
+# kernel = np.ones((5, 5), 'uint8')
+# img2 = cv2.dilate(img.numpy(), kernel, iterations=10)
+# img3 = cv2.erode(img.numpy(), kernel, iterations=10)
+# img4 = cv2.morphologyEx(img.numpy(), cv2.MORPH_OPEN, kernel)
+# axes[1,0].imshow(np.dstack((img2[0], img2[0], img2[0])))
+# axes[1,1].imshow(np.dstack((img3[1], img3[1], img3[1])))
+# axes[1,2].imshow(np.dstack((img4[2], img4[2], img4[2])))
+# axes[1,0].set_title("dilation")
+# axes[1,1].set_title("erosion")
+# axes[1,2].set_title("morpho-open")
+
 
 # %% TRAIN: ----- ----- ----- ----- ----- ----- ---
 # Reload:
@@ -316,3 +413,35 @@ report.output_progress_plot(
     tag=SELECTED_NET_CONFIG.VERSION,
     verbose_level=VerboseLevel.HIGH
 )
+
+# %% EVALUATE WITH COMPETITION TEST DATASET -------------------------------- %%
+# from sklearn.metrics import confusion_matrix, classification_report
+# # def evaluate_net(net, dataloader):
+# #     _print("> Evaluation Begin ...")
+# #     y_true = []
+# #     y_pred = []
+# #     for X, y in dataloader:
+# #         if device != None:
+# #             X = X.to(device)
+# #             y = y.to(device)
+
+# #         # Predict:
+# #         y_prediction = net(X)
+
+# #         # record:
+# #         y_true.extend(y.cpu().detach().numpy())
+# #         y_pred.extend(y_prediction.argmax(dim=1).cpu().detach().numpy())
+# #     _print("> Evaluation Complete")
+# #     return y_true, y_pred
+
+# # y_true, y_pred = evaluate_net(net=SELECTED_NET_MODEL, dataloader=valid_dataloader)
+
+# #  Generate Evaluation Report:
+# cm = confusion_matrix(y_true, y_pred )
+# clr = classification_report(y_true, y_pred, target_names=LABEL_TO_INT_LUT)
+
+# # Output:
+# fig, status = jx_lib.make_confusion_matrix(cf=cm)
+# fig.savefig("{}/confusion_matrix.jpg".format(SELECTED_NET_CONFIG.OUT_DIR), bbox_inches = 'tight')
+# print("Classification Report:\n----------------------\n", clr)
+

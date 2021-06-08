@@ -10,6 +10,8 @@ from dataclasses import dataclass
 import torch as t
 import torchvision.transforms as ttf
 from torchvision.datasets import MNIST
+from sklearn.metrics import confusion_matrix, classification_report
+import jx_lib
 
 #######################
 ##### Functions #######
@@ -205,6 +207,9 @@ class CNN_MODEL_TRAINER:
         verbose_level: VerboseLevel = VerboseLevel.LOW,
         _print=print,
     ):
+        y_true = []
+        y_pred = []
+        
         if verbose_level >= VerboseLevel.LOW:
             _print("  >> Testing (wip) ")
 
@@ -235,12 +240,16 @@ class CNN_MODEL_TRAINER:
             test_n += y.shape[0]
             batch_count += 1
 
+            # accumulate:
+            y_true.extend(y.cpu().detach().numpy())
+            y_pred.extend(y_prediction.argmax(dim=1).cpu().detach().numpy())
+
         print("\r")
         test_loss = test_loss_sum / batch_count
         test_acc = test_acc_sum / test_n
         test_ellapse = time.time() - test_start
 
-        return test_loss, test_acc, test_n, test_ellapse
+        return test_loss, test_acc, test_n, test_ellapse, y_true, y_pred
 
     # TRAINING: ----- ----- ----- ----- ----- ----- ----- ----- ----- #
     @staticmethod
@@ -316,6 +325,7 @@ class CNN_MODEL_TRAINER:
         n_decline = 0
         best_test_acc = 0
         best_net = None
+        t_start = time.time()
         # Cross entropy
         for epoch in range(num_epochs):
             if verbose_level >= VerboseLevel.LOW:
@@ -334,7 +344,7 @@ class CNN_MODEL_TRAINER:
             )
             
             # Testing:
-            test_loss, test_acc, test_n, test_ellapse = CNN_MODEL_TRAINER.test(
+            test_loss, test_acc, test_n, test_ellapse, y_true, y_pred = CNN_MODEL_TRAINER.test(
                 device = device,
                 test_dataset = test_dataset, 
                 net = net, 
@@ -362,6 +372,17 @@ class CNN_MODEL_TRAINER:
                 path = "{}/best_state_dict_{}:{}.pth".format(model_output_path, epoch + 1, num_epochs)
                 t.save(net.state_dict(), path)
                 _print("> Found Best Model State Dict saved @{} \n".format(path))
+                # generate evaluation report:
+
+                #  Generate Evaluation Report:
+                cm = confusion_matrix(y_true, y_pred )
+                clr = classification_report(y_true, y_pred, target_names=LABEL_TO_INT_LUT)
+
+                # Output:
+                fig, status = jx_lib.make_confusion_matrix(cf=cm)
+                fig.savefig("{}/confusion_matrix_{}:{}.jpg".format(model_output_path, epoch + 1, num_epochs), bbox_inches = 'tight')
+                print("Best Classification Report:\n----------------------\n", clr)
+
             else:
                 n_decline += 1
             
@@ -371,4 +392,6 @@ class CNN_MODEL_TRAINER:
 
         # Store the best model:
         t.save(best_net, "{}/best_model_{}.pth \n".format(model_output_path, epoch + 1))
+
+        _print("=> TOTAL Training + Validation Time: {:.3f} min".format((time.time() - t_start)/60))
         return report

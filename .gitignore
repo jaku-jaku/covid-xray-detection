@@ -7,3 +7,6 @@ data/train/*
 src_code/__pycache__/*
 */models/*
 **/models/*
+data/train-custom/*
+data/valid-custom/*
+data/competition_test/*
