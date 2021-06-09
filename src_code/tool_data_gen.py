@@ -107,8 +107,16 @@ def img_batch_conversion(PATH_LUT, OUT_DIR):
         # break
 
 
-OUT_DIR = abspath("data/train-custom")
-img_batch_conversion(PATH_LUT=TRAIN_DATA_LUT, OUT_DIR=OUT_DIR)
-OUT_DIR = abspath("data/valid-custom")
-img_batch_conversion(PATH_LUT=VALID_DATA_LUT, OUT_DIR=OUT_DIR)
+N_TEST = 400
+PATH_LUT_COMP = {
+    "[filename]": [ "{}.png".format(i+1) for i in range(N_TEST) ],
+    "img_abs_path": [ abspath("data/competition_test/{}.png".format(i+1)) for i in range(N_TEST) ],
+}
+OUT_DIR = abspath("data/competition_test-custom")
+img_batch_conversion(PATH_LUT=PATH_LUT_COMP, OUT_DIR=OUT_DIR)
+
+# OUT_DIR = abspath("data/train-custom")
+# img_batch_conversion(PATH_LUT=TRAIN_DATA_LUT, OUT_DIR=OUT_DIR)
+# OUT_DIR = abspath("data/valid-custom")
+# img_batch_conversion(PATH_LUT=VALID_DATA_LUT, OUT_DIR=OUT_DIR)
 # %%

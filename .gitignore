@@ -10,3 +10,4 @@ src_code/__pycache__/*
 data/train-custom/*
 data/valid-custom/*
 data/competition_test/*
+data/competition_test-custom/*

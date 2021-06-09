@@ -317,6 +317,8 @@ class CNN_MODEL_TRAINER:
         model_output_path,
         target_names,
         num_epochs: int,
+        eval_func_competition=None,
+        eval_data_competition=None,
         early_stopping_n_epochs_consecutive_decline: int = 3,
         # history_epoch_resolution: float = 1.0, TODO: mini-batches progress!!!
         max_data_samples: Optional[int] = None,
@@ -329,68 +331,78 @@ class CNN_MODEL_TRAINER:
         best_net = None
         t_start = time.time()
         # Cross entropy
-        for epoch in range(num_epochs):
-            if verbose_level >= VerboseLevel.LOW:
-                _print("> epoch {}/{}:".format(epoch + 1, num_epochs))
-            
-            # Train:
-            train_loss, train_acc, train_n, train_ellapse = CNN_MODEL_TRAINER.train(
-                device = device,
-                train_dataset = train_dataset, 
-                net = net, 
-                optimizer = optimizer, 
-                loss_func = loss_func,
-                max_data_samples = max_data_samples,
-                verbose_level = verbose_level,
-                _print= _print,
-            )
-            
-            # Testing:
-            test_loss, test_acc, test_n, test_ellapse, y_true, y_pred = CNN_MODEL_TRAINER.test(
-                device = device,
-                test_dataset = test_dataset, 
-                net = net, 
-                loss_func = loss_func,
-                max_data_samples = max_data_samples,
-                verbose_level = verbose_level,
-                _print= _print,
-            )
+        try:
+            for epoch in range(num_epochs):
+                if verbose_level >= VerboseLevel.LOW:
+                    _print("> epoch {}/{}:".format(epoch + 1, num_epochs))
+                
+                # Train:
+                train_loss, train_acc, train_n, train_ellapse = CNN_MODEL_TRAINER.train(
+                    device = device,
+                    train_dataset = train_dataset, 
+                    net = net, 
+                    optimizer = optimizer, 
+                    loss_func = loss_func,
+                    max_data_samples = max_data_samples,
+                    verbose_level = verbose_level,
+                    _print= _print,
+                )
+                
+                # Testing:
+                test_loss, test_acc, test_n, test_ellapse, y_true, y_pred = CNN_MODEL_TRAINER.test(
+                    device = device,
+                    test_dataset = test_dataset, 
+                    net = net, 
+                    loss_func = loss_func,
+                    max_data_samples = max_data_samples,
+                    verbose_level = verbose_level,
+                    _print= _print,
+                )
 
-            # Store
-            _print("{}\n".format(report.append(
-                epoch         = epoch + 1,
-                train_loss    = train_loss,
-                train_acc     = train_acc,
-                train_time    = train_ellapse,
-                test_loss     = test_loss,
-                test_acc      = test_acc,
-                test_time     = test_ellapse,
-                learning_rate = optimizer.param_groups[0]["lr"],
-            )))
+                # Store
+                _print("{}\n".format(report.append(
+                    epoch         = epoch + 1,
+                    train_loss    = train_loss,
+                    train_acc     = train_acc,
+                    train_time    = train_ellapse,
+                    test_loss     = test_loss,
+                    test_acc      = test_acc,
+                    test_time     = test_ellapse,
+                    learning_rate = optimizer.param_groups[0]["lr"],
+                )))
 
-            if test_acc > best_test_acc:
-                best_net = copy.deepcopy(net)
-                best_test_acc = test_acc
-                path = "{}/best_state_dict_{}:{}.pth".format(model_output_path, epoch + 1, num_epochs)
-                t.save(net.state_dict(), path)
-                _print("> Found Best Model State Dict saved @{} \n".format(path))
-                # generate evaluation report:
+                if test_acc > best_test_acc:
+                    if test_acc < train_acc: # override iff test acc < train acc
+                        best_net = copy.deepcopy(net)
+                        best_test_acc = test_acc
+                    path = "{}/best_state_dict_{}:{}.pth".format(model_output_path, epoch + 1, num_epochs)
+                    t.save(net.state_dict(), path)
+                    _print("> Found Best Model State Dict saved @{} \n".format(path))
+                    # generate evaluation report:
 
-                #  Generate Evaluation Report:
-                cm = confusion_matrix(y_true, y_pred )
-                clr = classification_report(y_true, y_pred, target_names=target_names)
+                    #  Generate Evaluation Report:
+                    cm = confusion_matrix(y_true, y_pred )
+                    clr = classification_report(y_true, y_pred, target_names=target_names)
 
-                # Output:
-                fig, status = jx_lib.make_confusion_matrix(cf=cm)
-                fig.savefig("{}/confusion_matrix_{}:{}.jpg".format(model_output_path, epoch + 1, num_epochs), bbox_inches = 'tight')
-                print("Best Classification Report:\n----------------------\n", clr)
+                    # Output:
+                    fig, status = jx_lib.make_confusion_matrix(cf=cm)
+                    fig.savefig("{}/confusion_matrix_{}:{}.jpg".format(model_output_path, epoch + 1, num_epochs), bbox_inches = 'tight')
+                    print("Best Classification Report:\n----------------------\n", clr)
+                    n_decline = 0
 
-            else:
-                n_decline += 1
-            
-            # early stopping:
-            if n_decline > early_stopping_n_epochs_consecutive_decline:
-                break
+                    # evaluate on competition data
+                    if eval_func_competition is not None:
+                        eval_func_competition(net=net, dataloader=eval_data_competition, tag="best[{}:{}]".format(epoch+1, num_epochs))
+                else:
+                    n_decline += 1
+                
+                # early stopping:
+                if n_decline > early_stopping_n_epochs_consecutive_decline:
+                    _print("[WARNING] EARLY STOPPING ===== ")
+                    break
+        except KeyboardInterrupt:
+            _print("[WARNING] USER EARLY ABORTION OF THE PROGRAM ===== ")
+            pass
 
         # Store the best model:
         t.save(best_net, "{}/best_model_{}.pth \n".format(model_output_path, epoch + 1))
