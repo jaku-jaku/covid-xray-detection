@@ -89,6 +89,7 @@ def make_confusion_matrix(
 
     # CODE TO GENERATE SUMMARY STATISTICS & TEXT FOR SUMMARY STATS
     status = {}
+    status2 = {}
     if sum_stats:
         #Accuracy is sum of diagonal divided by total observations
         status["Accuracy" ]  = np.trace(cf) / float(np.sum(cf))
@@ -100,7 +101,14 @@ def make_confusion_matrix(
             status["Recall"   ] = cf[1,1] / sum(cf[1,:])
             status["F1 Score" ] = 2 * status["Precision"] * status["Recall"] / (status["Precision"] + status["Recall"])
             
+            status2["SP"] = cf[1,1] / sum(cf[:,1])
+            status2["PP"] = cf[1,1] / sum(cf[1,:])
+            status2["SN"] = cf[0,0] / sum(cf[:,0])
+            status2["PN"] = cf[0,0] / sum(cf[0,:])
+            status2["Score"] = 6 * status2["SP"]+ 5 * status2["SN"]+ 3 * status2["PP"]+2 * status2["PN"]
+
     stats_text = "\n\n" + " | ".join(["{:10s}={:.3f}".format(key, status[key]) for key in status])
+    stats2_text = "\n" + " | ".join(["{:6s}={:.3f}".format(key, status2[key]) for key in status2])
 
     # SET FIGURE PARAMETERS ACCORDING TO OTHER ARGUMENTS
     if figsize==None:
@@ -119,7 +127,7 @@ def make_confusion_matrix(
     ax.set_aspect(1)
     if xyplotlabels:
         plt.ylabel('True label')
-        plt.xlabel('Predicted label' + stats_text)
+        plt.xlabel('Predicted label' + stats_text + stats2_text)
     else:
         plt.xlabel(stats_text)
     

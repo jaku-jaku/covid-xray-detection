@@ -114,6 +114,96 @@ class PredictorConfiguration:
 
 # SELECTED_TARGET = "1LAYER" # <--- select model !!!
 SELECTED_TARGET = "CUSTOM-MODEL" # <--- select model !!!
+PRINT_SAMPLES = False
+
+# %% MODEL:
+class BasicBlock(nn.Module):
+    expansion = 1
+
+    def __init__(self, inplanes, planes, stride=1, downsample=None):
+        super().__init__()
+        self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(planes)
+        self.relu = nn.ReLU(inplace=True)
+        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(planes)
+        self.downsample = downsample
+        self.stride = stride
+
+    def forward(self, x):
+        identity = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+
+        if self.downsample is not None:
+            identity = self.downsample(x)
+
+        out += identity
+        out = self.relu(out)
+
+        return out
+class ResNet(nn.Module):
+    
+    def __init__(self, block, layers, num_classes=1000):
+        super().__init__()
+        
+        self.inplanes = 64
+
+        self.conv1 = nn.Conv2d(3, self.inplanes, kernel_size=7, stride=2, padding=3, bias=False)
+        self.bn1 = nn.BatchNorm2d(self.inplanes)
+        self.relu = nn.ReLU(inplace=True)
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        
+        self.layer1 = self._make_layer(block, 64, layers[0])
+        self.layer2 = self._make_layer(block, 128, layers[1], stride=2)
+        self.layer3 = self._make_layer(block, 256, layers[2], stride=2)
+        self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
+        
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.fc = nn.Linear(512 , num_classes)
+
+
+    def _make_layer(self, block, planes, blocks, stride=1):
+        downsample = None  
+
+        if stride != 1 or self.inplanes != planes:
+            downsample = nn.Sequential(
+                nn.Conv2d(self.inplanes, planes, 1, stride, bias=False),
+                nn.BatchNorm2d(planes),
+            )
+
+        layers = []
+        layers.append(block(self.inplanes, planes, stride, downsample))
+        
+        self.inplanes = planes
+        
+        for _ in range(1, blocks):
+            layers.append(block(self.inplanes, planes))
+
+        return nn.Sequential(*layers)
+    
+    
+    def forward(self, x):
+        x = self.conv1(x)           # 224x224
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.maxpool(x)         # 112x112
+
+        x = self.layer1(x)          # 56x56
+        x = self.layer2(x)          # 28x28
+        x = self.layer3(x)          # 14x14
+        x = self.layer4(x)          # 7x7
+
+        x = self.avgpool(x)         # 1x1
+        x = torch.flatten(x, 1)     # remove 1 X 1 grid and make vector of tensor shape 
+        x = self.fc(x)
+
+        return x
 
 # %% INIT: ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #
 ### MODEL ###
@@ -180,35 +270,34 @@ MODEL_DICT = {
     "CUSTOM-MODEL": {
         "model":
             nn.Sequential(
-                # Classifier
-                # CNN:
-                nn.Conv2d(1, 4, kernel_size=3, stride=1, padding=1),
-                    nn.BatchNorm2d(4),
-                    nn.ReLU(inplace=True),
-                    nn.MaxPool2d(kernel_size=2, stride=2),
-                # FC:
-                nn.Flatten(1),
-                nn.Linear(50176, 1000),
-                    nn.Linear(1000, 100),
-                # Classification:
-                nn.Linear(100,   2),
-                    nn.Softmax()
+                # Feature Extraction:
+                ResNet(BasicBlock, [3, 4, 6, 3], num_classes=2), # ResNet 34
+                # # Classifier:
+                # nn.ReLU(), 
+                # # nn.Dropout(0.2), 
+                # nn.Linear(1000, 2), 
+                nn.Softmax(),
             ),
+            # models.inception_v3(),
         "config":
             PredictorConfiguration(
-                VERSION="v1",
+                VERSION="v6",
                 OPTIMIZER=optim.SGD,
-                BATCH_SIZE=200,
-                TOTAL_NUM_EPOCHS=20
+                LEARNING_RATE=0.03,
+                BATCH_SIZE=20,
+                TOTAL_NUM_EPOCHS=20,
+                EARLY_STOPPING_DECLINE_CRITERION=5,
             ),
         "transformation":
             transforms.Compose([
+                # v3
                 # transforms.RandomHorizontalFlip(p=0.5),
                 # transforms.RandomVerticalFlip(p=0.5),
                 # transforms.RandomPerspective(),
                 # transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
-                transforms.Resize(255),
-                transforms.CenterCrop(255),
+                # same:
+                transforms.Resize(300),
+                transforms.CenterCrop(300),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5), (0.5)),
                 # transforms.Grayscale() # apply gray scale
@@ -216,7 +305,8 @@ MODEL_DICT = {
     },
 }
 
-# MODEL_DICT["Inception"]["model"].fc = nn.Sequential(
+# # Classifier:
+# MODEL_DICT["CUSTOM-MODEL"]["model"].fc = nn.Sequential(
 #     nn.Linear(2048, 512),
 #     nn.ReLU(),
 #     nn.Dropout(0.2),
@@ -356,8 +446,9 @@ def plot_sample_from_dataloader(dataloader, tag:str, N_COLS = 4, N_MAX=20):
         
     fig.savefig("{}/plot_{}.png".format(SELECTED_NET_CONFIG.OUT_DIR, tag), bbox_inches = 'tight')
 
-plot_sample_from_dataloader(train_dataloader, tag="training-sample")
-plot_sample_from_dataloader(valid_dataloader, tag="validation-sample")
+if PRINT_SAMPLES:
+    plot_sample_from_dataloader(train_dataloader, tag="training-sample")
+    plot_sample_from_dataloader(valid_dataloader, tag="validation-sample")
 
 
 # # %% Playground
@@ -393,7 +484,7 @@ importlib.reload(jx_lib)
 from jx_pytorch_lib import ProgressReport, VerboseLevel, CNN_MODEL_TRAINER
 
 # run:
-report = CNN_MODEL_TRAINER.train_and_monitor(
+report, best_net = CNN_MODEL_TRAINER.train_and_monitor(
     device=device,
     train_dataset=train_dataloader,
     test_dataset=valid_dataloader, 
@@ -402,6 +493,7 @@ report = CNN_MODEL_TRAINER.train_and_monitor(
     net=SELECTED_NET_MODEL,
     num_epochs=SELECTED_NET_CONFIG.TOTAL_NUM_EPOCHS,
     model_output_path=SELECTED_NET_CONFIG.OUT_DIR_MODELS,
+    target_names=LABEL_TO_INT_LUT,
     early_stopping_n_epochs_consecutive_decline=SELECTED_NET_CONFIG.EARLY_STOPPING_DECLINE_CRITERION,
     # max_data_samples=20,
     verbose_level= VerboseLevel.HIGH,
@@ -415,33 +507,50 @@ report.output_progress_plot(
 )
 
 # %% EVALUATE WITH COMPETITION TEST DATASET -------------------------------- %%
-# from sklearn.metrics import confusion_matrix, classification_report
-# # def evaluate_net(net, dataloader):
-# #     _print("> Evaluation Begin ...")
-# #     y_true = []
-# #     y_pred = []
-# #     for X, y in dataloader:
-# #         if device != None:
-# #             X = X.to(device)
-# #             y = y.to(device)
+from sklearn.metrics import confusion_matrix, classification_report
+def evaluate_net(net, dataloader):
+    _print("> Evaluation Begin ...")
+    y_true = []
+    y_pred = []
+    for X, y in dataloader:
+        if device != None:
+            X = X.to(device)
+            y = y.to(device)
 
-# #         # Predict:
-# #         y_prediction = net(X)
+        # Predict:
+        y_prediction = net(X)
 
-# #         # record:
-# #         y_true.extend(y.cpu().detach().numpy())
-# #         y_pred.extend(y_prediction.argmax(dim=1).cpu().detach().numpy())
-# #     _print("> Evaluation Complete")
-# #     return y_true, y_pred
+        # record:
+        y_true.extend(y.cpu().detach().numpy())
+        y_pred.extend(y_prediction.argmax(dim=1).cpu().detach().numpy())
+    _print("> Evaluation Complete")
+    return y_true, y_pred
 
-# # y_true, y_pred = evaluate_net(net=SELECTED_NET_MODEL, dataloader=valid_dataloader)
+def eval_competition(net, dataloader, tag):
+    # eval:
+    y_true, y_pred = evaluate_net(net=net, dataloader=dataloader)
+    _print("> {3} +:{1}/{0} 1:{2}/{0}".format(N_TEST, np.sum(y_pred), N_TEST-np.sum(y_pred), tag))
 
-# #  Generate Evaluation Report:
-# cm = confusion_matrix(y_true, y_pred )
-# clr = classification_report(y_true, y_pred, target_names=LABEL_TO_INT_LUT)
+    OUT_FILE_PATH = "{}/y_pred[{}].txt".format(SELECTED_NET_CONFIG.OUT_DIR, tag)
+    with open(OUT_FILE_PATH, "w") as file_out:
+        file_out.write("\n".join(["{}".format(yi) for yi in y_pred]))
 
-# # Output:
-# fig, status = jx_lib.make_confusion_matrix(cf=cm)
-# fig.savefig("{}/confusion_matrix.jpg".format(SELECTED_NET_CONFIG.OUT_DIR), bbox_inches = 'tight')
-# print("Classification Report:\n----------------------\n", clr)
+# form dataloader:
+N_TEST = 400
+COMPETITION_PATH = [ abspath("data/competition_test/{}.png".format(i+1)) for i in range(N_TEST) ]
+COMPETITION_Y = np.zeros(N_TEST)
+img_dataset_competition = CTscanDataSet(
+    list_of_img_dir=COMPETITION_PATH, 
+    transform=SELECTED_NET_TRANSFORMATION, labels=COMPETITION_Y
+)
+competition_dataloader = torch.utils.data.DataLoader(
+    img_dataset_competition, 
+    batch_size=SELECTED_NET_CONFIG.BATCH_SIZE, shuffle=False
+)
 
+_print("=== Dataset Loaded:")
+_print("> Competition Dataset: {}".format(competition_dataloader.dataset._report()))
+
+#eval:
+eval_competition(net=best_net, dataloader=competition_dataloader, tag="best")
+eval_competition(net=SELECTED_NET_MODEL, dataloader=competition_dataloader, tag="final")

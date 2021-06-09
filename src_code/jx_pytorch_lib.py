@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from enum import IntEnum, auto
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
+import copy
 
 import torch as t
 import torchvision.transforms as ttf
@@ -278,7 +279,7 @@ class CNN_MODEL_TRAINER:
                 print("\r   >[{}/{}]".format(i+1, len(train_dataset)),  end='')
             
             # 1: Clear PyTorch Cache
-            net.zero_grad()
+            optimizer.zero_grad()
             
             # 2: hardware-acceleration
             if device != None:
@@ -314,6 +315,7 @@ class CNN_MODEL_TRAINER:
         loss_func,
         net, 
         model_output_path,
+        target_names,
         num_epochs: int,
         early_stopping_n_epochs_consecutive_decline: int = 3,
         # history_epoch_resolution: float = 1.0, TODO: mini-batches progress!!!
@@ -367,7 +369,7 @@ class CNN_MODEL_TRAINER:
             )))
 
             if test_acc > best_test_acc:
-                best_net = net
+                best_net = copy.deepcopy(net)
                 best_test_acc = test_acc
                 path = "{}/best_state_dict_{}:{}.pth".format(model_output_path, epoch + 1, num_epochs)
                 t.save(net.state_dict(), path)
@@ -376,7 +378,7 @@ class CNN_MODEL_TRAINER:
 
                 #  Generate Evaluation Report:
                 cm = confusion_matrix(y_true, y_pred )
-                clr = classification_report(y_true, y_pred, target_names=LABEL_TO_INT_LUT)
+                clr = classification_report(y_true, y_pred, target_names=target_names)
 
                 # Output:
                 fig, status = jx_lib.make_confusion_matrix(cf=cm)
@@ -394,4 +396,4 @@ class CNN_MODEL_TRAINER:
         t.save(best_net, "{}/best_model_{}.pth \n".format(model_output_path, epoch + 1))
 
         _print("=> TOTAL Training + Validation Time: {:.3f} min".format((time.time() - t_start)/60))
-        return report
+        return report, best_net
