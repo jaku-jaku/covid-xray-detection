@@ -387,7 +387,8 @@ class CNN_MODEL_TRAINER:
                     # Output:
                     fig, status = jx_lib.make_confusion_matrix(cf=cm)
                     fig.savefig("{}/confusion_matrix_{}:{}.jpg".format(model_output_path, epoch + 1, num_epochs), bbox_inches = 'tight')
-                    print("Best Classification Report:\n----------------------\n", clr)
+                    _print("Best Classification Report:\n----------------------")
+                    _print(clr)
                     n_decline = 0
 
                     # evaluate on competition data

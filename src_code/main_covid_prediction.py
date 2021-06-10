@@ -123,6 +123,7 @@ class PredictorConfiguration:
     EARLY_STOPPING_DECLINE_CRITERION  : int = 5
 
 # %% MODEL:
+# @Credit to https://jarvislabs.ai/blogs/resnet tutorial on resnet34 from scratch
 class BasicBlock(nn.Module):
     expansion = 1
 
@@ -214,65 +215,6 @@ class ResNet(nn.Module):
 # %% INIT: ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #
 ### MODEL ###
 MODEL_DICT = {
-    "1LAYER": {
-        "model":
-            nn.Sequential(
-                # Classifier
-                nn.Flatten(1),
-                # nn.Linear(4096, 4096), nn.ReLU(), nn.Dropout(0.5),
-                nn.Linear(50176,   2),
-                nn.Softmax(dim=1),
-            ),
-        "config":
-            PredictorConfiguration(
-                VERSION="v1",
-                OPTIMIZER=optim.SGD,
-                BATCH_SIZE=1000,
-            ),
-        "transformation":
-            transforms.Compose([
-                # transforms.RandomHorizontalFlip(p=0.5),
-                # transforms.RandomVerticalFlip(p=0.5),
-                # transforms.RandomPerspective(),
-                # transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
-                transforms.Resize(255),
-                transforms.CenterCrop(224),
-                transforms.ToTensor(),
-                transforms.Normalize((0.5), (0.5)),
-                transforms.Grayscale() # apply gray scale
-            ]),
-    },
-    "4LAYER": {
-        "model":
-            nn.Sequential(
-                # Classifier
-                nn.Flatten(1),
-                nn.Linear(50176, 1000),
-                nn.Linear(1000, 1000),
-                nn.Linear(1000, 100),
-                nn.Linear(100,   2),
-                nn.Softmax(dim=1),
-            ),
-        "config":
-            PredictorConfiguration(
-                VERSION="v1",
-                OPTIMIZER=optim.SGD,
-                BATCH_SIZE=200,
-                TOTAL_NUM_EPOCHS=20
-            ),
-        "transformation":
-            transforms.Compose([
-                # transforms.RandomHorizontalFlip(p=0.5),
-                # transforms.RandomVerticalFlip(p=0.5),
-                # transforms.RandomPerspective(),
-                # transforms.GaussianBlur(3, sigma=(0.1, 2.0)),
-                transforms.Resize(255),
-                transforms.CenterCrop(224),
-                transforms.ToTensor(),
-                transforms.Normalize((0.5), (0.5)),
-                transforms.Grayscale() # apply gray scale
-            ]),
-    },
     "CUSTOM-MODEL": {
         "model":
             nn.Sequential(
@@ -287,11 +229,11 @@ MODEL_DICT = {
             # models.inception_v3(),
         "config":
             PredictorConfiguration(
-                VERSION="v6-custom-3",
+                VERSION="v6-custom-5",
                 OPTIMIZER=optim.SGD,
                 LEARNING_RATE=0.001,
-                BATCH_SIZE=50,
-                TOTAL_NUM_EPOCHS=50,
+                BATCH_SIZE=20,
+                TOTAL_NUM_EPOCHS=100,#50
                 EARLY_STOPPING_DECLINE_CRITERION=3,
             ),
         "transformation":
@@ -349,6 +291,7 @@ def _print(content):
 # log model:
 _print(str(SELECTED_NET_MODEL))
 _print(str(SELECTED_NET_CONFIG))
+_print(str(SELECTED_NET_TRANSFORMATION))
 
 #%% LOAD NET: ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #
 # check device:
