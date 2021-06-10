@@ -1,0 +1,967 @@
+
+[2021-06-10 07:57:32.377118]:  USER PREFERENCE: 
+ > SELECTED_TARGET:CUSTOM-MODEL
+ > USE_PREPROCESS_CUSTOM_DATASET:True
+ > USE_PREPROCESS_AUGMENTED_CUSTOM_DATASET:True
+ > PRINT_SAMPLES:True
+
+[2021-06-10 07:57:32.378106]: Sequential(
+  (0): ResNet(
+    (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (4): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (5): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (fc): Linear(in_features=512, out_features=2, bias=True)
+  )
+  (1): Softmax(dim=1)
+)
+[2021-06-10 07:57:32.378215]: PredictorConfiguration(MODEL_TAG='CUSTOM-MODEL', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2', OUT_DIR_MODELS='/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models', VERSION='v6-custom-with-aug-2', TOTAL_NUM_EPOCHS=100, LEARNING_RATE=0.001, BATCH_SIZE=20, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=5)
+[2021-06-10 07:57:32.378297]: Compose(
+    Resize(size=300, interpolation=bilinear)
+    CenterCrop(size=(300, 300))
+    ToTensor()
+    Normalize(mean=0.5, std=0.5)
+)
+[2021-06-10 07:57:32.398332]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-10 07:57:34.996468]: === Dataset Loaded:
+[2021-06-10 07:57:34.996749]: > Train Dataset: +: 4315/8630 (50.00%)  -: 4315/8630 (50.00%) [BALANCED.]
+[2021-06-10 07:57:34.996900]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-10 07:57:34.997435]: === Dataset Loaded:
+[2021-06-10 07:57:34.997518]: > Competition Dataset: +: 0.0/400 (0.00%)  -: 400.0/400 (100.00%) [UNBALANCED !!!]
+[2021-06-10 07:57:35.537725]: === Print Sample Data (training-sample) [n_display:20 / batch_size:20]
+[2021-06-10 07:58:10.766201]: === Print Sample Data (validation-sample) [n_display:20 / batch_size:20]
+[2021-06-10 07:58:47.383990]: > epoch 1/100:
+[2021-06-10 07:58:47.384066]:   >> Learning (wip) 
+[2021-06-10 08:03:20.888833]: [WARNING] USER EARLY ABORTION OF THE PROGRAM ===== 
+[2021-06-10 08:03:20.889363]: => TOTAL Training + Validation Time: 4.558 min
+[2021-06-10 08:03:21.061791]: > Evaluation Begin ...
+[2021-06-10 08:03:32.870726]:  USER PREFERENCE: 
+ > SELECTED_TARGET:CUSTOM-MODEL
+ > USE_PREPROCESS_CUSTOM_DATASET:True
+ > USE_PREPROCESS_AUGMENTED_CUSTOM_DATASET:True
+ > PRINT_SAMPLES:True
+
+[2021-06-10 08:03:32.871839]: Sequential(
+  (0): ResNet(
+    (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (4): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (5): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (fc): Linear(in_features=512, out_features=2, bias=True)
+  )
+  (1): Softmax(dim=1)
+)
+[2021-06-10 08:03:32.871982]: PredictorConfiguration(MODEL_TAG='CUSTOM-MODEL', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2', OUT_DIR_MODELS='/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models', VERSION='v6-custom-with-aug-2', TOTAL_NUM_EPOCHS=100, LEARNING_RATE=0.003, BATCH_SIZE=20, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.003
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=5)
+[2021-06-10 08:03:32.872097]: Compose(
+    Resize(size=300, interpolation=bilinear)
+    CenterCrop(size=(300, 300))
+    ToTensor()
+    Normalize(mean=0.5, std=0.5)
+)
+[2021-06-10 08:03:32.887671]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-10 08:03:34.666483]: === Dataset Loaded:
+[2021-06-10 08:03:34.666856]: > Train Dataset: +: 4315/8630 (50.00%)  -: 4315/8630 (50.00%) [BALANCED.]
+[2021-06-10 08:03:34.667101]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-10 08:03:34.668125]: === Dataset Loaded:
+[2021-06-10 08:03:34.668253]: > Competition Dataset: +: 0.0/400 (0.00%)  -: 400.0/400 (100.00%) [UNBALANCED !!!]
+[2021-06-10 08:03:35.202205]: === Print Sample Data (training-sample) [n_display:20 / batch_size:20]
+[2021-06-10 08:04:09.899989]: === Print Sample Data (validation-sample) [n_display:20 / batch_size:20]
+[2021-06-10 08:04:46.051084]: > epoch 1/100:
+[2021-06-10 08:04:46.051159]:   >> Learning (wip) 
+[2021-06-10 08:14:41.689510]:   >> Testing (wip) 
+[2021-06-10 08:15:25.916288]:     epoch 1 > Training: [LOSS: -0.8365 | ACC: 0.8553] | Testing: [LOSS: -0.9191 | ACC: 0.9450] Ellapsed: 595.64 s | rate:44.22643
+
+[2021-06-10 08:15:26.019360]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_1:100.pth 
+
+[2021-06-10 08:15:26.201963]: Best Classification Report:
+----------------------
+[2021-06-10 08:15:26.202040]:               precision    recall  f1-score   support
+
+    positive       0.94      0.94      0.94       200
+    negative       0.94      0.94      0.94       200
+
+    accuracy                           0.94       400
+   macro avg       0.94      0.94      0.94       400
+weighted avg       0.94      0.94      0.94       400
+
+[2021-06-10 08:15:26.202100]: > Evaluation Begin ...
+[2021-06-10 08:16:03.686236]: > Evaluation Complete
+[2021-06-10 08:16:03.686624]: > best[1:100] +:204/400 -:196/400
+[2021-06-10 08:16:03.686923]: > epoch 2/100:
+[2021-06-10 08:16:03.686973]:   >> Learning (wip) 
+[2021-06-10 08:25:57.981235]:   >> Testing (wip) 
+[2021-06-10 08:26:42.131475]:     epoch 2 > Training: [LOSS: -0.9030 | ACC: 0.9088] | Testing: [LOSS: -0.9500 | ACC: 0.9600] Ellapsed: 594.29 s | rate:44.14985
+
+[2021-06-10 08:26:42.239111]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_2:100.pth 
+
+[2021-06-10 08:26:42.375212]: Best Classification Report:
+----------------------
+[2021-06-10 08:26:42.375277]:               precision    recall  f1-score   support
+
+    positive       0.95      0.97      0.96       200
+    negative       0.97      0.95      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2021-06-10 08:26:42.375326]: > Evaluation Begin ...
+[2021-06-10 08:27:18.136551]: > Evaluation Complete
+[2021-06-10 08:27:18.136965]: > best[2:100] +:193/400 -:207/400
+[2021-06-10 08:27:18.137268]: > epoch 3/100:
+[2021-06-10 08:27:18.137317]:   >> Learning (wip) 
+[2021-06-10 08:37:12.892434]:   >> Testing (wip) 
+[2021-06-10 08:37:56.832618]:     epoch 3 > Training: [LOSS: -0.9150 | ACC: 0.9184] | Testing: [LOSS: -0.9445 | ACC: 0.9475] Ellapsed: 594.75 s | rate:43.93980
+
+[2021-06-10 08:37:56.936707]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_3:100.pth 
+
+[2021-06-10 08:37:57.080693]: Best Classification Report:
+----------------------
+[2021-06-10 08:37:57.080768]:               precision    recall  f1-score   support
+
+    positive       0.95      0.94      0.95       200
+    negative       0.95      0.95      0.95       200
+
+    accuracy                           0.95       400
+   macro avg       0.95      0.95      0.95       400
+weighted avg       0.95      0.95      0.95       400
+
+[2021-06-10 08:37:57.080819]: > Evaluation Begin ...
+[2021-06-10 08:38:32.936978]: > Evaluation Complete
+[2021-06-10 08:38:32.937389]: > best[3:100] +:198/400 -:202/400
+[2021-06-10 08:38:32.937688]: > epoch 4/100:
+[2021-06-10 08:38:32.937740]:   >> Learning (wip) 
+[2021-06-10 08:48:28.190546]:   >> Testing (wip) 
+[2021-06-10 08:49:12.529351]:     epoch 4 > Training: [LOSS: -0.9209 | ACC: 0.9243] | Testing: [LOSS: -0.9583 | ACC: 0.9725] Ellapsed: 595.25 s | rate:44.33842
+
+[2021-06-10 08:49:12.632229]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_4:100.pth 
+
+[2021-06-10 08:49:12.767468]: Best Classification Report:
+----------------------
+[2021-06-10 08:49:12.767532]:               precision    recall  f1-score   support
+
+    positive       0.96      0.98      0.97       200
+    negative       0.98      0.96      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 08:49:12.767588]: > Evaluation Begin ...
+[2021-06-10 08:49:48.641855]: > Evaluation Complete
+[2021-06-10 08:49:48.642245]: > best[4:100] +:179/400 -:221/400
+[2021-06-10 08:49:48.642530]: > epoch 5/100:
+[2021-06-10 08:49:48.642578]:   >> Learning (wip) 
+[2021-06-10 08:59:41.951139]:   >> Testing (wip) 
+[2021-06-10 09:00:26.148714]:     epoch 5 > Training: [LOSS: -0.9271 | ACC: 0.9297] | Testing: [LOSS: -0.9541 | ACC: 0.9625] Ellapsed: 593.31 s | rate:44.19714
+
+[2021-06-10 09:00:26.252707]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_5:100.pth 
+
+[2021-06-10 09:00:26.425491]: Best Classification Report:
+----------------------
+[2021-06-10 09:00:26.425577]:               precision    recall  f1-score   support
+
+    positive       0.95      0.98      0.96       200
+    negative       0.98      0.94      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2021-06-10 09:00:26.425654]: > Evaluation Begin ...
+[2021-06-10 09:01:02.245463]: > Evaluation Complete
+[2021-06-10 09:01:02.245917]: > best[5:100] +:178/400 -:222/400
+[2021-06-10 09:01:02.246223]: > epoch 6/100:
+[2021-06-10 09:01:02.246294]:   >> Learning (wip) 
+[2021-06-10 09:10:52.927895]:   >> Testing (wip) 
+[2021-06-10 09:11:36.550955]:     epoch 6 > Training: [LOSS: -0.9287 | ACC: 0.9305] | Testing: [LOSS: -0.9534 | ACC: 0.9625] Ellapsed: 590.68 s | rate:43.62261
+
+[2021-06-10 09:11:36.653855]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_6:100.pth 
+
+[2021-06-10 09:11:36.791793]: Best Classification Report:
+----------------------
+[2021-06-10 09:11:36.791879]:               precision    recall  f1-score   support
+
+    positive       0.94      0.99      0.96       200
+    negative       0.99      0.94      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2021-06-10 09:11:36.791954]: > Evaluation Begin ...
+[2021-06-10 09:12:12.627427]: > Evaluation Complete
+[2021-06-10 09:12:12.627905]: > best[6:100] +:160/400 -:240/400
+[2021-06-10 09:12:12.628217]: > epoch 7/100:
+[2021-06-10 09:12:12.628289]:   >> Learning (wip) 
+[2021-06-10 09:22:05.030698]:   >> Testing (wip) 
+[2021-06-10 09:22:49.423850]:     epoch 7 > Training: [LOSS: -0.9358 | ACC: 0.9388] | Testing: [LOSS: -0.9160 | ACC: 0.9175] Ellapsed: 592.40 s | rate:44.39276
+
+[2021-06-10 09:22:49.551219]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_7:100.pth 
+
+[2021-06-10 09:22:49.691951]: Best Classification Report:
+----------------------
+[2021-06-10 09:22:49.692019]:               precision    recall  f1-score   support
+
+    positive       0.87      0.98      0.92       200
+    negative       0.98      0.85      0.91       200
+
+    accuracy                           0.92       400
+   macro avg       0.93      0.92      0.92       400
+weighted avg       0.93      0.92      0.92       400
+
+[2021-06-10 09:22:49.692066]: > Evaluation Begin ...
+[2021-06-10 09:23:25.527178]: > Evaluation Complete
+[2021-06-10 09:23:25.527581]: > best[7:100] +:135/400 -:265/400
+[2021-06-10 09:23:25.527870]: > epoch 8/100:
+[2021-06-10 09:23:25.527918]:   >> Learning (wip) 
+[2021-06-10 09:33:17.010796]:   >> Testing (wip) 
+[2021-06-10 09:34:00.744752]:     epoch 8 > Training: [LOSS: -0.9356 | ACC: 0.9385] | Testing: [LOSS: -0.9216 | ACC: 0.9225] Ellapsed: 591.48 s | rate:43.73351
+
+[2021-06-10 09:34:00.876670]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_8:100.pth 
+
+[2021-06-10 09:34:01.028977]: Best Classification Report:
+----------------------
+[2021-06-10 09:34:01.029042]:               precision    recall  f1-score   support
+
+    positive       0.90      0.94      0.92       200
+    negative       0.94      0.90      0.92       200
+
+    accuracy                           0.92       400
+   macro avg       0.92      0.92      0.92       400
+weighted avg       0.92      0.92      0.92       400
+
+[2021-06-10 09:34:01.029089]: > Evaluation Begin ...
+[2021-06-10 09:34:36.773826]: > Evaluation Complete
+[2021-06-10 09:34:36.774229]: > best[8:100] +:142/400 -:258/400
+[2021-06-10 09:34:36.774529]: > epoch 9/100:
+[2021-06-10 09:34:36.774577]:   >> Learning (wip) 
+[2021-06-10 09:44:23.071796]:   >> Testing (wip) 
+[2021-06-10 09:45:06.660251]:     epoch 9 > Training: [LOSS: -0.9403 | ACC: 0.9429] | Testing: [LOSS: -0.9441 | ACC: 0.9450] Ellapsed: 586.30 s | rate:43.58804
+
+[2021-06-10 09:45:06.764711]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_9:100.pth 
+
+[2021-06-10 09:45:06.899834]: Best Classification Report:
+----------------------
+[2021-06-10 09:45:06.899901]:               precision    recall  f1-score   support
+
+    positive       0.92      0.97      0.95       200
+    negative       0.97      0.92      0.94       200
+
+    accuracy                           0.94       400
+   macro avg       0.95      0.95      0.94       400
+weighted avg       0.95      0.94      0.94       400
+
+[2021-06-10 09:45:06.899965]: > Evaluation Begin ...
+[2021-06-10 09:45:42.605141]: > Evaluation Complete
+[2021-06-10 09:45:42.605573]: > best[9:100] +:175/400 -:225/400
+[2021-06-10 09:45:42.605914]: > epoch 10/100:
+[2021-06-10 09:45:42.605964]:   >> Learning (wip) 
+[2021-06-10 09:55:29.737369]:   >> Testing (wip) 
+[2021-06-10 09:56:13.501849]:     epoch 10 > Training: [LOSS: -0.9437 | ACC: 0.9462] | Testing: [LOSS: -0.8904 | ACC: 0.8950] Ellapsed: 587.13 s | rate:43.76407
+
+[2021-06-10 09:56:13.501933]: > epoch 11/100:
+[2021-06-10 09:56:13.501982]:   >> Learning (wip) 
+[2021-06-10 10:06:00.296715]:   >> Testing (wip) 
+[2021-06-10 10:06:43.898059]:     epoch 11 > Training: [LOSS: -0.9415 | ACC: 0.9435] | Testing: [LOSS: -0.9230 | ACC: 0.9275] Ellapsed: 586.79 s | rate:43.60095
+
+[2021-06-10 10:06:44.016858]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_11:100.pth 
+
+[2021-06-10 10:06:44.151612]: Best Classification Report:
+----------------------
+[2021-06-10 10:06:44.151680]:               precision    recall  f1-score   support
+
+    positive       0.89      0.97      0.93       200
+    negative       0.97      0.89      0.92       200
+
+    accuracy                           0.93       400
+   macro avg       0.93      0.93      0.93       400
+weighted avg       0.93      0.93      0.93       400
+
+[2021-06-10 10:06:44.151729]: > Evaluation Begin ...
+[2021-06-10 10:07:19.912143]: > Evaluation Complete
+[2021-06-10 10:07:19.912543]: > best[11:100] +:154/400 -:246/400
+[2021-06-10 10:07:19.914599]: > epoch 12/100:
+[2021-06-10 10:07:19.914652]:   >> Learning (wip) 
+[2021-06-10 10:17:06.716350]:   >> Testing (wip) 
+[2021-06-10 10:17:49.927255]:     epoch 12 > Training: [LOSS: -0.9416 | ACC: 0.9445] | Testing: [LOSS: -0.9656 | ACC: 0.9725] Ellapsed: 586.80 s | rate:43.21048
+
+[2021-06-10 10:17:50.030733]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_12:100.pth 
+
+[2021-06-10 10:17:50.165261]: Best Classification Report:
+----------------------
+[2021-06-10 10:17:50.165329]:               precision    recall  f1-score   support
+
+    positive       0.95      0.99      0.97       200
+    negative       0.99      0.95      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 10:17:50.165381]: > Evaluation Begin ...
+[2021-06-10 10:18:25.977649]: > Evaluation Complete
+[2021-06-10 10:18:25.978050]: > best[12:100] +:144/400 -:256/400
+[2021-06-10 10:18:25.980117]: > epoch 13/100:
+[2021-06-10 10:18:25.980170]:   >> Learning (wip) 
+[2021-06-10 10:28:13.445870]:   >> Testing (wip) 
+[2021-06-10 10:28:56.658105]:     epoch 13 > Training: [LOSS: -0.9481 | ACC: 0.9502] | Testing: [LOSS: -0.9570 | ACC: 0.9550] Ellapsed: 587.47 s | rate:43.21184
+
+[2021-06-10 10:28:56.763138]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_13:100.pth 
+
+[2021-06-10 10:28:56.939274]: Best Classification Report:
+----------------------
+[2021-06-10 10:28:56.939343]:               precision    recall  f1-score   support
+
+    positive       0.93      0.99      0.96       200
+    negative       0.99      0.92      0.95       200
+
+    accuracy                           0.95       400
+   macro avg       0.96      0.96      0.95       400
+weighted avg       0.96      0.95      0.95       400
+
+[2021-06-10 10:28:56.939397]: > Evaluation Begin ...
+[2021-06-10 10:29:32.725063]: > Evaluation Complete
+[2021-06-10 10:29:32.725472]: > best[13:100] +:165/400 -:235/400
+[2021-06-10 10:29:32.725771]: > epoch 14/100:
+[2021-06-10 10:29:32.725824]:   >> Learning (wip) 
+[2021-06-10 10:39:19.461739]:   >> Testing (wip) 
+[2021-06-10 10:40:03.019102]:     epoch 14 > Training: [LOSS: -0.9508 | ACC: 0.9531] | Testing: [LOSS: -0.9417 | ACC: 0.9450] Ellapsed: 586.74 s | rate:43.55696
+
+[2021-06-10 10:40:03.139086]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_14:100.pth 
+
+[2021-06-10 10:40:03.275618]: Best Classification Report:
+----------------------
+[2021-06-10 10:40:03.275684]:               precision    recall  f1-score   support
+
+    positive       0.92      0.98      0.95       200
+    negative       0.98      0.91      0.94       200
+
+    accuracy                           0.94       400
+   macro avg       0.95      0.95      0.94       400
+weighted avg       0.95      0.94      0.94       400
+
+[2021-06-10 10:40:03.275740]: > Evaluation Begin ...
+[2021-06-10 10:40:39.097140]: > Evaluation Complete
+[2021-06-10 10:40:39.097568]: > best[14:100] +:146/400 -:254/400
+[2021-06-10 10:40:39.097900]: > epoch 15/100:
+[2021-06-10 10:40:39.097954]:   >> Learning (wip) 
+[2021-06-10 10:50:25.149840]:   >> Testing (wip) 
+[2021-06-10 10:51:08.404197]:     epoch 15 > Training: [LOSS: -0.9535 | ACC: 0.9568] | Testing: [LOSS: -0.9600 | ACC: 0.9625] Ellapsed: 586.05 s | rate:43.25396
+
+[2021-06-10 10:51:08.513443]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_15:100.pth 
+
+[2021-06-10 10:51:08.660506]: Best Classification Report:
+----------------------
+[2021-06-10 10:51:08.660580]:               precision    recall  f1-score   support
+
+    positive       0.94      0.98      0.96       200
+    negative       0.98      0.94      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2021-06-10 10:51:08.660635]: > Evaluation Begin ...
+[2021-06-10 10:51:44.500665]: > Evaluation Complete
+[2021-06-10 10:51:44.501067]: > best[15:100] +:159/400 -:241/400
+[2021-06-10 10:51:44.501365]: > epoch 16/100:
+[2021-06-10 10:51:44.501412]:   >> Learning (wip) 
+[2021-06-10 11:01:30.355725]:   >> Testing (wip) 
+[2021-06-10 11:02:14.076479]:     epoch 16 > Training: [LOSS: -0.9540 | ACC: 0.9560] | Testing: [LOSS: -0.9632 | ACC: 0.9675] Ellapsed: 585.85 s | rate:43.72025
+
+[2021-06-10 11:02:14.179031]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_16:100.pth 
+
+[2021-06-10 11:02:14.316688]: Best Classification Report:
+----------------------
+[2021-06-10 11:02:14.316753]:               precision    recall  f1-score   support
+
+    positive       0.95      0.98      0.97       200
+    negative       0.98      0.95      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 11:02:14.316811]: > Evaluation Begin ...
+[2021-06-10 11:02:50.094527]: > Evaluation Complete
+[2021-06-10 11:02:50.094971]: > best[16:100] +:138/400 -:262/400
+[2021-06-10 11:02:50.095308]: > epoch 17/100:
+[2021-06-10 11:02:50.095359]:   >> Learning (wip) 
+[2021-06-10 11:12:36.549287]:   >> Testing (wip) 
+[2021-06-10 11:13:20.166694]:     epoch 17 > Training: [LOSS: -0.9592 | ACC: 0.9613] | Testing: [LOSS: -0.9383 | ACC: 0.9425] Ellapsed: 586.45 s | rate:43.61700
+
+[2021-06-10 11:13:20.166791]: > epoch 18/100:
+[2021-06-10 11:13:20.166841]:   >> Learning (wip) 
+[2021-06-10 11:23:05.214406]:   >> Testing (wip) 
+[2021-06-10 11:23:48.774693]:     epoch 18 > Training: [LOSS: -0.9558 | ACC: 0.9591] | Testing: [LOSS: -0.9600 | ACC: 0.9625] Ellapsed: 585.05 s | rate:43.55988
+
+[2021-06-10 11:23:48.876718]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_18:100.pth 
+
+[2021-06-10 11:23:49.015324]: Best Classification Report:
+----------------------
+[2021-06-10 11:23:49.015398]:               precision    recall  f1-score   support
+
+    positive       0.94      0.98      0.96       200
+    negative       0.98      0.94      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2021-06-10 11:23:49.015453]: > Evaluation Begin ...
+[2021-06-10 11:24:24.785519]: > Evaluation Complete
+[2021-06-10 11:24:24.785934]: > best[18:100] +:148/400 -:252/400
+[2021-06-10 11:24:24.786262]: > epoch 19/100:
+[2021-06-10 11:24:24.786321]:   >> Learning (wip) 
+[2021-06-10 11:34:13.048945]:   >> Testing (wip) 
+[2021-06-10 11:34:56.821912]:     epoch 19 > Training: [LOSS: -0.9601 | ACC: 0.9623] | Testing: [LOSS: -0.9322 | ACC: 0.9350] Ellapsed: 588.26 s | rate:43.77252
+
+[2021-06-10 11:34:56.822016]: > epoch 20/100:
+[2021-06-10 11:34:56.822069]:   >> Learning (wip) 
+[2021-06-10 11:44:45.960340]:   >> Testing (wip) 
+[2021-06-10 11:45:29.660110]:     epoch 20 > Training: [LOSS: -0.9577 | ACC: 0.9594] | Testing: [LOSS: -0.9474 | ACC: 0.9525] Ellapsed: 589.14 s | rate:43.69937
+
+[2021-06-10 11:45:29.781911]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_20:100.pth 
+
+[2021-06-10 11:45:29.918477]: Best Classification Report:
+----------------------
+[2021-06-10 11:45:29.918553]:               precision    recall  f1-score   support
+
+    positive       0.93      0.97      0.95       200
+    negative       0.97      0.93      0.95       200
+
+    accuracy                           0.95       400
+   macro avg       0.95      0.95      0.95       400
+weighted avg       0.95      0.95      0.95       400
+
+[2021-06-10 11:45:29.918611]: > Evaluation Begin ...
+[2021-06-10 11:46:05.750822]: > Evaluation Complete
+[2021-06-10 11:46:05.751524]: > best[20:100] +:146/400 -:254/400
+[2021-06-10 11:46:05.752013]: > epoch 21/100:
+[2021-06-10 11:46:05.752087]:   >> Learning (wip) 
+[2021-06-10 11:55:57.541495]:   >> Testing (wip) 
+[2021-06-10 11:56:42.160023]:     epoch 21 > Training: [LOSS: -0.9591 | ACC: 0.9611] | Testing: [LOSS: -0.9313 | ACC: 0.9375] Ellapsed: 591.79 s | rate:44.61804
+
+[2021-06-10 11:56:42.160116]: > epoch 22/100:
+[2021-06-10 11:56:42.160189]:   >> Learning (wip) 
+[2021-06-10 12:06:38.863750]:   >> Testing (wip) 
+[2021-06-10 12:07:22.983900]:     epoch 22 > Training: [LOSS: -0.9622 | ACC: 0.9644] | Testing: [LOSS: -0.9660 | ACC: 0.9675] Ellapsed: 596.70 s | rate:44.11970
+
+[2021-06-10 12:07:23.087749]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_22:100.pth 
+
+[2021-06-10 12:07:23.223965]: Best Classification Report:
+----------------------
+[2021-06-10 12:07:23.224033]:               precision    recall  f1-score   support
+
+    positive       0.95      0.98      0.97       200
+    negative       0.98      0.95      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 12:07:23.224112]: > Evaluation Begin ...
+[2021-06-10 12:07:59.059482]: > Evaluation Complete
+[2021-06-10 12:07:59.059912]: > best[22:100] +:155/400 -:245/400
+[2021-06-10 12:07:59.060234]: > epoch 23/100:
+[2021-06-10 12:07:59.060292]:   >> Learning (wip) 
+[2021-06-10 12:17:49.288144]:   >> Testing (wip) 
+[2021-06-10 12:18:33.282576]:     epoch 23 > Training: [LOSS: -0.9628 | ACC: 0.9656] | Testing: [LOSS: -0.9714 | ACC: 0.9725] Ellapsed: 590.23 s | rate:43.99400
+
+[2021-06-10 12:18:33.385411]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_23:100.pth 
+
+[2021-06-10 12:18:33.523688]: Best Classification Report:
+----------------------
+[2021-06-10 12:18:33.523765]:               precision    recall  f1-score   support
+
+    positive       0.97      0.97      0.97       200
+    negative       0.97      0.97      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 12:18:33.523842]: > Evaluation Begin ...
+[2021-06-10 12:19:09.295155]: > Evaluation Complete
+[2021-06-10 12:19:09.295555]: > best[23:100] +:176/400 -:224/400
+[2021-06-10 12:19:09.295856]: > epoch 24/100:
+[2021-06-10 12:19:09.295903]:   >> Learning (wip) 
+[2021-06-10 12:28:59.230681]:   >> Testing (wip) 
+[2021-06-10 12:29:42.948349]:     epoch 24 > Training: [LOSS: -0.9646 | ACC: 0.9662] | Testing: [LOSS: -0.9542 | ACC: 0.9575] Ellapsed: 589.93 s | rate:43.71725
+
+[2021-06-10 12:29:43.068242]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_24:100.pth 
+
+[2021-06-10 12:29:43.205614]: Best Classification Report:
+----------------------
+[2021-06-10 12:29:43.205681]:               precision    recall  f1-score   support
+
+    positive       0.94      0.98      0.96       200
+    negative       0.98      0.94      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2021-06-10 12:29:43.205737]: > Evaluation Begin ...
+[2021-06-10 12:30:18.982151]: > Evaluation Complete
+[2021-06-10 12:30:18.982555]: > best[24:100] +:129/400 -:271/400
+[2021-06-10 12:30:18.982885]: > epoch 25/100:
+[2021-06-10 12:30:18.982936]:   >> Learning (wip) 
+[2021-06-10 12:40:11.658322]:   >> Testing (wip) 
+[2021-06-10 12:40:56.647117]:     epoch 25 > Training: [LOSS: -0.9655 | ACC: 0.9679] | Testing: [LOSS: -0.9480 | ACC: 0.9550] Ellapsed: 592.68 s | rate:44.98833
+
+[2021-06-10 12:40:56.647209]: > epoch 26/100:
+[2021-06-10 12:40:56.647257]:   >> Learning (wip) 
+[2021-06-10 12:50:49.103464]:   >> Testing (wip) 
+[2021-06-10 12:51:33.533973]:     epoch 26 > Training: [LOSS: -0.9687 | ACC: 0.9709] | Testing: [LOSS: -0.9666 | ACC: 0.9675] Ellapsed: 592.46 s | rate:44.43009
+
+[2021-06-10 12:51:33.653276]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_26:100.pth 
+
+[2021-06-10 12:51:33.792061]: Best Classification Report:
+----------------------
+[2021-06-10 12:51:33.792126]:               precision    recall  f1-score   support
+
+    positive       0.95      0.98      0.97       200
+    negative       0.98      0.95      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 12:51:33.792176]: > Evaluation Begin ...
+[2021-06-10 12:52:09.546910]: > Evaluation Complete
+[2021-06-10 12:52:09.547314]: > best[26:100] +:156/400 -:244/400
+[2021-06-10 12:52:09.547621]: > epoch 27/100:
+[2021-06-10 12:52:09.547668]:   >> Learning (wip) 
+[2021-06-10 13:02:02.651906]:   >> Testing (wip) 
+[2021-06-10 13:02:46.687071]:     epoch 27 > Training: [LOSS: -0.9721 | ACC: 0.9746] | Testing: [LOSS: -0.9718 | ACC: 0.9775] Ellapsed: 593.10 s | rate:44.03476
+
+[2021-06-10 13:02:46.791649]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_27:100.pth 
+
+[2021-06-10 13:02:46.932736]: Best Classification Report:
+----------------------
+[2021-06-10 13:02:46.932804]:               precision    recall  f1-score   support
+
+    positive       0.97      0.99      0.98       200
+    negative       0.99      0.96      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2021-06-10 13:02:46.932858]: > Evaluation Begin ...
+[2021-06-10 13:03:22.774982]: > Evaluation Complete
+[2021-06-10 13:03:22.775410]: > best[27:100] +:146/400 -:254/400
+[2021-06-10 13:03:22.775746]: > epoch 28/100:
+[2021-06-10 13:03:22.775802]:   >> Learning (wip) 
+[2021-06-10 13:13:16.757416]:   >> Testing (wip) 
+[2021-06-10 13:14:01.345306]:     epoch 28 > Training: [LOSS: -0.9719 | ACC: 0.9731] | Testing: [LOSS: -0.9526 | ACC: 0.9550] Ellapsed: 593.98 s | rate:44.58749
+
+[2021-06-10 13:14:01.345389]: > epoch 29/100:
+[2021-06-10 13:14:01.345438]:   >> Learning (wip) 
+[2021-06-10 13:23:55.731994]:   >> Testing (wip) 
+[2021-06-10 13:24:40.233306]:     epoch 29 > Training: [LOSS: -0.9717 | ACC: 0.9736] | Testing: [LOSS: -0.9864 | ACC: 0.9875] Ellapsed: 594.39 s | rate:44.50092
+
+[2021-06-10 13:24:40.332020]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_29:100.pth 
+
+[2021-06-10 13:24:40.465012]: Best Classification Report:
+----------------------
+[2021-06-10 13:24:40.465073]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.98      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2021-06-10 13:24:40.465121]: > Evaluation Begin ...
+[2021-06-10 13:25:16.167238]: > Evaluation Complete
+[2021-06-10 13:25:16.167633]: > best[29:100] +:169/400 -:231/400
+[2021-06-10 13:25:16.169742]: > epoch 30/100:
+[2021-06-10 13:25:16.169801]:   >> Learning (wip) 
+[2021-06-10 13:35:09.107574]:   >> Testing (wip) 
+[2021-06-10 13:35:53.186986]:     epoch 30 > Training: [LOSS: -0.9741 | ACC: 0.9761] | Testing: [LOSS: -0.9715 | ACC: 0.9725] Ellapsed: 592.94 s | rate:44.07896
+
+[2021-06-10 13:35:53.308192]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_30:100.pth 
+
+[2021-06-10 13:35:53.442593]: Best Classification Report:
+----------------------
+[2021-06-10 13:35:53.442659]:               precision    recall  f1-score   support
+
+    positive       0.95      0.99      0.97       200
+    negative       0.99      0.95      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2021-06-10 13:35:53.442729]: > Evaluation Begin ...
+[2021-06-10 13:36:29.325429]: > Evaluation Complete
+[2021-06-10 13:36:29.325845]: > best[30:100] +:157/400 -:243/400
+[2021-06-10 13:36:29.327710]: > epoch 31/100:
+[2021-06-10 13:36:29.327763]:   >> Learning (wip) 
+[2021-06-10 13:46:20.996304]:   >> Testing (wip) 
+[2021-06-10 13:47:05.726233]:     epoch 31 > Training: [LOSS: -0.9763 | ACC: 0.9775] | Testing: [LOSS: -0.9648 | ACC: 0.9650] Ellapsed: 591.67 s | rate:44.72952
+
+[2021-06-10 13:47:05.726317]: > epoch 32/100:
+[2021-06-10 13:47:05.726375]:   >> Learning (wip) 
+[2021-06-10 13:56:54.451113]:   >> Testing (wip) 
+[2021-06-10 13:57:38.489713]:     epoch 32 > Training: [LOSS: -0.9777 | ACC: 0.9806] | Testing: [LOSS: -0.9766 | ACC: 0.9825] Ellapsed: 588.72 s | rate:44.03813
+
+[2021-06-10 13:57:38.621294]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_32:100.pth 
+
+[2021-06-10 13:57:38.762112]: Best Classification Report:
+----------------------
+[2021-06-10 13:57:38.762188]:               precision    recall  f1-score   support
+
+    positive       0.97      1.00      0.98       200
+    negative       1.00      0.96      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2021-06-10 13:57:38.762244]: > Evaluation Begin ...
+[2021-06-10 13:58:14.577760]: > Evaluation Complete
+[2021-06-10 13:58:14.578164]: > best[32:100] +:131/400 -:269/400
+[2021-06-10 13:58:14.578461]: > epoch 33/100:
+[2021-06-10 13:58:14.578512]:   >> Learning (wip) 
+[2021-06-10 14:08:04.631074]:   >> Testing (wip) 
+[2021-06-10 14:08:48.546781]:     epoch 33 > Training: [LOSS: -0.9775 | ACC: 0.9802] | Testing: [LOSS: -0.9754 | ACC: 0.9800] Ellapsed: 590.05 s | rate:43.91526
+
+[2021-06-10 14:08:48.670842]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-with-aug-2/models/best_state_dict_33:100.pth 
+
+[2021-06-10 14:08:48.844038]: Best Classification Report:
+----------------------
+[2021-06-10 14:08:48.844103]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2021-06-10 14:08:48.844158]: > Evaluation Begin ...
+[2021-06-10 14:09:24.566246]: > Evaluation Complete
+[2021-06-10 14:09:24.566675]: > best[33:100] +:153/400 -:247/400
+[2021-06-10 14:09:24.567009]: > epoch 34/100:
+[2021-06-10 14:09:24.567061]:   >> Learning (wip) 
+[2021-06-10 14:19:21.467127]:   >> Testing (wip) 
+[2021-06-10 14:20:05.350510]:     epoch 34 > Training: [LOSS: -0.9813 | ACC: 0.9835] | Testing: [LOSS: -0.9623 | ACC: 0.9675] Ellapsed: 596.90 s | rate:43.88293
+
+[2021-06-10 14:20:05.350602]: > epoch 35/100:
+[2021-06-10 14:20:05.350651]:   >> Learning (wip) 
+[2021-06-10 14:30:02.758420]:   >> Testing (wip) 
+[2021-06-10 14:30:46.870537]:     epoch 35 > Training: [LOSS: -0.9800 | ACC: 0.9829] | Testing: [LOSS: -0.9496 | ACC: 0.9475] Ellapsed: 597.41 s | rate:44.11169
+
+[2021-06-10 14:30:46.870622]: > epoch 36/100:
+[2021-06-10 14:30:46.870671]:   >> Learning (wip) 
+[2021-06-10 14:40:42.900226]:   >> Testing (wip) 
+[2021-06-10 14:41:27.100107]:     epoch 36 > Training: [LOSS: -0.9831 | ACC: 0.9849] | Testing: [LOSS: -0.9641 | ACC: 0.9650] Ellapsed: 596.03 s | rate:44.19946
+
+[2021-06-10 14:41:27.100193]: > epoch 37/100:
+[2021-06-10 14:41:27.100242]:   >> Learning (wip) 
+[2021-06-10 14:51:22.554955]:   >> Testing (wip) 
+[2021-06-10 14:52:07.126926]:     epoch 37 > Training: [LOSS: -0.9823 | ACC: 0.9841] | Testing: [LOSS: -0.9497 | ACC: 0.9550] Ellapsed: 595.45 s | rate:44.57152
+
+[2021-06-10 14:52:07.127013]: > epoch 38/100:
+[2021-06-10 14:52:07.127061]:   >> Learning (wip) 
+[2021-06-10 15:02:04.295102]:   >> Testing (wip) 
+[2021-06-10 15:02:48.381500]:     epoch 38 > Training: [LOSS: -0.9837 | ACC: 0.9847] | Testing: [LOSS: -0.9563 | ACC: 0.9650] Ellapsed: 597.17 s | rate:44.08598
+
+[2021-06-10 15:02:48.381586]: > epoch 39/100:
+[2021-06-10 15:02:48.381634]:   >> Learning (wip) 
+[2021-06-10 15:12:46.771503]:   >> Testing (wip) 
+[2021-06-10 15:13:30.912522]:     epoch 39 > Training: [LOSS: -0.9843 | ACC: 0.9861] | Testing: [LOSS: -0.9625 | ACC: 0.9725] Ellapsed: 598.39 s | rate:44.14057
+
+[2021-06-10 15:13:30.912612]: [WARNING] EARLY STOPPING ===== 
+[2021-06-10 15:13:31.022229]: => TOTAL Training + Validation Time: 428.750 min
+[2021-06-10 15:13:31.517704]: > Evaluation Begin ...
+[2021-06-10 15:14:07.491626]: > Evaluation Complete
+[2021-06-10 15:14:07.492053]: > best +:153/400 -:247/400
+[2021-06-10 15:14:07.492365]: > Evaluation Begin ...
+[2021-06-10 15:14:43.438588]: > Evaluation Complete
+[2021-06-10 15:14:43.439017]: > final +:153/400 -:247/400
