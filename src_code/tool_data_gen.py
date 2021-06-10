@@ -232,13 +232,18 @@ print((">> New Training Dataset >> +:{:6d} | -:{:6d} with {:4d} from RSNA").form
 # generate pre-processed images + upsampling images by augmentation:
 OUT_DIR = abspath("data/train-custom-with-aug")
 # pre-process with morpho logic operators
+print("> Generate +ve dataset:")
 img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=False)
+print("> Generate -ve dataset:")
 img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=False)
 # pre-process with augmentation + morpho logic operators
+print("> Augmenting +ve dataset:")
 img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=True)
+print("> Augmenting -ve dataset:")
 img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=True)
+print("==> AUTO_GEN completed!")
 
-# %% output:
+# %% output descriptive file
 
 def output_text_file(OUT_DIR, tag, dataframe):
     OUT_FILE_PATH = "{}/pre-processed-[{}].txt".format(OUT_DIR, tag)
@@ -257,3 +262,5 @@ NEW_TRAINING_DATA_AUGMENTED = NEW_TRAINING_DATA_AUGMENTED.sample(frac=1).reset_i
 
 output_text_file(OUT_DIR=abspath("data"), tag="train", dataframe=NEW_TRAINING_DATA_AUGMENTED)
 
+
+# %%
