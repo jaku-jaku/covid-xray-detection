@@ -15,22 +15,26 @@ if module_path not in sys.path:
 
 # %%
 data_paths = [
-    "output/CUSTOM-MODEL/v6/y_pred[best].txt",
-    "output/CUSTOM-MODEL/v6/y_pred[final].txt",
+    "output/CUSTOM-MODEL/v6-custom-3/y_pred[best].txt",
+    "output/CUSTOM-MODEL/v6-custom-3/y_pred[final].txt",
     "output/CUSTOM-MODEL/v6-custom-3/y_pred[best[36:50]].txt",
     "output/CUSTOM-MODEL/v6-custom-3/y_pred[best[37:50]].txt",
-    "output/CUSTOM-MODEL/v6-custom-3/y_pred[best].txt",
-    "output/CUSTOM-MODEL/v6-custom-3/y_pred[final].txt"
+    "output/CUSTOM-MODEL/v6-custom-4/y_pred[best].txt",
+    "output/CUSTOM-MODEL/v6-custom-4/y_pred[final].txt",
+    "output/CUSTOM-MODEL/v6-custom-with-aug/y_pred[best].txt",
+    "output/CUSTOM-MODEL/v6-custom-with-aug/y_pred[final].txt",
 ]
 data_list = [ pd.read_csv(abspath(path), sep=" ", header=None) for path in data_paths ]
 # %%
 from icecream import ic
-ic(np.sum(np.abs(data_list[2]-data_list[3])))
-ic(np.sum(np.abs(data_list[4]-data_list[3])))
-ic(np.sum(np.abs(data_list[5]-data_list[3])))
-
+ic(np.sum(np.abs(data_list[3]-data_list[2])))
 ic(np.sum(np.abs(data_list[4]-data_list[2])))
 ic(np.sum(np.abs(data_list[5]-data_list[2])))
+ic(np.sum(np.abs(data_list[6]-data_list[2])))
+ic(np.sum(np.abs(data_list[7]-data_list[2])))
+
+ic(np.sum(np.abs(data_list[0]-data_list[2])))
+ic(np.sum(np.abs(data_list[1]-data_list[2])))
 
 
 # %%
