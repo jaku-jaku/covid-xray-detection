@@ -4,3 +4,12 @@ data/train/*.DS_Store
 *.vscode
 data/train/*
 data/train/*
+src_code/__pycache__/*
+*/models/*
+**/models/*
+data/train-custom/*
+data/valid-custom/*
+data/competition_test/*
+data/competition_test-custom/*
+data/train-custom-with-aug/*
+output/CUSTOM-MODEL/*

@@ -1,0 +1,517 @@
+
+[2021-06-09 05:00:32.706796]: Sequential(
+  (0): ResNet(
+    (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (4): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (5): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (fc): Linear(in_features=512, out_features=2, bias=True)
+  )
+  (1): Softmax(dim=1)
+)
+[2021-06-09 05:00:32.706914]: PredictorConfiguration(MODEL_TAG='CUSTOM-MODEL', OUT_DIR='/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3', OUT_DIR_MODELS='/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models', VERSION='v6-custom-3', TOTAL_NUM_EPOCHS=50, LEARNING_RATE=0.001, BATCH_SIZE=20, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.001
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=3)
+[2021-06-09 05:00:32.720727]: [ALERT] Attempt to use GPU => CUDA:0
+[2021-06-09 05:00:34.679712]: === Dataset Loaded:
+[2021-06-09 05:00:34.679988]: > Train Dataset: +: 2158/4316 (50.00%)  -: 2158/4316 (50.00%) [BALANCED.]
+[2021-06-09 05:00:34.680143]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2021-06-09 05:00:34.680688]: === Dataset Loaded:
+[2021-06-09 05:00:34.680774]: > Competition Dataset: +: 0.0/400 (0.00%)  -: 400.0/400 (100.00%) [UNBALANCED !!!]
+[2021-06-09 05:00:35.212497]: === Print Sample Data (training-sample) [n_display:20 / batch_size:20]
+[2021-06-09 05:01:10.625416]: === Print Sample Data (validation-sample) [n_display:20 / batch_size:20]
+[2021-06-09 05:01:46.235350]: > epoch 1/50:
+[2021-06-09 05:01:46.235460]:   >> Learning (wip) 
+[2021-06-09 05:06:47.724507]:   >> Testing (wip) 
+[2021-06-09 05:07:31.607197]:     epoch 1 > Training: [LOSS: -0.6564 | ACC: 0.6995] | Testing: [LOSS: -0.6723 | ACC: 0.6975] Ellapsed: 301.49 s | rate:43.88229
+
+[2021-06-09 05:07:31.737357]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_1:50.pth 
+
+[2021-06-09 05:07:31.915330]: > Evaluation Begin ...
+[2021-06-09 05:08:10.061876]: > Evaluation Complete
+[2021-06-09 05:08:10.062400]: > best[1:50] +:175/400 1:225/400
+[2021-06-09 05:08:10.062696]: > epoch 2/50:
+[2021-06-09 05:08:10.062774]:   >> Learning (wip) 
+[2021-06-09 05:13:13.485579]:   >> Testing (wip) 
+[2021-06-09 05:13:57.659021]:     epoch 2 > Training: [LOSS: -0.8530 | ACC: 0.8753] | Testing: [LOSS: -0.6663 | ACC: 0.6800] Ellapsed: 303.42 s | rate:44.17303
+
+[2021-06-09 05:13:57.659106]: > epoch 3/50:
+[2021-06-09 05:13:57.659156]:   >> Learning (wip) 
+[2021-06-09 05:19:02.375560]:   >> Testing (wip) 
+[2021-06-09 05:19:46.968130]:     epoch 3 > Training: [LOSS: -0.8807 | ACC: 0.8941] | Testing: [LOSS: -0.8365 | ACC: 0.8625] Ellapsed: 304.72 s | rate:44.59213
+
+[2021-06-09 05:19:47.087370]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_3:50.pth 
+
+[2021-06-09 05:19:47.224898]: > Evaluation Begin ...
+[2021-06-09 05:20:26.080075]: > Evaluation Complete
+[2021-06-09 05:20:26.080659]: > best[3:50] +:205/400 1:195/400
+[2021-06-09 05:20:26.081157]: > epoch 4/50:
+[2021-06-09 05:20:26.081211]:   >> Learning (wip) 
+[2021-06-09 05:25:29.329975]:   >> Testing (wip) 
+[2021-06-09 05:26:12.928535]:     epoch 4 > Training: [LOSS: -0.8970 | ACC: 0.9064] | Testing: [LOSS: -0.8464 | ACC: 0.8700] Ellapsed: 303.25 s | rate:43.59812
+
+[2021-06-09 05:26:13.046181]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_4:50.pth 
+
+[2021-06-09 05:26:13.183392]: > Evaluation Begin ...
+[2021-06-09 05:26:52.131060]: > Evaluation Complete
+[2021-06-09 05:26:52.131464]: > best[4:50] +:188/400 1:212/400
+[2021-06-09 05:26:52.131752]: > epoch 5/50:
+[2021-06-09 05:26:52.131807]:   >> Learning (wip) 
+[2021-06-09 05:31:55.739857]:   >> Testing (wip) 
+[2021-06-09 05:32:40.199978]:     epoch 5 > Training: [LOSS: -0.9087 | ACC: 0.9168] | Testing: [LOSS: -0.8324 | ACC: 0.8650] Ellapsed: 303.61 s | rate:44.45971
+
+[2021-06-09 05:32:40.200067]: > epoch 6/50:
+[2021-06-09 05:32:40.201969]:   >> Learning (wip) 
+[2021-06-09 05:37:44.111473]:   >> Testing (wip) 
+[2021-06-09 05:38:28.654609]:     epoch 6 > Training: [LOSS: -0.9134 | ACC: 0.9187] | Testing: [LOSS: -0.8673 | ACC: 0.8700] Ellapsed: 303.91 s | rate:44.54273
+
+[2021-06-09 05:38:28.654697]: > epoch 7/50:
+[2021-06-09 05:38:28.656682]:   >> Learning (wip) 
+[2021-06-09 05:43:31.920173]:   >> Testing (wip) 
+[2021-06-09 05:44:15.755148]:     epoch 7 > Training: [LOSS: -0.9166 | ACC: 0.9226] | Testing: [LOSS: -0.9342 | ACC: 0.9500] Ellapsed: 303.26 s | rate:43.83457
+
+[2021-06-09 05:44:15.857414]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_7:50.pth 
+
+[2021-06-09 05:44:15.993537]: > Evaluation Begin ...
+[2021-06-09 05:44:54.776415]: > Evaluation Complete
+[2021-06-09 05:44:54.776830]: > best[7:50] +:201/400 1:199/400
+[2021-06-09 05:44:54.777136]: > epoch 8/50:
+[2021-06-09 05:44:54.777194]:   >> Learning (wip) 
+[2021-06-09 05:49:57.974028]:   >> Testing (wip) 
+[2021-06-09 05:50:42.598916]:     epoch 8 > Training: [LOSS: -0.9199 | ACC: 0.9275] | Testing: [LOSS: -0.9309 | ACC: 0.9425] Ellapsed: 303.20 s | rate:44.62219
+
+[2021-06-09 05:50:42.706703]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_8:50.pth 
+
+[2021-06-09 05:50:42.850439]: > Evaluation Begin ...
+[2021-06-09 05:51:21.653859]: > Evaluation Complete
+[2021-06-09 05:51:21.654268]: > best[8:50] +:210/400 1:190/400
+[2021-06-09 05:51:21.654565]: > epoch 9/50:
+[2021-06-09 05:51:21.654615]:   >> Learning (wip) 
+[2021-06-09 05:56:24.306519]:   >> Testing (wip) 
+[2021-06-09 05:57:08.663318]:     epoch 9 > Training: [LOSS: -0.9197 | ACC: 0.9266] | Testing: [LOSS: -0.9058 | ACC: 0.9275] Ellapsed: 302.65 s | rate:44.35639
+
+[2021-06-09 05:57:08.766428]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_9:50.pth 
+
+[2021-06-09 05:57:08.910746]: > Evaluation Begin ...
+[2021-06-09 05:57:47.192889]: > Evaluation Complete
+[2021-06-09 05:57:47.193282]: > best[9:50] +:218/400 1:182/400
+[2021-06-09 05:57:47.193588]: > epoch 10/50:
+[2021-06-09 05:57:47.193637]:   >> Learning (wip) 
+[2021-06-09 06:02:49.871315]:   >> Testing (wip) 
+[2021-06-09 06:03:33.906946]:     epoch 10 > Training: [LOSS: -0.9232 | ACC: 0.9277] | Testing: [LOSS: -0.9290 | ACC: 0.9450] Ellapsed: 302.68 s | rate:44.03522
+
+[2021-06-09 06:03:34.008416]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_10:50.pth 
+
+[2021-06-09 06:03:34.145213]: > Evaluation Begin ...
+[2021-06-09 06:04:12.374958]: > Evaluation Complete
+[2021-06-09 06:04:12.375361]: > best[10:50] +:194/400 1:206/400
+[2021-06-09 06:04:12.375648]: > epoch 11/50:
+[2021-06-09 06:04:12.375700]:   >> Learning (wip) 
+[2021-06-09 06:09:14.168716]:   >> Testing (wip) 
+[2021-06-09 06:09:58.755272]:     epoch 11 > Training: [LOSS: -0.9271 | ACC: 0.9323] | Testing: [LOSS: -0.9103 | ACC: 0.9200] Ellapsed: 301.79 s | rate:44.58616
+
+[2021-06-09 06:09:58.883417]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_11:50.pth 
+
+[2021-06-09 06:09:59.027885]: > Evaluation Begin ...
+[2021-06-09 06:10:38.008889]: > Evaluation Complete
+[2021-06-09 06:10:38.009468]: > best[11:50] +:217/400 1:183/400
+[2021-06-09 06:10:38.009995]: > epoch 12/50:
+[2021-06-09 06:10:38.010078]:   >> Learning (wip) 
+[2021-06-09 06:15:40.888941]:   >> Testing (wip) 
+[2021-06-09 06:16:25.264188]:     epoch 12 > Training: [LOSS: -0.9272 | ACC: 0.9316] | Testing: [LOSS: -0.9238 | ACC: 0.9350] Ellapsed: 302.88 s | rate:44.37475
+
+[2021-06-09 06:16:25.378859]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_12:50.pth 
+
+[2021-06-09 06:16:25.529134]: > Evaluation Begin ...
+[2021-06-09 06:17:04.446291]: > Evaluation Complete
+[2021-06-09 06:17:04.446698]: > best[12:50] +:210/400 1:190/400
+[2021-06-09 06:17:04.447006]: > epoch 13/50:
+[2021-06-09 06:17:04.447057]:   >> Learning (wip) 
+[2021-06-09 06:22:07.242818]:   >> Testing (wip) 
+[2021-06-09 06:22:51.731688]:     epoch 13 > Training: [LOSS: -0.9299 | ACC: 0.9347] | Testing: [LOSS: -0.9127 | ACC: 0.9275] Ellapsed: 302.80 s | rate:44.48846
+
+[2021-06-09 06:22:51.852482]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_13:50.pth 
+
+[2021-06-09 06:22:51.996022]: > Evaluation Begin ...
+[2021-06-09 06:23:27.937845]: > Evaluation Complete
+[2021-06-09 06:23:27.938253]: > best[13:50] +:193/400 1:207/400
+[2021-06-09 06:23:27.938566]: > epoch 14/50:
+[2021-06-09 06:23:27.938616]:   >> Learning (wip) 
+[2021-06-09 06:28:29.512254]:   >> Testing (wip) 
+[2021-06-09 06:29:13.130330]:     epoch 14 > Training: [LOSS: -0.9318 | ACC: 0.9372] | Testing: [LOSS: -0.9393 | ACC: 0.9525] Ellapsed: 301.57 s | rate:43.61767
+
+[2021-06-09 06:29:13.232888]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_14:50.pth 
+
+[2021-06-09 06:29:13.371118]: > Evaluation Begin ...
+[2021-06-09 06:29:49.252025]: > Evaluation Complete
+[2021-06-09 06:29:49.254915]: > best[14:50] +:213/400 1:187/400
+[2021-06-09 06:29:49.255219]: > epoch 15/50:
+[2021-06-09 06:29:49.255270]:   >> Learning (wip) 
+[2021-06-09 06:34:51.079059]:   >> Testing (wip) 
+[2021-06-09 06:35:35.307389]:     epoch 15 > Training: [LOSS: -0.9342 | ACC: 0.9393] | Testing: [LOSS: -0.9210 | ACC: 0.9300] Ellapsed: 301.82 s | rate:44.22791
+
+[2021-06-09 06:35:35.426405]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_15:50.pth 
+
+[2021-06-09 06:35:35.607108]: > Evaluation Begin ...
+[2021-06-09 06:36:13.133960]: > Evaluation Complete
+[2021-06-09 06:36:13.134373]: > best[15:50] +:196/400 1:204/400
+[2021-06-09 06:36:13.134701]: > epoch 16/50:
+[2021-06-09 06:36:13.134779]:   >> Learning (wip) 
+[2021-06-09 06:41:14.843168]:   >> Testing (wip) 
+[2021-06-09 06:41:59.053477]:     epoch 16 > Training: [LOSS: -0.9360 | ACC: 0.9398] | Testing: [LOSS: -0.9341 | ACC: 0.9400] Ellapsed: 301.71 s | rate:44.20988
+
+[2021-06-09 06:41:59.161377]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_16:50.pth 
+
+[2021-06-09 06:41:59.302025]: > Evaluation Begin ...
+[2021-06-09 06:42:37.119579]: > Evaluation Complete
+[2021-06-09 06:42:37.120001]: > best[16:50] +:219/400 1:181/400
+[2021-06-09 06:42:37.120311]: > epoch 17/50:
+[2021-06-09 06:42:37.120361]:   >> Learning (wip) 
+[2021-06-09 06:47:37.847914]:   >> Testing (wip) 
+[2021-06-09 06:48:21.795125]:     epoch 17 > Training: [LOSS: -0.9360 | ACC: 0.9416] | Testing: [LOSS: -0.9270 | ACC: 0.9375] Ellapsed: 300.73 s | rate:43.94680
+
+[2021-06-09 06:48:21.914530]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_17:50.pth 
+
+[2021-06-09 06:48:22.059145]: > Evaluation Begin ...
+[2021-06-09 06:48:57.797630]: > Evaluation Complete
+[2021-06-09 06:48:57.798038]: > best[17:50] +:215/400 1:185/400
+[2021-06-09 06:48:57.798364]: > epoch 18/50:
+[2021-06-09 06:48:57.798414]:   >> Learning (wip) 
+[2021-06-09 06:53:58.230589]:   >> Testing (wip) 
+[2021-06-09 06:54:42.388618]:     epoch 18 > Training: [LOSS: -0.9387 | ACC: 0.9428] | Testing: [LOSS: -0.9207 | ACC: 0.9350] Ellapsed: 300.43 s | rate:44.15762
+
+[2021-06-09 06:54:42.388707]: > epoch 19/50:
+[2021-06-09 06:54:42.390656]:   >> Learning (wip) 
+[2021-06-09 06:59:43.121451]:   >> Testing (wip) 
+[2021-06-09 07:00:27.261965]:     epoch 19 > Training: [LOSS: -0.9430 | ACC: 0.9465] | Testing: [LOSS: -0.9611 | ACC: 0.9675] Ellapsed: 300.73 s | rate:44.14006
+
+[2021-06-09 07:00:27.364926]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_19:50.pth 
+
+[2021-06-09 07:00:27.502745]: > Evaluation Begin ...
+[2021-06-09 07:01:03.297057]: > Evaluation Complete
+[2021-06-09 07:01:03.297482]: > best[19:50] +:214/400 1:186/400
+[2021-06-09 07:01:03.297793]: > epoch 20/50:
+[2021-06-09 07:01:03.297850]:   >> Learning (wip) 
+[2021-06-09 07:06:03.530819]:   >> Testing (wip) 
+[2021-06-09 07:06:47.548546]:     epoch 20 > Training: [LOSS: -0.9453 | ACC: 0.9495] | Testing: [LOSS: -0.9284 | ACC: 0.9400] Ellapsed: 300.23 s | rate:44.01732
+
+[2021-06-09 07:06:47.671850]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_20:50.pth 
+
+[2021-06-09 07:06:47.836532]: > Evaluation Begin ...
+[2021-06-09 07:07:23.520907]: > Evaluation Complete
+[2021-06-09 07:07:23.521322]: > best[20:50] +:205/400 1:195/400
+[2021-06-09 07:07:23.521656]: > epoch 21/50:
+[2021-06-09 07:07:23.521714]:   >> Learning (wip) 
+[2021-06-09 07:12:20.763149]:   >> Testing (wip) 
+[2021-06-09 07:13:04.317173]:     epoch 21 > Training: [LOSS: -0.9420 | ACC: 0.9449] | Testing: [LOSS: -0.9332 | ACC: 0.9500] Ellapsed: 297.24 s | rate:43.55362
+
+[2021-06-09 07:13:04.420296]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_21:50.pth 
+
+[2021-06-09 07:13:04.557121]: > Evaluation Begin ...
+[2021-06-09 07:13:40.234769]: > Evaluation Complete
+[2021-06-09 07:13:40.235175]: > best[21:50] +:218/400 1:182/400
+[2021-06-09 07:13:40.235479]: > epoch 22/50:
+[2021-06-09 07:13:40.235528]:   >> Learning (wip) 
+[2021-06-09 07:18:36.709104]:   >> Testing (wip) 
+[2021-06-09 07:19:20.344602]:     epoch 22 > Training: [LOSS: -0.9431 | ACC: 0.9490] | Testing: [LOSS: -0.9359 | ACC: 0.9475] Ellapsed: 296.47 s | rate:43.63505
+
+[2021-06-09 07:19:20.469457]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_22:50.pth 
+
+[2021-06-09 07:19:20.606105]: > Evaluation Begin ...
+[2021-06-09 07:19:56.490547]: > Evaluation Complete
+[2021-06-09 07:19:56.490968]: > best[22:50] +:220/400 1:180/400
+[2021-06-09 07:19:56.491282]: > epoch 23/50:
+[2021-06-09 07:19:56.491332]:   >> Learning (wip) 
+[2021-06-09 07:24:57.172784]:   >> Testing (wip) 
+[2021-06-09 07:25:41.033009]:     epoch 23 > Training: [LOSS: -0.9496 | ACC: 0.9537] | Testing: [LOSS: -0.9575 | ACC: 0.9725] Ellapsed: 300.68 s | rate:43.85982
+
+[2021-06-09 07:25:41.137018]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_23:50.pth 
+
+[2021-06-09 07:25:41.313823]: > Evaluation Begin ...
+[2021-06-09 07:26:17.123507]: > Evaluation Complete
+[2021-06-09 07:26:17.123904]: > best[23:50] +:243/400 1:157/400
+[2021-06-09 07:26:17.124206]: > epoch 24/50:
+[2021-06-09 07:26:17.124265]:   >> Learning (wip) 
+[2021-06-09 07:31:17.588389]:   >> Testing (wip) 
+[2021-06-09 07:32:01.388185]:     epoch 24 > Training: [LOSS: -0.9499 | ACC: 0.9553] | Testing: [LOSS: -0.9359 | ACC: 0.9425] Ellapsed: 300.46 s | rate:43.79937
+
+[2021-06-09 07:32:01.388282]: > epoch 25/50:
+[2021-06-09 07:32:01.388332]:   >> Learning (wip) 
+[2021-06-09 07:37:02.062039]:   >> Testing (wip) 
+[2021-06-09 07:37:46.015732]:     epoch 25 > Training: [LOSS: -0.9530 | ACC: 0.9590] | Testing: [LOSS: -0.9345 | ACC: 0.9450] Ellapsed: 300.67 s | rate:43.95329
+
+[2021-06-09 07:37:46.015820]: > epoch 26/50:
+[2021-06-09 07:37:46.015869]:   >> Learning (wip) 
+[2021-06-09 07:42:46.976321]:   >> Testing (wip) 
+[2021-06-09 07:43:31.023502]:     epoch 26 > Training: [LOSS: -0.9484 | ACC: 0.9546] | Testing: [LOSS: -0.9589 | ACC: 0.9675] Ellapsed: 300.96 s | rate:44.04675
+
+[2021-06-09 07:43:31.128818]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_26:50.pth 
+
+[2021-06-09 07:43:31.266256]: > Evaluation Begin ...
+[2021-06-09 07:44:07.192930]: > Evaluation Complete
+[2021-06-09 07:44:07.193364]: > best[26:50] +:229/400 1:171/400
+[2021-06-09 07:44:07.193709]: > epoch 27/50:
+[2021-06-09 07:44:07.193775]:   >> Learning (wip) 
+[2021-06-09 07:49:08.946973]:   >> Testing (wip) 
+[2021-06-09 07:49:52.457225]:     epoch 27 > Training: [LOSS: -0.9512 | ACC: 0.9574] | Testing: [LOSS: -0.9500 | ACC: 0.9575] Ellapsed: 301.75 s | rate:43.50980
+
+[2021-06-09 07:49:52.562062]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_27:50.pth 
+
+[2021-06-09 07:49:52.701913]: > Evaluation Begin ...
+[2021-06-09 07:50:28.571202]: > Evaluation Complete
+[2021-06-09 07:50:28.571641]: > best[27:50] +:229/400 1:171/400
+[2021-06-09 07:50:28.574030]: > epoch 28/50:
+[2021-06-09 07:50:28.574103]:   >> Learning (wip) 
+[2021-06-09 07:55:29.556133]:   >> Testing (wip) 
+[2021-06-09 07:56:13.709421]:     epoch 28 > Training: [LOSS: -0.9520 | ACC: 0.9567] | Testing: [LOSS: -0.9685 | ACC: 0.9725] Ellapsed: 300.98 s | rate:44.15288
+
+[2021-06-09 07:56:13.815818]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_28:50.pth 
+
+[2021-06-09 07:56:13.952685]: > Evaluation Begin ...
+[2021-06-09 07:56:49.887355]: > Evaluation Complete
+[2021-06-09 07:56:49.887777]: > best[28:50] +:221/400 1:179/400
+[2021-06-09 07:56:49.888106]: > epoch 29/50:
+[2021-06-09 07:56:49.888157]:   >> Learning (wip) 
+[2021-06-09 08:01:52.104108]:   >> Testing (wip) 
+[2021-06-09 08:02:36.370757]:     epoch 29 > Training: [LOSS: -0.9522 | ACC: 0.9560] | Testing: [LOSS: -0.9608 | ACC: 0.9625] Ellapsed: 302.22 s | rate:44.26623
+
+[2021-06-09 08:02:36.472579]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_29:50.pth 
+
+[2021-06-09 08:02:36.613058]: > Evaluation Begin ...
+[2021-06-09 08:03:12.808290]: > Evaluation Complete
+[2021-06-09 08:03:12.808877]: > best[29:50] +:213/400 1:187/400
+[2021-06-09 08:03:12.809373]: > epoch 30/50:
+[2021-06-09 08:03:12.809453]:   >> Learning (wip) 
+[2021-06-09 08:08:14.628285]:   >> Testing (wip) 
+[2021-06-09 08:08:58.408054]:     epoch 30 > Training: [LOSS: -0.9534 | ACC: 0.9576] | Testing: [LOSS: -0.9608 | ACC: 0.9675] Ellapsed: 301.82 s | rate:43.77931
+
+[2021-06-09 08:08:58.512639]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_30:50.pth 
+
+[2021-06-09 08:08:58.650313]: > Evaluation Begin ...
+[2021-06-09 08:09:34.536212]: > Evaluation Complete
+[2021-06-09 08:09:34.536640]: > best[30:50] +:220/400 1:180/400
+[2021-06-09 08:09:34.536968]: > epoch 31/50:
+[2021-06-09 08:09:34.537022]:   >> Learning (wip) 
+[2021-06-09 08:14:37.078076]:   >> Testing (wip) 
+[2021-06-09 08:15:21.447106]:     epoch 31 > Training: [LOSS: -0.9560 | ACC: 0.9599] | Testing: [LOSS: -0.9576 | ACC: 0.9700] Ellapsed: 302.54 s | rate:44.36464
+
+[2021-06-09 08:15:21.584161]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_31:50.pth 
+
+[2021-06-09 08:15:21.765116]: > Evaluation Begin ...
+[2021-06-09 08:15:57.754496]: > Evaluation Complete
+[2021-06-09 08:15:57.754920]: > best[31:50] +:210/400 1:190/400
+[2021-06-09 08:15:57.755225]: > epoch 32/50:
+[2021-06-09 08:15:57.755276]:   >> Learning (wip) 
+[2021-06-09 08:20:59.023604]:   >> Testing (wip) 
+[2021-06-09 08:21:42.877291]:     epoch 32 > Training: [LOSS: -0.9617 | ACC: 0.9648] | Testing: [LOSS: -0.9525 | ACC: 0.9625] Ellapsed: 301.27 s | rate:43.85326
+
+[2021-06-09 08:21:42.996613]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_32:50.pth 
+
+[2021-06-09 08:21:43.133714]: > Evaluation Begin ...
+[2021-06-09 08:22:18.951675]: > Evaluation Complete
+[2021-06-09 08:22:18.952084]: > best[32:50] +:214/400 1:186/400
+[2021-06-09 08:22:18.952414]: > epoch 33/50:
+[2021-06-09 08:22:18.952465]:   >> Learning (wip) 
+[2021-06-09 08:27:18.906624]:   >> Testing (wip) 
+[2021-06-09 08:28:03.007044]:     epoch 33 > Training: [LOSS: -0.9573 | ACC: 0.9608] | Testing: [LOSS: -0.9555 | ACC: 0.9625] Ellapsed: 299.95 s | rate:44.09998
+
+[2021-06-09 08:28:03.007135]: > epoch 34/50:
+[2021-06-09 08:28:03.007186]:   >> Learning (wip) 
+[2021-06-09 08:33:04.041571]:   >> Testing (wip) 
+[2021-06-09 08:33:47.949446]:     epoch 34 > Training: [LOSS: -0.9633 | ACC: 0.9676] | Testing: [LOSS: -0.9420 | ACC: 0.9575] Ellapsed: 301.03 s | rate:43.90742
+
+[2021-06-09 08:33:47.949545]: > epoch 35/50:
+[2021-06-09 08:33:47.949616]:   >> Learning (wip) 
+[2021-06-09 08:38:47.660061]:   >> Testing (wip) 
+[2021-06-09 08:39:31.884306]:     epoch 35 > Training: [LOSS: -0.9620 | ACC: 0.9664] | Testing: [LOSS: -0.9613 | ACC: 0.9675] Ellapsed: 299.71 s | rate:44.22382
+
+[2021-06-09 08:39:31.992208]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_35:50.pth 
+
+[2021-06-09 08:39:32.139560]: > Evaluation Begin ...
+[2021-06-09 08:40:07.924446]: > Evaluation Complete
+[2021-06-09 08:40:07.924854]: > best[35:50] +:228/400 1:172/400
+[2021-06-09 08:40:07.925162]: > epoch 36/50:
+[2021-06-09 08:40:07.925212]:   >> Learning (wip) 
+[2021-06-09 08:45:08.785864]:   >> Testing (wip) 
+[2021-06-09 08:45:52.772823]:     epoch 36 > Training: [LOSS: -0.9617 | ACC: 0.9669] | Testing: [LOSS: -0.9740 | ACC: 0.9800] Ellapsed: 300.86 s | rate:43.98653
+
+[2021-06-09 08:45:52.877346]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_36:50.pth 
+
+[2021-06-09 08:45:53.024592]: > Evaluation Begin ...
+[2021-06-09 08:46:28.821846]: > Evaluation Complete
+[2021-06-09 08:46:28.822252]: > best[36:50] +:230/400 1:170/400
+[2021-06-09 08:46:28.822547]: > epoch 37/50:
+[2021-06-09 08:46:28.822597]:   >> Learning (wip) 
+[2021-06-09 08:51:29.408384]:   >> Testing (wip) 
+[2021-06-09 08:52:13.111478]:     epoch 37 > Training: [LOSS: -0.9630 | ACC: 0.9655] | Testing: [LOSS: -0.9711 | ACC: 0.9750] Ellapsed: 300.59 s | rate:43.70267
+
+[2021-06-09 08:52:13.219137]: > Found Best Model State Dict saved @/home/jx/JXProject/Github/covidx-clubhouse/output/CUSTOM-MODEL/v6-custom-3/models/best_state_dict_37:50.pth 
+
+[2021-06-09 08:52:13.358971]: > Evaluation Begin ...
+[2021-06-09 08:52:49.257612]: > Evaluation Complete
+[2021-06-09 08:52:49.258053]: > best[37:50] +:224/400 1:176/400
+[2021-06-09 08:52:49.258381]: > epoch 38/50:
+[2021-06-09 08:52:49.258439]:   >> Learning (wip) 
+[2021-06-09 08:57:49.851930]:   >> Testing (wip) 
+[2021-06-09 08:58:33.509567]:     epoch 38 > Training: [LOSS: -0.9630 | ACC: 0.9676] | Testing: [LOSS: -0.9369 | ACC: 0.9475] Ellapsed: 300.59 s | rate:43.65721
+
+[2021-06-09 08:58:33.509662]: > epoch 39/50:
+[2021-06-09 08:58:33.509712]:   >> Learning (wip) 
+[2021-06-09 09:03:34.992421]:   >> Testing (wip) 
+[2021-06-09 09:04:18.778675]:     epoch 39 > Training: [LOSS: -0.9689 | ACC: 0.9743] | Testing: [LOSS: -0.9498 | ACC: 0.9625] Ellapsed: 301.48 s | rate:43.78584
+
+[2021-06-09 09:04:18.778779]: > epoch 40/50:
+[2021-06-09 09:04:18.778831]:   >> Learning (wip) 
+[2021-06-09 09:09:20.225883]:   >> Testing (wip) 
+[2021-06-09 09:10:04.739657]:     epoch 40 > Training: [LOSS: -0.9684 | ACC: 0.9722] | Testing: [LOSS: -0.9243 | ACC: 0.9375] Ellapsed: 301.45 s | rate:44.51336
+
+[2021-06-09 09:10:04.739742]: > epoch 41/50:
+[2021-06-09 09:10:04.741672]:   >> Learning (wip) 
+[2021-06-09 09:15:07.747168]:   >> Testing (wip) 
+[2021-06-09 09:15:51.914463]:     epoch 41 > Training: [LOSS: -0.9677 | ACC: 0.9722] | Testing: [LOSS: -0.9568 | ACC: 0.9625] Ellapsed: 303.01 s | rate:44.16688
+
+[2021-06-09 09:15:52.023075]: => TOTAL Training + Validation Time: 254.096 min
+[2021-06-09 09:15:52.563009]: > Evaluation Begin ...
+[2021-06-09 09:16:28.701283]: > Evaluation Complete
+[2021-06-09 09:16:28.701694]: > best +:214/400 1:186/400
+[2021-06-09 09:16:28.701995]: > Evaluation Begin ...
+[2021-06-09 09:17:04.869354]: > Evaluation Complete
+[2021-06-09 09:17:04.869761]: > final +:229/400 1:171/400
