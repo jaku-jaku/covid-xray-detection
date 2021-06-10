@@ -12,3 +12,4 @@ data/valid-custom/*
 data/competition_test/*
 data/competition_test-custom/*
 data/train-custom-with-aug/*
+output/CUSTOM-MODEL/*
