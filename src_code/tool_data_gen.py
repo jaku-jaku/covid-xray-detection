@@ -25,7 +25,7 @@ import torchvision.models as models
 ##### LOCAL LIB #######
 #######################
 ## USER DEFINED:
-ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
+ABS_PATH = "/content" # Define ur absolute path here
 
 ## Custom Files:
 def abspath(relative_path):
@@ -78,8 +78,8 @@ report_status(data=VALID_DATA_LUT, tag="valid")
 #######################
 ##### PREFERENCE ######
 #######################
-FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = False # Only with differential augmentation for  RGB channels
-FEATURE_DATA_PRE_PROCESS_V2 = True # Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
+FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = True # (Validation/Test) Only with differential augmentation for  RGB channels
+FEATURE_DATA_PRE_PROCESS_V2 = False # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
 
 # %% image conversion function: ----- ----- ----- ----- ----- -----
 ######################
@@ -156,8 +156,8 @@ if FEATURE_CONVERT_ALL_DATA_PRE_PROCESS:
     OUT_DIR = abspath("data/competition_test-custom")
     img_batch_conversion(PATH_LUT=PATH_LUT_COMP, OUT_DIR=OUT_DIR)
 
-    OUT_DIR = abspath("data/train-custom")
-    img_batch_conversion(PATH_LUT=TRAIN_DATA_LUT, OUT_DIR=OUT_DIR)
+    # OUT_DIR = abspath("data/train-custom")
+    # img_batch_conversion(PATH_LUT=TRAIN_DATA_LUT, OUT_DIR=OUT_DIR)
 
     OUT_DIR = abspath("data/valid-custom")
     img_batch_conversion(PATH_LUT=VALID_DATA_LUT, OUT_DIR=OUT_DIR)
@@ -165,106 +165,106 @@ if FEATURE_CONVERT_ALL_DATA_PRE_PROCESS:
 ################################################
 ##### RGB DIFF +  Rot  & Zoom Augmentation #####
 ################################################
-# if FEATURE_DATA_PRE_PROCESS_V2:
-def dataframe_split(dataframe, tag):
-    print("\n### {:10s} data source ========".format(tag))
-    # split based on unique data source
-    PD_DICT = {}
-    N_pos, N_neg = 0, 0
-    for source_name in TRAIN_DATA_LUT["[data source]"].unique():
-        dataframe_ = dataframe[dataframe["[data source]"] == source_name]
+if FEATURE_DATA_PRE_PROCESS_V2:
+    def dataframe_split(dataframe, tag):
+        print("\n### {:10s} data source ========".format(tag))
+        # split based on unique data source
+        PD_DICT = {}
+        N_pos, N_neg = 0, 0
+        for source_name in TRAIN_DATA_LUT["[data source]"].unique():
+            dataframe_ = dataframe[dataframe["[data source]"] == source_name]
 
-        PD_DICT[source_name] = {
-            "+": dataframe_[dataframe_["Y"] == 1],
-            "-": dataframe_[dataframe_["Y"] == 0]
-        }
-        n_pos, n_neg = len(PD_DICT[source_name]["+"]), len(PD_DICT[source_name]["-"])
-        print("> [{:10s}]: +:{:6d} | -:{:6d}".format(source_name, n_pos, n_neg))
-        N_pos += n_pos
-        N_neg += n_neg
-    
-    print("> [{:10s}]: +:{:6d} | -:{:6d}".format("Total", N_pos, N_neg))
-    print("=================================== \n")
+            PD_DICT[source_name] = {
+                "+": dataframe_[dataframe_["Y"] == 1],
+                "-": dataframe_[dataframe_["Y"] == 0]
+            }
+            n_pos, n_neg = len(PD_DICT[source_name]["+"]), len(PD_DICT[source_name]["-"])
+            print("> [{:10s}]: +:{:6d} | -:{:6d}".format(source_name, n_pos, n_neg))
+            N_pos += n_pos
+            N_neg += n_neg
+        
+        print("> [{:10s}]: +:{:6d} | -:{:6d}".format("Total", N_pos, N_neg))
+        print("=================================== \n")
 
-    return PD_DICT
+        return PD_DICT
 
-PD_DICT_TRAIN = dataframe_split(dataframe=TRAIN_DATA_LUT, tag="Training")
-PD_DICT_VALID = dataframe_split(dataframe=VALID_DATA_LUT, tag="Validation")
+    PD_DICT_TRAIN = dataframe_split(dataframe=TRAIN_DATA_LUT, tag="Training")
+    PD_DICT_VALID = dataframe_split(dataframe=VALID_DATA_LUT, tag="Validation")
 
-# %% BALANCING: ----- ----- ----- ----- ----- -----
-"""
-### Training   data source ========
-> [cohen     ]: +:   270 | -:   297
-> [actmed    ]: +:    25 | -:   107
-> [fig1      ]: +:    24 | -:     0
-> [sirm      ]: +:   943 | -:     0
-> [ricord    ]: +:   896 | -:     0
-> [rsna      ]: +:     0 | -: 13389
-> [Total     ]: +:  2158 | -: 13793
-=================================== 
-### Validation data source ========
-> [cohen     ]: +:     0 | -:     0
-> [actmed    ]: +:     0 | -:     0
-> [fig1      ]: +:     0 | -:     0
-> [sirm      ]: +:     0 | -:     0
-> [ricord    ]: +:   200 | -:     0
-> [rsna      ]: +:     0 | -:   200
-> [Total     ]: +:   200 | -:   200
-=================================== 
+    # %% BALANCING: ----- ----- ----- ----- ----- -----
+    """
+    ### Training   data source ========
+    > [cohen     ]: +:   270 | -:   297
+    > [actmed    ]: +:    25 | -:   107
+    > [fig1      ]: +:    24 | -:     0
+    > [sirm      ]: +:   943 | -:     0
+    > [ricord    ]: +:   896 | -:     0
+    > [rsna      ]: +:     0 | -: 13389
+    > [Total     ]: +:  2158 | -: 13793
+    =================================== 
+    ### Validation data source ========
+    > [cohen     ]: +:     0 | -:     0
+    > [actmed    ]: +:     0 | -:     0
+    > [fig1      ]: +:     0 | -:     0
+    > [sirm      ]: +:     0 | -:     0
+    > [ricord    ]: +:   200 | -:     0
+    > [rsna      ]: +:     0 | -:   200
+    > [Total     ]: +:   200 | -:   200
+    =================================== 
 
-Hence, we can balance the dataset by:
-1. take all positive data                                                   (+: 2158 | -: 0)
-2. take negative data with cohen and actmed, and sample (2158-297-107) >>   (+: 2158 | -: 2158)
-3. augment dataset                                                          (+: 4316 | -: 4316)
+    Hence, we can balance the dataset by:
+    1. take all positive data                                                   (+: 2158 | -: 0)
+    2. take negative data with cohen and actmed, and sample (2158-297-107) >>   (+: 2158 | -: 2158)
+    3. augment dataset                                                          (+: 4316 | -: 4316)
 
-"""
-# downsample:
-PD_DICT_TRAIN_NEW = {}
-PD_DICT_TRAIN_NEW["+"] = pd.concat([ PD_DICT_TRAIN[source_name]["+"] for source_name in ["cohen", "actmed", "fig1", "sirm", "ricord"]])
-PD_DICT_TRAIN_NEW["-"] = pd.concat([ PD_DICT_TRAIN[source_name]["-"] for source_name in ["cohen", "actmed"]])
+    """
+    # downsample:
+    PD_DICT_TRAIN_NEW = {}
+    PD_DICT_TRAIN_NEW["+"] = pd.concat([ PD_DICT_TRAIN[source_name]["+"] for source_name in ["cohen", "actmed", "fig1", "sirm", "ricord"]])
+    PD_DICT_TRAIN_NEW["-"] = pd.concat([ PD_DICT_TRAIN[source_name]["-"] for source_name in ["cohen", "actmed"]])
 
-N_DOWNSAMPLE = len(PD_DICT_TRAIN_NEW["+"]) - len(PD_DICT_TRAIN_NEW["-"])
-PD_PD_DICT_TRAIN_RSNA_DOWN_SAMPLE = PD_DICT_TRAIN["rsna"]["-"].sample(n=N_DOWNSAMPLE, random_state=1)
-PD_DICT_TRAIN_NEW["-"] = pd.concat([PD_DICT_TRAIN_NEW["-"], PD_PD_DICT_TRAIN_RSNA_DOWN_SAMPLE])
+    N_DOWNSAMPLE = len(PD_DICT_TRAIN_NEW["+"]) - len(PD_DICT_TRAIN_NEW["-"])
+    PD_PD_DICT_TRAIN_RSNA_DOWN_SAMPLE = PD_DICT_TRAIN["rsna"]["-"].sample(n=N_DOWNSAMPLE, random_state=1)
+    PD_DICT_TRAIN_NEW["-"] = pd.concat([PD_DICT_TRAIN_NEW["-"], PD_PD_DICT_TRAIN_RSNA_DOWN_SAMPLE])
 
-print((">> New Training Dataset >> +:{:6d} | -:{:6d} with {:4d} from RSNA").format(
-    len(PD_DICT_TRAIN_NEW["+"]), len(PD_DICT_TRAIN_NEW["-"]), N_DOWNSAMPLE
-))
-
-
-# %% UP-SAMPLING: ----- ----- ----- ----- ----- -----
-# generate pre-processed images + upsampling images by augmentation:
-OUT_DIR = abspath("data/train-custom-with-aug")
-# pre-process with morpho logic operators
-print("> Generate +ve dataset:")
-img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=False)
-print("> Generate -ve dataset:")
-img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=False)
-# pre-process with augmentation + morpho logic operators
-print("> Augmenting +ve dataset:")
-img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=True)
-print("> Augmenting -ve dataset:")
-img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=True)
-print("==> AUTO_GEN completed!")
-
-# %% output descriptive file
-
-def output_text_file(OUT_DIR, tag, dataframe):
-    OUT_FILE_PATH = "{}/pre-processed-[{}].txt".format(OUT_DIR, tag)
-    with open(OUT_FILE_PATH, "w") as file_out:
-        # original:
-        file_out.write("\n".join([" ".join(["{}".format(dataframe[lut][i]) for lut in LUT_HEADER]) for i in dataframe.index]))
-        # augmented:
-        file_out.write("\n".join([" ".join(["{}".format(
-            dataframe[lut][i]) if lut != "[filename]" else "aug_{}".format(
-                dataframe[lut][i])  for lut in LUT_HEADER]) for i in dataframe.index]))
-    print("Descriptive file output @{}".format(OUT_FILE_PATH))
+    print((">> New Training Dataset >> +:{:6d} | -:{:6d} with {:4d} from RSNA").format(
+        len(PD_DICT_TRAIN_NEW["+"]), len(PD_DICT_TRAIN_NEW["-"]), N_DOWNSAMPLE
+    ))
 
 
-NEW_TRAINING_DATA_AUGMENTED = pd.concat([PD_DICT_TRAIN_NEW["+"], PD_DICT_TRAIN_NEW["-"]])
-NEW_TRAINING_DATA_AUGMENTED = NEW_TRAINING_DATA_AUGMENTED.sample(frac=1).reset_index(drop=True)
+    # %% UP-SAMPLING: ----- ----- ----- ----- ----- -----
+    # generate pre-processed images + upsampling images by augmentation:
+    OUT_DIR = abspath("data/train-custom-with-aug")
+    # pre-process with morpho logic operators
+    print("> Generate +ve dataset:")
+    img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=False)
+    print("> Generate -ve dataset:")
+    img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=False)
+    # pre-process with augmentation + morpho logic operators
+    print("> Augmenting +ve dataset:")
+    img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=True)
+    print("> Augmenting -ve dataset:")
+    img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=True)
+    print("==> AUTO_GEN completed!")
 
-output_text_file(OUT_DIR=abspath("data"), tag="train", dataframe=NEW_TRAINING_DATA_AUGMENTED)
+    # %% output descriptive file
+
+    def output_text_file(OUT_DIR, tag, dataframe):
+        OUT_FILE_PATH = "{}/pre-processed-[{}].txt".format(OUT_DIR, tag)
+        with open(OUT_FILE_PATH, "w") as file_out:
+            # original:
+            file_out.write("\n".join([" ".join(["{}".format(dataframe[lut][i]) for lut in LUT_HEADER]) for i in dataframe.index]))
+            # augmented:
+            file_out.write("\n".join([" ".join(["{}".format(
+                dataframe[lut][i]) if lut != "[filename]" else "aug_{}".format(
+                    dataframe[lut][i])  for lut in LUT_HEADER]) for i in dataframe.index]))
+        print("Descriptive file output @{}".format(OUT_FILE_PATH))
+
+
+    NEW_TRAINING_DATA_AUGMENTED = pd.concat([PD_DICT_TRAIN_NEW["+"], PD_DICT_TRAIN_NEW["-"]])
+    NEW_TRAINING_DATA_AUGMENTED = NEW_TRAINING_DATA_AUGMENTED.sample(frac=1).reset_index(drop=True)
+
+    output_text_file(OUT_DIR=abspath("data"), tag="train", dataframe=NEW_TRAINING_DATA_AUGMENTED)
 
 
 # %%
