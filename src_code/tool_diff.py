@@ -5,7 +5,8 @@ import os
 import sys
 # %%
 ## Custom Files:
-ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
+# ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
+ABS_PATH = "/Users/jaku/JX-Platform/Github/Covidx-clubhouse" # Define ur absolute path here
 def abspath(relative_path):
     return os.path.join(ABS_PATH, relative_path)
 
@@ -23,6 +24,8 @@ data_paths = [
     "output/CUSTOM-MODEL/v6-custom-4/y_pred[final].txt",
     "output/CUSTOM-MODEL/v6-custom-with-aug/y_pred[best].txt",
     "output/CUSTOM-MODEL/v6-custom-with-aug/y_pred[final].txt",
+    "output/CUSTOM-MODEL/v6-custom-with-aug-2/y_pred[best[29:100]].txt",
+    "output/CUSTOM-MODEL/v6-custom-with-aug-3/y_pred[best[6:100]].txt",
 ]
 data_list = [ pd.read_csv(abspath(path), sep=" ", header=None) for path in data_paths ]
 # %%
@@ -35,6 +38,11 @@ ic(np.sum(np.abs(data_list[7]-data_list[2])))
 
 ic(np.sum(np.abs(data_list[0]-data_list[2])))
 ic(np.sum(np.abs(data_list[1]-data_list[2])))
+
+
+ic(np.sum(np.abs(data_list[-2]-data_list[2])))
+ic(np.sum(np.abs(data_list[-1]-data_list[2])))
+ic(np.sum(np.abs(data_list[-1]-data_list[-2])))
 
 
 # %%

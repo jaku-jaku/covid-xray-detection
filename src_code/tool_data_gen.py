@@ -2,39 +2,28 @@
 This main would predict covid
 """
 # %% Import
+###############
+##### LIB #####
+###############
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 from ast import literal_eval
 import os
 import sys
-import json
 
 from dataclasses import dataclass, field
-from typing import Dict, Any, List, Optional
-import re
-import emoji
-import operator
-import time
 import random
 
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
-import datetime
-
-from PIL import Image
-
 # ML:
-import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from torchvision import datasets, transforms
-from torch.utils.data import Dataset
 import torchvision.models as models
 
+#######################
+##### LOCAL LIB #######
+#######################
 ## USER DEFINED:
 ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
 
@@ -51,6 +40,9 @@ import jx_pytorch_lib
 
 
 # %% LOAD DATASET INFO: ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #
+#######################
+##### LOAD DATASET ####
+#######################
 LUT_HEADER = ["[patient id]", "[filename]", "[class]", "[data source]"]
 # import data
 TRAIN_DATA_LUT = pd.read_csv(abspath("data/train.txt"), sep=" ", header=None, names=LUT_HEADER)
@@ -83,10 +75,16 @@ report_status(data=TRAIN_DATA_LUT, tag="train")
 report_status(data=VALID_DATA_LUT, tag="valid")
 
 # %% USER DEFINE ----- ----- ----- ----- ----- -----
-FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = False
-FEATURE_DATA_PRE_PROCESS_V2 = True
+#######################
+##### PREFERENCE ######
+#######################
+FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = False # Only with differential augmentation for  RGB channels
+FEATURE_DATA_PRE_PROCESS_V2 = True # Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
 
-# %% Convert image: ----- ----- ----- ----- ----- -----
+# %% image conversion function: ----- ----- ----- ----- ----- -----
+######################
+##### FUNCTIONS ######
+######################
 import cv2
 def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False):
     jx_lib.create_folder(DIR=OUT_DIR)
@@ -145,7 +143,10 @@ def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False):
         cv2.imwrite(out_path, img_new)
         # break
 
-# %% 
+# %% V1 conversion
+#######################
+##### RGB DIFF ONLY ###
+#######################
 if FEATURE_CONVERT_ALL_DATA_PRE_PROCESS:
     N_TEST = 400
     PATH_LUT_COMP = {
@@ -160,7 +161,10 @@ if FEATURE_CONVERT_ALL_DATA_PRE_PROCESS:
 
     OUT_DIR = abspath("data/valid-custom")
     img_batch_conversion(PATH_LUT=VALID_DATA_LUT, OUT_DIR=OUT_DIR)
-# %%
+# %% V2 Conversion
+################################################
+##### RGB DIFF +  Rot  & Zoom Augmentation #####
+################################################
 # if FEATURE_DATA_PRE_PROCESS_V2:
 def dataframe_split(dataframe, tag):
     print("\n### {:10s} data source ========".format(tag))
