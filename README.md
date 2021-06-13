@@ -36,6 +36,8 @@
 - To further improve the performance, we start to engineer the dataset to better utilize the model we use:
     - The initial thought is that the provided image has RGB channels exactly same to provide a black and white image, hence three channels have duplicated information, which is redundant for **Resnet34**.
     - In classical computer vision, we would use morphological operators (dilation and erosion) to extract features from the image. In addition, we figure out whether patient has COVID-19 based on the abnormal features within the chest scan. As a result, the idea is to provide **Resnet34** a sense of where the the chest region is and where the features are, with dilation and erosion respectively. Hence, we can utilize the three channels with R:(gray image), G:(erosion image), B:(dilation image), and the **Resnet34** can now fully utilize all three channels to produce a better prediction:
+        ![dataset](img/dataset.png)
+    - Sample training dataset becomes:
         ![Training Sample](output/CUSTOM-MODEL/v6-custom-3/plot_training-sample.png)
 - As a result, the performance is quite well:
     ![Training Progress](output/CUSTOM-MODEL/v6-custom-3/training_progress[v6-custom-3].png)
