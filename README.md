@@ -30,6 +30,7 @@
 - The base model is a simple and basic **Resnet34** (https://jarvislabs.ai/blogs/resnet), for its lightweight and adaptive properties for the given task on chest COVID detection.
 - Due to limitation of my hardware (only have a GTX980Ti 6GB), I was not able to go with a deeper model and pytorch built-in model. The **Resnet34** was selected for the task, resulting a 70-80% accuracies on the evaluation test dataset provided.
 - The training dataset was discovered to be quite imbalanced:
+    
     ![dataset](img/dataset.png)
 - For simplicity, the dataset is randomly downsampled for -ve dataset, with +ve dataset unchanged.
 - To further improve the performance, we start to engineer the dataset to better utilize the model we use:
