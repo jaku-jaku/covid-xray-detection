@@ -26,6 +26,7 @@ data_paths = [
     "output/CUSTOM-MODEL/v6-custom-with-aug/y_pred[final].txt",
     "output/CUSTOM-MODEL/v6-custom-with-aug-2/y_pred[best[29:100]].txt",
     "output/CUSTOM-MODEL/v6-custom-with-aug-3/y_pred[best[6:100]].txt",
+    "output/CUSTOM-MODEL/v6-custom-with-aug-3/y_pred[best[21:100]].txt",
 ]
 data_list = [ pd.read_csv(abspath(path), sep=" ", header=None) for path in data_paths ]
 # %%

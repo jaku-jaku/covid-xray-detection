@@ -8,24 +8,16 @@ This main would predict covid
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
-from ast import literal_eval
 import os
 import sys
 
-from dataclasses import dataclass, field
 import random
-
-# ML:
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import torchvision.models as models
 
 #######################
 ##### LOCAL LIB #######
 #######################
 ## USER DEFINED:
-ABS_PATH = "/content" # Define ur absolute path here
+ABS_PATH = "/Users/jaku/JX-Platform/Github/Covidx-clubhouse" # Define ur absolute path here
 
 ## Custom Files:
 def abspath(relative_path):
@@ -36,7 +28,6 @@ if module_path not in sys.path:
     sys.path.append(abspath("src_code"))
 
 import jx_lib
-import jx_pytorch_lib
 
 
 # %% LOAD DATASET INFO: ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- #
@@ -78,15 +69,16 @@ report_status(data=VALID_DATA_LUT, tag="valid")
 #######################
 ##### PREFERENCE ######
 #######################
-FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = True # (Validation/Test) Only with differential augmentation for  RGB channels
-FEATURE_DATA_PRE_PROCESS_V2 = False # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
+FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = False # (Validation/Test) Only with differential augmentation for  RGB channels
+FEATURE_DATA_PRE_PROCESS_V2 = True # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
+TRAIN_NEW_IMG_SIZE = (320,320)
 
 # %% image conversion function: ----- ----- ----- ----- ----- -----
 ######################
 ##### FUNCTIONS ######
 ######################
 import cv2
-def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False):
+def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False, size=None):
     jx_lib.create_folder(DIR=OUT_DIR)
     counter = 0
     for img_path, file_name in zip(PATH_LUT["img_abs_path"], PATH_LUT["[filename]"]):
@@ -125,7 +117,7 @@ def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False):
             img = random_rotation(img, 90)
             img = random_zoom_crop(img, 0.8)
 
-
+            
         # basic morphological operator
         kernel = np.ones((5, 5), 'uint8')
         img1 = cv2.dilate(img, kernel, iterations=5)
@@ -133,6 +125,21 @@ def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False):
         
         img_new = np.dstack((img[:,:,0], img1[:,:,1], img2[:,:,2]))
         
+        if size is not None:
+            # fit:
+            w, h, c= img_new.shape
+            if w <= h:
+                nw = size[0]
+                nh = int(size[0]/w * h)
+            else:
+                nh = size[0]
+                nw = int(size[0] / h * w)
+            img_new  = cv2.resize(img_new, (nw, nh))
+            # center crop:
+            w, h, c= img_new.shape
+            a = int((w-size[0])/2)
+            b = int((h-size[1])/2)
+            img_new = img_new[a:a+size[0], b:b+size[1]]
         # plt.imshow(img_new)
         # fig, axes = plt.subplots(figsize=(20, 10), ncols=3)
         # axes[0].imshow(img)
@@ -237,14 +244,14 @@ if FEATURE_DATA_PRE_PROCESS_V2:
     OUT_DIR = abspath("data/train-custom-with-aug")
     # pre-process with morpho logic operators
     print("> Generate +ve dataset:")
-    img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=False)
+    img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=False, size=TRAIN_NEW_IMG_SIZE)
     print("> Generate -ve dataset:")
-    img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=False)
+    img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=False, size=TRAIN_NEW_IMG_SIZE)
     # pre-process with augmentation + morpho logic operators
     print("> Augmenting +ve dataset:")
-    img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=True)
+    img_batch_conversion(PD_DICT_TRAIN_NEW["+"], OUT_DIR, RANDOM_AUGMENTATION=True, size=TRAIN_NEW_IMG_SIZE)
     print("> Augmenting -ve dataset:")
-    img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=True)
+    img_batch_conversion(PD_DICT_TRAIN_NEW["-"], OUT_DIR, RANDOM_AUGMENTATION=True, size=TRAIN_NEW_IMG_SIZE)
     print("==> AUTO_GEN completed!")
 
     # %% output descriptive file
