@@ -69,9 +69,10 @@ report_status(data=VALID_DATA_LUT, tag="valid")
 #######################
 ##### PREFERENCE ######
 #######################
-FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = False # (Validation/Test) Only with differential augmentation for  RGB channels
-FEATURE_DATA_PRE_PROCESS_V2 = True # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
+FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = True # (Validation/Test) Only with differential augmentation for  RGB channels
+FEATURE_DATA_PRE_PROCESS_V2 = False # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
 TRAIN_NEW_IMG_SIZE = (320,320)
+TEST_NEW_IMG_SIZE = TRAIN_NEW_IMG_SIZE # None for original size
 
 # %% image conversion function: ----- ----- ----- ----- ----- -----
 ######################
@@ -161,13 +162,13 @@ if FEATURE_CONVERT_ALL_DATA_PRE_PROCESS:
         "img_abs_path": [ abspath("data/competition_test/{}.png".format(i+1)) for i in range(N_TEST) ],
     }
     OUT_DIR = abspath("data/competition_test-custom")
-    img_batch_conversion(PATH_LUT=PATH_LUT_COMP, OUT_DIR=OUT_DIR)
+    img_batch_conversion(PATH_LUT=PATH_LUT_COMP, OUT_DIR=OUT_DIR, size=TEST_NEW_IMG_SIZE)
 
     # OUT_DIR = abspath("data/train-custom")
     # img_batch_conversion(PATH_LUT=TRAIN_DATA_LUT, OUT_DIR=OUT_DIR)
 
     OUT_DIR = abspath("data/valid-custom")
-    img_batch_conversion(PATH_LUT=VALID_DATA_LUT, OUT_DIR=OUT_DIR)
+    img_batch_conversion(PATH_LUT=VALID_DATA_LUT, OUT_DIR=OUT_DIR, size=TEST_NEW_IMG_SIZE)
 # %% V2 Conversion
 ################################################
 ##### RGB DIFF +  Rot  & Zoom Augmentation #####
