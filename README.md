@@ -53,7 +53,8 @@
         ![Training Sample](output/CUSTOM-MODEL/v6-custom-3/plot_training-sample.png)
     
 - As a result, the performance is quite well:
-    ![training_progress[v6-custom-with-aug-10]](img/training_progress[v6-custom-with-aug-10].png)
+
+    ![training_progress](img/training_progress[v6-custom-with-aug-10].png)
     
 - Lastly, to further push the model performance and robustness, we doubled the dataset with random zoom and rotation. To note, we have also tweaked around the learning rate and stopping criteria to find the best parameters
 
