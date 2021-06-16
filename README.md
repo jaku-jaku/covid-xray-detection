@@ -22,6 +22,12 @@
 1. Understanding resnet from scratch: https://jarvislabs.ai/blogs/resnet
 2. Checklist on squeezing the shit out of your model: http://karpathy.github.io/2019/04/25/recipe/
 
+### Our Best Run Notebook:
+- https://github.com/JXproject/covid-xray-detection/blob/master/src_code/covid-colab.ipynb
+
+### Hardware:
+- GTX 980 Ti
+- Google Colab Pro
 
 ### Description:
 - There are two approaches to make a better predictions on given dataset:
