@@ -53,6 +53,7 @@
 - To note, we pre-generate the training dataset in advance to improve the run-time efficiency.
 
 - Overall, the best competition scored model (with just 6 epochs): 
+
     ![confusion_matrix_107_200](img/confusion_matrix_107_200.jpg)
     
 - Ranking (s1/28):
