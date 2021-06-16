@@ -70,8 +70,8 @@ report_status(data=VALID_DATA_LUT, tag="valid")
 ##### PREFERENCE ######
 #######################
 FEATURE_CONVERT_ALL_DATA_PRE_PROCESS = True # (Validation/Test) Only with differential augmentation for  RGB channels
-FEATURE_DATA_PRE_PROCESS_V2 = False # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
-TRAIN_NEW_IMG_SIZE = (320,320)
+FEATURE_DATA_PRE_PROCESS_V2 = True # (Training) Additional dataset with rotation and zoom augmentation, with differential augmentation for  RGB channels
+TRAIN_NEW_IMG_SIZE = (400,400)
 TEST_NEW_IMG_SIZE = TRAIN_NEW_IMG_SIZE # None for original size
 
 # %% image conversion function: ----- ----- ----- ----- ----- -----
