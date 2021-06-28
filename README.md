@@ -40,7 +40,6 @@
         ## USER DEFINED:
         ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
         ```
-        ```
     2.  Ensure all settings are expected for the run, with default below (line 48-58):
         ```py
         # %% USER OPTION: ----- ----- ----- ----- ----- ----- ----- ----- ----- #
@@ -99,6 +98,7 @@
 2. Upload the jupyter notebook via Colab
 3. Create a ```dataset-folder``` directory on Google Drive (so we only have to mount the drive upon reconnection)
     1. Create ```dataset-folder/data``` sub-directory (as the image shown below)
+       ![gdrive](img/gdrive_dataset.png)
     2. [Option 1] Upload the dataset to the Google Drive (>10 GB)
     3. [Option 2: Recommended] You may follow the local instruction **Step_8** to pre-compile the dataset locally, and upload the reduced and preprocessed dataset (<2 GB)
     4. Create ```dataset-folder/lib``` and upload all the library source code from ```src_code``` directory
@@ -114,6 +114,7 @@
     5. [If you did not have dataset] Uncomment **Cell_3** to download dataset directly from Kaggle and **Cell_4** to pre-process dataset (make sure your absolute directory in ```lib/tool_data_gen.py``` is correct)
     6. Run the rest!
 7. Pick the best result from the google drive (same as the local guide but in the CLOUD ☁️)
+    ![selection](img/gdrive_selection.png)
 
 
 ## Documentation:
@@ -124,6 +125,8 @@
 ### Our Best Run:
 - Local (Python): https://github.com/JXproject/covid-xray-detection/blob/master/src_code/main_covid_prediction.py
 - Colab Version (Best Jupyter Notebook): https://github.com/JXproject/covid-xray-detection/blob/master/src_code/covid-colab.ipynb
+- Log File: https://github.com/JXproject/covid-xray-detection/blob/master/output/CUSTOM-MODEL/v6-custom-with-aug-10/log.txt
+- Confusion matrix: ![Best](output/CUSTOM-MODEL/v6-custom-with-aug-10/models/confusion_matrix_107_200.jpg)
 
 ### Hardware:
 - Local: GTX 980 Ti
@@ -149,19 +152,19 @@
     - In classical computer vision, we would use morphological operators (dilation and erosion) to extract features from the image. In addition, we figure out whether patient has COVID-19 based on the abnormal features within the chest scan. As a result, the idea is to provide **Resnet34** a sense of where the the chest region is and where the features are, with dilation and erosion respectively. Hence, we can utilize the three channels with R:(gray image), G:(erosion image), B:(dilation image), and the **Resnet34** can now fully utilize all three channels to produce a better prediction:
         ![dataset](img/rgb.png)
     - Sample training dataset becomes:
-        ![Training Sample](output/CUSTOM-MODEL/v6-custom-3/plot_training-sample.png)
+        ![Training Sample](output/CUSTOM-MODEL/v6-custom-with-aug-10/plot_training-sample.png)
     
 - As a result, the performance is quite well:
 
-    ![training_progress](img/training_progress[v6-custom-with-aug-10].png)
+    ![training_progress](output/CUSTOM-MODEL/v6-custom-with-aug-10/training_progress%5Bv6-custom-with-aug-10%5D.png)
     
 - Lastly, to further push the model performance and robustness, we doubled the dataset with random zoom and rotation. To note, we have also tweaked around the learning rate and stopping criteria to find the best parameters
 
 - To note, we pre-generate the training dataset in advance to improve the run-time efficiency.
 
-- Overall, the best competition scored model (with just 6 epochs): 
+- Overall, the best competition scored model (with just 107 epochs): 
 
-    ![confusion_matrix_107_200](img/confusion_matrix_107_200.jpg)
+    ![confusion_matrix_107_200](output/CUSTOM-MODEL/v6-custom-with-aug-10/models/confusion_matrix_107_200.jpg)
     
 - Ranking (s1/28):
 
