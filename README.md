@@ -27,7 +27,7 @@
     ```
 3. run model ```$ python src_code/eval.py```
 - Note: there will be a cache folder created to generate reduced images from provided images.
-- The best model it uses is captured at the 107 epoch: ```v6-custom-with-aug-10/models/best_model_138.pth``` [Link]()
+- The best model it uses is captured at the 107 epoch: ```v6-custom-with-aug-10/models/best_model_138.pth``` [Link to the model](https://github.com/JXproject/covid-xray-detection/blob/master/output/CUSTOM-MODEL/v6-custom-with-aug-10/models/best_model_138.pth) (This is the model, and it is not model_state, so you can just use it without prior knowledge of the model. But the script do support any model state input.)
 
 ### Local Machine Setup:
 1. Download / Clone this repo.
