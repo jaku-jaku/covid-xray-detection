@@ -6,7 +6,7 @@ import sys
 # %%
 ## Custom Files:
 # ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
-ABS_PATH = "/Users/jaku/JX-Platform/Github/Covidx-clubhouse" # Define ur absolute path here
+ABS_PATH = "/home/jx/JX_Project/covid-xray-detection" # Define ur absolute path here
 def abspath(relative_path):
     return os.path.join(ABS_PATH, relative_path)
 

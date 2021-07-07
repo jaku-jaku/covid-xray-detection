@@ -13,6 +13,22 @@
 
 
 ## Instructions
+### Evaluation / Use the pre-trained model:
+1. Download / Clone this repo.
+2. Modify list path of images in ```src_code/eval.py``` and model path:
+    ```py
+    imgs = ["/home/jx/JX_Project/covid-xray-detection/data/competition_test/{}.png".format(id) for id in range(1, 401)]
+    # evaluate:
+    output = eval(
+        list_of_images=imgs, 
+        model_path="/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/v6-custom-with-aug-10/models/best_model_138.pth",
+    )
+    print(output)
+    ```
+3. run model ```$ python src_code/eval.py```
+- Note: there will be a cache folder created to generate reduced images from provided images.
+- The best model it uses is captured at the 107 epoch: ```v6-custom-with-aug-10/models/best_model_138.pth``` [Link]()
+
 ### Local Machine Setup:
 1. Download / Clone this repo.
 2. Download the original dataset from Kaggle (https://www.kaggle.com/andyczhao/covidx-cxr2), unzip subdirectories into the ```data``` folder
