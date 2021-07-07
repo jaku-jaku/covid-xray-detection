@@ -143,6 +143,7 @@
 - Colab Version (Best Jupyter Notebook): https://github.com/JXproject/covid-xray-detection/blob/master/src_code/covid-colab.ipynb
 - Log File: https://github.com/JXproject/covid-xray-detection/blob/master/output/CUSTOM-MODEL/v6-custom-with-aug-10/log.txt
 - Confusion matrix: ![Best](output/CUSTOM-MODEL/v6-custom-with-aug-10/models/confusion_matrix_107_200.jpg)
+- Best model: https://github.com/JXproject/covid-xray-detection/blob/master/output/CUSTOM-MODEL/v6-custom-with-aug-10/models/best_model_138.pth
 
 ### Hardware:
 - Local: GTX 980 Ti
