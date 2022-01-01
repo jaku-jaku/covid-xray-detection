@@ -33,7 +33,7 @@ import torchvision.models as models
 ##### LOCAL LIB #######
 #######################
 ## USER DEFINED:
-ABS_PATH = "/home/jx/JXProject/Github/covidx-clubhouse" # Define ur absolute path here
+ABS_PATH = "/home/jx/JX_Project/covid-xray-detection" # Define ur absolute path here
 
 ## Custom Files:
 def abspath(relative_path):
@@ -254,10 +254,10 @@ MODEL_DICT = {
             ),
         "config":
             PredictorConfiguration(
-                VERSION="v6-custom-with-aug-10", # <--- name your run
+                VERSION="v6-base-model", # <--- name your run
                 OPTIMIZER=optim.SGD,
                 LEARNING_RATE=0.01,
-                BATCH_SIZE=50,
+                BATCH_SIZE=100,
                 TOTAL_NUM_EPOCHS=200,#50
                 EARLY_STOPPING_DECLINE_CRITERION=30,# No stopping
             ),
@@ -512,7 +512,7 @@ report, best_net = CNN_MODEL_TRAINER.train_and_monitor(
     # max_data_samples=20,
     verbose_level= VerboseLevel.HIGH,
     _print=_print,
-    save_model=OUTPUT_MODEL,
+    # save_model=OUTPUT_MODEL,
 )
 
 report.output_progress_plot(
@@ -524,3 +524,5 @@ report.output_progress_plot(
 #eval:
 eval_competition(net=best_net, dataloader=competition_dataloader, tag="best")
 eval_competition(net=SELECTED_NET_MODEL, dataloader=competition_dataloader, tag="final")
+
+# %%
