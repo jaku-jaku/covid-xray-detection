@@ -248,13 +248,19 @@ MODEL_DICT = {
         "model":
             nn.Sequential(
                 # Feature Extraction:
-                ResNet(BasicBlock, [3, 4, 6, 3], num_classes=2), # ResNet 34
+                # ResNet(BasicBlock, [0,1,1,1], num_classes=2), # ResNet reduced v9 - ResNet10 - ablation
+                # ResNet(BasicBlock, [1,1,1,1], num_classes=2), # ResNet reduced v8 - ResNet10
+                ResNet(BasicBlock, [1,2,3,2], num_classes=2), # ResNet reduced v7
+                # ResNet(BasicBlock, [3,4,6,3], num_classes=2), # ResNet base v6
                 # Classifier:
                 nn.Softmax(dim=1),
             ),
         "config":
             PredictorConfiguration(
-                VERSION="v6-base-model", # <--- name your run
+                # VERSION="v6-base-model-resnet34", # <--- name your run
+                VERSION="v7-reduced-model", # <--- name your run
+                # VERSION="v8-reduced-model", # <--- name your run
+                # VERSION="v8-reduced-model-ablation-1", # <--- name your run
                 OPTIMIZER=optim.SGD,
                 LEARNING_RATE=0.01,
                 BATCH_SIZE=100,
@@ -519,6 +525,11 @@ report.output_progress_plot(
     OUT_DIR=SELECTED_NET_CONFIG.OUT_DIR, 
     tag=SELECTED_NET_CONFIG.VERSION,
     verbose_level=VerboseLevel.HIGH
+)
+
+report.save(
+    OUT_DIR=SELECTED_NET_CONFIG.OUT_DIR, 
+    tag=SELECTED_NET_CONFIG.VERSION,
 )
 
 #eval:
