@@ -16,6 +16,7 @@ OUTPUT:
 # Python:
 import enum
 import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 from typing import List
 import sys, os
 local_module_path = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +25,7 @@ if local_module_path not in sys.path:
 from PIL import Image
 
 import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix, classification_report
 
 # Classical CV:
 import cv2
@@ -35,6 +37,9 @@ from torchvision import transforms
 from torch.utils.data import Dataset
 
 import jx_lib
+
+from tool_data_gen import img_batch_conversion, abs_data_path, LUT_HEADER, class_to_binary, filename_to_abspath, report_status, LABEL_TO_INT_LUT
+
 # %% MODEL:
 class BasicBlock(nn.Module):
     expansion = 1
@@ -128,6 +133,9 @@ CUSTOM_MODEL_DICT = {
     "model":
         nn.Sequential(
             # Feature Extraction:
+            # ResNet(BasicBlock, [0,1,1,1], num_classes=2), # ResNet reduced v9 - ResNet10 - ablation
+            # ResNet(BasicBlock, [1,1,1,1], num_classes=2), # ResNet reduced v8 - ResNet10
+            # ResNet(BasicBlock, [1,2,3,2], num_classes=2), # ResNet reduced v7
             ResNet(BasicBlock, [3, 4, 6, 3], num_classes=2), # ResNet 34
             # Classifier:
             nn.Softmax(dim=1),
@@ -158,65 +166,31 @@ class CTscanDataSet(Dataset):
         return img_transformed
     
 
-def img_batch_conversion(PATH_LUT, OUT_DIR, RANDOM_AUGMENTATION=False, size=None):
-    jx_lib.create_folder(DIR=OUT_DIR)
-    new_path_list=[]
-    counter = 0
-    for img_path, file_name in zip(PATH_LUT["img_abs_path"], PATH_LUT["[filename]"]):
-        counter += 1
-        print("\r   >[{}/{}]".format(counter,len(PATH_LUT["img_abs_path"])),  end='')
-        out_path = "{}/{}".format(OUT_DIR, file_name)
-        img = cv2.imread(img_path)
-            
-        # basic morphological operator
-        kernel = np.ones((5, 5), 'uint8')
-        img1 = cv2.dilate(img, kernel, iterations=5)
-        img2 = cv2.erode(img, kernel, iterations=5)
-        
-        img_new = np.dstack((img[:,:,0], img1[:,:,1], img2[:,:,2]))
-        
-        if size is not None:
-            # fit:
-            w, h, c= img_new.shape
-            if w <= h:
-                nw = size[0]
-                nh = int(size[0]/w * h)
-            else:
-                nh = size[0]
-                nw = int(size[0] / h * w)
-            img_new  = cv2.resize(img_new, (nw, nh))
-            # center crop:
-            w, h, c= img_new.shape
-            a = int((w-size[0])/2)
-            b = int((h-size[1])/2)
-            img_new = img_new[a:a+size[0], b:b+size[1]]
-            
-        # print(out_path)
-        cv2.imwrite(out_path, img_new)
-        new_path_list.append(out_path)
-        
-    return new_path_list
 # %% Evaluation Script
 def eval(
     list_of_images  :List[str], 
     model_path      :str, 
+    network_arch,
     size            :tuple = (320,320),
     model_dict_type :bool = False, # if saved as model dictionary
     folder_name_for_pre_process_cache: str = "_reduced",
+    PROCESSING_NEEDED:bool = True
 ) -> List[int]:
     # let's pre-process images first:
     print("[Pre-processing] image conversion:")
     PATH_LUT = {}
     PATH_LUT["img_abs_path"]=list_of_images
     PATH_LUT["[filename]"]=[ os.path.basename(path) for path in list_of_images ]
-    OUT_DIR = os.path.dirname(list_of_images[0]) + folder_name_for_pre_process_cache
-    LIST_REDUCED_IMG_PATH = img_batch_conversion(PATH_LUT=PATH_LUT, OUT_DIR=OUT_DIR, size=(320,320))
-
+    if PROCESSING_NEEDED: 
+        OUT_DIR = os.path.dirname(list_of_images[0]) + folder_name_for_pre_process_cache
+        LIST_REDUCED_IMG_PATH = img_batch_conversion(PATH_LUT=PATH_LUT, OUT_DIR=OUT_DIR, size=(320,320), POST_HOMOGRAPHY=True)
+    else:
+        LIST_REDUCED_IMG_PATH =  PATH_LUT["img_abs_path"]
+    
     # load models:
     if model_dict_type:
-        trained_net = CUSTOM_MODEL_DICT["model"]
-        state_dict = torch.load(model_path)
-        trained_net.load_state_dict(state_dict)
+        trained_net = network_arch
+        trained_net.load_state_dict(torch.load(model_path, map_location="cuda:0"))
     else:
         trained_net = torch.load(model_path)
 
@@ -262,16 +236,91 @@ def eval(
     return y_pred
 
 # %% Example main: ----- ----- ----- ----- ----- -----
-# path to original images:
-imgs = ["/home/jx/JX_Project/covid-xray-detection/data/competition_test/{}.png".format(id) for id in range(1, 401)]
-# evaluate:
-output = eval(
-    list_of_images=imgs, 
-    model_path="/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/v6-custom-with-aug-10/models/best_model_138.pth",
+MODEL_VER = "latest-v8-reduced-model"
+MODEL_NAME = "best_state_dict_78:200.pth"
+MODEL_ARCH = nn.Sequential(
+    # Feature Extraction:
+    # ResNet(BasicBlock, [0,1,1,1], num_classes=2), # ResNet reduced v8 - ResNet10 - ablation
+    ResNet(BasicBlock, [1,1,1,1], num_classes=2), # ResNet reduced v8 - ResNet10
+    # ResNet(BasicBlock, [1,2,3,2], num_classes=2), # ResNet reduced v7
+    # ResNet(BasicBlock, [3,4,6,3], num_classes=2), # ResNet 34
+    # Classifier:
+    nn.Softmax(dim=1),
 )
-print(output)
+LIST_OF_TODO = [
+#     {
+#         "data_directory": "external_data",
+#         "category": "COVID",
+#         "model_directory": MODEL_VER,
+#         "model_name": MODEL_NAME,
+#     },
+#     {
+#         "data_directory": "external_data",
+#         "category": "Lung_Opacity",
+#         "model_directory": MODEL_VER,
+#         "model_name": MODEL_NAME,
+#     },
+#     {
+#         "data_directory": "external_data",
+#         "category": "Normal",
+#         "model_directory": MODEL_VER,
+#         "model_name": MODEL_NAME,
+#     },
+#     {
+#         "data_directory": "external_data",
+#         "category": "Viral Pneumonia",
+#         "model_directory": MODEL_VER,
+#         "model_name": MODEL_NAME,
+#     },
+    {
+        "data_directory": "data-latest",
+        "category": "eval-custom-post",
+        "model_directory": MODEL_VER,
+        "model_name": MODEL_NAME,
+    },
+]
 
-# % Validation:
-y_ref = np.loadtxt("/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/v6-custom-with-aug-10/y_pred[best[107_200]].txt")
-print("diff: ", np.sum(np.abs(y_ref - output)))
+for TODO_ENTRY in LIST_OF_TODO:
+    print("=== BEGIN ===")
+    print(TODO_ENTRY)
+    data_directory = TODO_ENTRY["data_directory"]
+    category = TODO_ENTRY["category"]
+    model_directory = TODO_ENTRY["model_directory"]
+    model_name = TODO_ENTRY["model_name"]
+    IMG_DIR = "/home/jx/JX_Project/covid-xray-detection/{}/{}".format(data_directory, category) 
+    if data_directory == "data-latest":
+        PROCESSING_NEEDED = False
+        # do sth
+        VALID_DATA_LUT = pd.read_csv(abs_data_path("pre-processed-[eval].txt"), sep=" ", header=None, names=LUT_HEADER)
+        VALID_DATA_LUT["Y"] = class_to_binary(VALID_DATA_LUT["[class]"])
+        imgs = filename_to_abspath(filenames=VALID_DATA_LUT["[filename]"], tag=category)
+        report_status(data=VALID_DATA_LUT, tag="eval")
+        y_ref = VALID_DATA_LUT["Y"]
+    else:
+        PROCESSING_NEEDED = True
+        # path to original images:
+        imgs = jx_lib.get_files(DIR=IMG_DIR)
+        # % Validation:
+        y_ref = np.zeros(len(imgs))
+        if category == "COVID":
+            y_ref = np.ones(len(imgs))
+    # evaluate: 
+    FILE_PATH = "/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/{}/models/{}".format(model_directory, model_name)
+    output = eval(
+        list_of_images=imgs, model_path=FILE_PATH, model_dict_type=("state_dict" in model_name), network_arch=MODEL_ARCH,
+        PROCESSING_NEEDED=PROCESSING_NEEDED
+    )
+    OUT_FILE_PATH = "/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/{}/{}-{}.csv".format(model_directory, category, model_name)
+    np.savetxt(OUT_FILE_PATH, output)
+    #-report:
+    print("accuracy: ",  (1- np.sum(np.abs(y_ref - output))/len(imgs))*100, " %")
+    cm = confusion_matrix(output, y_ref)
+    clr = classification_report(y_ref, output, target_names=LABEL_TO_INT_LUT)
+    fig, status = jx_lib.make_confusion_matrix(cf=cm)
+    model_output_path = "/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/{}".format(model_directory)
+    fig.savefig("{}/confusion_matrix_[{}:{}].jpg".format(model_output_path, category, model_name), bbox_inches = 'tight')
+    print("Best Classification Report:\n----------------------")
+    print(clr)
+    print("=== END === \n")
 
+# %%

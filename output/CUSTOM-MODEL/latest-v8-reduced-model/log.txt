@@ -1,0 +1,1283 @@
+
+[2022-01-03 22:37:20.801353]:  USER PREFERENCE: 
+ > SELECTED_TARGET:CUSTOM-MODEL
+ > USE_PREPROCESS_CUSTOM_DATASET:True
+ > USE_PREPROCESS_AUGMENTED_CUSTOM_DATASET:True
+ > PRINT_SAMPLES:True
+
+[2022-01-03 22:37:20.801579]: Sequential(
+  (0): ResNet(
+    (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (fc): Linear(in_features=512, out_features=2, bias=True)
+  )
+  (1): Softmax(dim=1)
+)
+[2022-01-03 22:37:20.801625]: PredictorConfiguration(MODEL_TAG='CUSTOM-MODEL', OUT_DIR='/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model', OUT_DIR_MODELS='/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models', VERSION='latest-v8-reduced-model', TOTAL_NUM_EPOCHS=200, LEARNING_RATE=0.01, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.01
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=30)
+[2022-01-03 22:37:20.801656]: Compose(
+    CenterCrop(size=(320, 320))
+    ToTensor()
+    Normalize(mean=0.5, std=0.5)
+)
+[2022-01-03 22:37:20.840826]: [ALERT] Attempt to use GPU => CUDA:0
+[2022-01-03 22:37:22.612652]: === Dataset Loaded:
+[2022-01-03 22:37:22.612901]: > Train Dataset: +: 11194/22388 (50.00%)  -: 11194/22388 (50.00%) [BALANCED.]
+[2022-01-03 22:37:22.613005]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2022-01-03 22:37:22.613562]: === Dataset Loaded:
+[2022-01-03 22:37:22.613613]: > Competition Dataset: +: 0.0/400 (0.00%)  -: 400.0/400 (100.00%) [UNBALANCED !!!]
+[2022-01-03 22:37:22.936676]: === Print Sample Data (training-sample) [n_display:20 / batch_size:100]
+[2022-01-03 22:37:41.324574]: === Print Sample Data (validation-sample) [n_display:20 / batch_size:100]
+[2022-01-03 22:37:59.725132]: === Print Sample Data (competition-sample) [n_display:20 / batch_size:100]
+[2022-01-03 22:41:52.051965]:  USER PREFERENCE: 
+ > SELECTED_TARGET:CUSTOM-MODEL
+ > USE_PREPROCESS_CUSTOM_DATASET:True
+ > USE_PREPROCESS_AUGMENTED_CUSTOM_DATASET:True
+ > PRINT_SAMPLES:True
+
+[2022-01-03 22:41:52.052200]: Sequential(
+  (0): ResNet(
+    (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU(inplace=True)
+    (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (layer1): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (layer2): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (layer3): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (layer4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+    )
+    (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+    (fc): Linear(in_features=512, out_features=2, bias=True)
+  )
+  (1): Softmax(dim=1)
+)
+[2022-01-03 22:41:52.052251]: PredictorConfiguration(MODEL_TAG='CUSTOM-MODEL', OUT_DIR='/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model', OUT_DIR_MODELS='/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models', VERSION='latest-v8-reduced-model', TOTAL_NUM_EPOCHS=200, LEARNING_RATE=0.01, BATCH_SIZE=100, LOSS_FUNC=NLLLoss(), OPTIMIZER=SGD (
+Parameter Group 0
+    dampening: 0
+    lr: 0.01
+    momentum: 0
+    nesterov: False
+    weight_decay: 0
+), EARLY_STOPPING_DECLINE_CRITERION=30)
+[2022-01-03 22:41:52.052300]: Compose(
+    CenterCrop(size=(320, 320))
+    ToTensor()
+    Normalize(mean=0.5, std=0.5)
+)
+[2022-01-03 22:41:52.073041]: [ALERT] Attempt to use GPU => CUDA:0
+[2022-01-03 22:41:53.800011]: === Dataset Loaded:
+[2022-01-03 22:41:53.800237]: > Train Dataset: +: 11194/22388 (50.00%)  -: 11194/22388 (50.00%) [BALANCED.]
+[2022-01-03 22:41:53.800315]: > Valid Dataset: +: 200/400 (50.00%)  -: 200/400 (50.00%) [BALANCED.]
+[2022-01-03 22:41:54.129427]: === Print Sample Data (training-sample) [n_display:20 / batch_size:100]
+[2022-01-03 22:42:12.767376]: === Print Sample Data (validation-sample) [n_display:20 / batch_size:100]
+[2022-01-03 22:42:30.946767]: === SUMMARY ===
+[2022-01-03 22:42:31.024354]: ----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1         [-1, 64, 160, 160]           9,408
+       BatchNorm2d-2         [-1, 64, 160, 160]             128
+              ReLU-3         [-1, 64, 160, 160]               0
+         MaxPool2d-4           [-1, 64, 80, 80]               0
+            Conv2d-5           [-1, 64, 80, 80]          36,864
+       BatchNorm2d-6           [-1, 64, 80, 80]             128
+              ReLU-7           [-1, 64, 80, 80]               0
+            Conv2d-8           [-1, 64, 80, 80]          36,864
+       BatchNorm2d-9           [-1, 64, 80, 80]             128
+             ReLU-10           [-1, 64, 80, 80]               0
+       BasicBlock-11           [-1, 64, 80, 80]               0
+           Conv2d-12          [-1, 128, 40, 40]          73,728
+      BatchNorm2d-13          [-1, 128, 40, 40]             256
+             ReLU-14          [-1, 128, 40, 40]               0
+           Conv2d-15          [-1, 128, 40, 40]         147,456
+      BatchNorm2d-16          [-1, 128, 40, 40]             256
+           Conv2d-17          [-1, 128, 40, 40]           8,192
+      BatchNorm2d-18          [-1, 128, 40, 40]             256
+             ReLU-19          [-1, 128, 40, 40]               0
+       BasicBlock-20          [-1, 128, 40, 40]               0
+           Conv2d-21          [-1, 256, 20, 20]         294,912
+      BatchNorm2d-22          [-1, 256, 20, 20]             512
+             ReLU-23          [-1, 256, 20, 20]               0
+           Conv2d-24          [-1, 256, 20, 20]         589,824
+      BatchNorm2d-25          [-1, 256, 20, 20]             512
+           Conv2d-26          [-1, 256, 20, 20]          32,768
+      BatchNorm2d-27          [-1, 256, 20, 20]             512
+             ReLU-28          [-1, 256, 20, 20]               0
+       BasicBlock-29          [-1, 256, 20, 20]               0
+           Conv2d-30          [-1, 512, 10, 10]       1,179,648
+      BatchNorm2d-31          [-1, 512, 10, 10]           1,024
+             ReLU-32          [-1, 512, 10, 10]               0
+           Conv2d-33          [-1, 512, 10, 10]       2,359,296
+      BatchNorm2d-34          [-1, 512, 10, 10]           1,024
+           Conv2d-35          [-1, 512, 10, 10]         131,072
+      BatchNorm2d-36          [-1, 512, 10, 10]           1,024
+             ReLU-37          [-1, 512, 10, 10]               0
+       BasicBlock-38          [-1, 512, 10, 10]               0
+AdaptiveAvgPool2d-39            [-1, 512, 1, 1]               0
+           Linear-40                    [-1, 2]           1,026
+           ResNet-41                    [-1, 2]               0
+          Softmax-42                    [-1, 2]               0
+================================================================
+Total params: 4,906,818
+Trainable params: 4,906,818
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 1.17
+Forward/backward pass size (MB): 87.11
+Params size (MB): 18.72
+Estimated Total Size (MB): 107.00
+----------------------------------------------------------------
+
+[2022-01-03 22:42:31.024401]: > epoch 1/200:
+[2022-01-03 22:42:31.024422]:   >> Learning (wip) 
+[2022-01-03 22:43:31.596547]:   >> Testing (wip) 
+[2022-01-03 22:43:32.539133]:     epoch 1 > Training: [LOSS: -0.8073 | ACC: 0.8382] | Testing: [LOSS: -0.8378 | ACC: 0.8675] Ellapsed: 60.57 s | rate:0.94241
+
+[2022-01-03 22:43:32.557611]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_1:200.pth 
+
+[2022-01-03 22:43:32.663665]: Best Classification Report:
+----------------------
+[2022-01-03 22:43:32.663699]:               precision    recall  f1-score   support
+
+    positive       0.84      0.91      0.87       200
+    negative       0.90      0.82      0.86       200
+
+    accuracy                           0.87       400
+   macro avg       0.87      0.87      0.87       400
+weighted avg       0.87      0.87      0.87       400
+
+[2022-01-03 22:43:32.663725]: > epoch 2/200:
+[2022-01-03 22:43:32.663749]:   >> Learning (wip) 
+[2022-01-03 22:44:34.125277]:   >> Testing (wip) 
+[2022-01-03 22:44:35.082722]:     epoch 2 > Training: [LOSS: -0.9071 | ACC: 0.9202] | Testing: [LOSS: -0.9041 | ACC: 0.9325] Ellapsed: 61.46 s | rate:0.95722
+
+[2022-01-03 22:44:35.099048]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_2:200.pth 
+
+[2022-01-03 22:44:35.171456]: Best Classification Report:
+----------------------
+[2022-01-03 22:44:35.171489]:               precision    recall  f1-score   support
+
+    positive       0.91      0.96      0.93       200
+    negative       0.96      0.90      0.93       200
+
+    accuracy                           0.93       400
+   macro avg       0.93      0.93      0.93       400
+weighted avg       0.93      0.93      0.93       400
+
+[2022-01-03 22:44:35.171514]: > epoch 3/200:
+[2022-01-03 22:44:35.171536]:   >> Learning (wip) 
+[2022-01-03 22:45:36.251489]:   >> Testing (wip) 
+[2022-01-03 22:45:37.202409]:     epoch 3 > Training: [LOSS: -0.9295 | ACC: 0.9365] | Testing: [LOSS: -0.9372 | ACC: 0.9575] Ellapsed: 61.08 s | rate:0.95070
+
+[2022-01-03 22:45:37.218892]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_3:200.pth 
+
+[2022-01-03 22:45:37.291894]: Best Classification Report:
+----------------------
+[2022-01-03 22:45:37.291927]:               precision    recall  f1-score   support
+
+    positive       0.94      0.97      0.96       200
+    negative       0.97      0.94      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2022-01-03 22:45:37.291954]: > epoch 4/200:
+[2022-01-03 22:45:37.291976]:   >> Learning (wip) 
+[2022-01-03 22:46:38.633377]:   >> Testing (wip) 
+[2022-01-03 22:46:39.583215]:     epoch 4 > Training: [LOSS: -0.9354 | ACC: 0.9421] | Testing: [LOSS: -0.9672 | ACC: 0.9825] Ellapsed: 61.34 s | rate:0.94962
+
+[2022-01-03 22:46:39.599391]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_4:200.pth 
+
+[2022-01-03 22:46:39.673862]: Best Classification Report:
+----------------------
+[2022-01-03 22:46:39.673898]:               precision    recall  f1-score   support
+
+    positive       0.97      1.00      0.98       200
+    negative       1.00      0.96      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 22:46:39.673926]: > epoch 5/200:
+[2022-01-03 22:46:39.673949]:   >> Learning (wip) 
+[2022-01-03 22:47:40.238557]:   >> Testing (wip) 
+[2022-01-03 22:47:41.190407]:     epoch 5 > Training: [LOSS: -0.9418 | ACC: 0.9477] | Testing: [LOSS: -0.9474 | ACC: 0.9750] Ellapsed: 60.56 s | rate:0.95163
+
+[2022-01-03 22:47:41.206641]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_5:200.pth 
+
+[2022-01-03 22:47:41.292039]: Best Classification Report:
+----------------------
+[2022-01-03 22:47:41.292086]:               precision    recall  f1-score   support
+
+    positive       0.97      0.97      0.97       200
+    negative       0.97      0.97      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2022-01-03 22:47:41.292118]: > epoch 6/200:
+[2022-01-03 22:47:41.292147]:   >> Learning (wip) 
+[2022-01-03 22:48:42.539509]:   >> Testing (wip) 
+[2022-01-03 22:48:43.499297]:     epoch 6 > Training: [LOSS: -0.9484 | ACC: 0.9544] | Testing: [LOSS: -0.9536 | ACC: 0.9675] Ellapsed: 61.25 s | rate:0.95958
+
+[2022-01-03 22:48:43.516520]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_6:200.pth 
+
+[2022-01-03 22:48:43.589434]: Best Classification Report:
+----------------------
+[2022-01-03 22:48:43.589468]:               precision    recall  f1-score   support
+
+    positive       0.98      0.95      0.97       200
+    negative       0.95      0.98      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2022-01-03 22:48:43.589492]: > epoch 7/200:
+[2022-01-03 22:48:43.589515]:   >> Learning (wip) 
+[2022-01-03 22:49:44.784062]:   >> Testing (wip) 
+[2022-01-03 22:49:45.716445]:     epoch 7 > Training: [LOSS: -0.9524 | ACC: 0.9573] | Testing: [LOSS: -0.9702 | ACC: 0.9875] Ellapsed: 61.19 s | rate:0.93216
+
+[2022-01-03 22:49:45.732781]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_7:200.pth 
+
+[2022-01-03 22:49:45.812298]: Best Classification Report:
+----------------------
+[2022-01-03 22:49:45.812334]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.98      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2022-01-03 22:49:45.812362]: > epoch 8/200:
+[2022-01-03 22:49:45.812387]:   >> Learning (wip) 
+[2022-01-03 22:50:45.660498]:   >> Testing (wip) 
+[2022-01-03 22:50:46.593678]:     epoch 8 > Training: [LOSS: -0.9558 | ACC: 0.9599] | Testing: [LOSS: -0.9483 | ACC: 0.9675] Ellapsed: 59.85 s | rate:0.93295
+
+[2022-01-03 22:50:46.609996]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_8:200.pth 
+
+[2022-01-03 22:50:46.682832]: Best Classification Report:
+----------------------
+[2022-01-03 22:50:46.682867]:               precision    recall  f1-score   support
+
+    positive       0.97      0.97      0.97       200
+    negative       0.97      0.96      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2022-01-03 22:50:46.682893]: > epoch 9/200:
+[2022-01-03 22:50:46.682916]:   >> Learning (wip) 
+[2022-01-03 22:51:46.569233]:   >> Testing (wip) 
+[2022-01-03 22:51:47.533996]:     epoch 9 > Training: [LOSS: -0.9572 | ACC: 0.9604] | Testing: [LOSS: -0.9665 | ACC: 0.9800] Ellapsed: 59.89 s | rate:0.96455
+
+[2022-01-03 22:51:47.550479]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_9:200.pth 
+
+[2022-01-03 22:51:47.623543]: Best Classification Report:
+----------------------
+[2022-01-03 22:51:47.623578]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 22:51:47.623604]: > epoch 10/200:
+[2022-01-03 22:51:47.623628]:   >> Learning (wip) 
+[2022-01-03 22:52:48.478410]:   >> Testing (wip) 
+[2022-01-03 22:52:49.414732]:     epoch 10 > Training: [LOSS: -0.9586 | ACC: 0.9629] | Testing: [LOSS: -0.9604 | ACC: 0.9775] Ellapsed: 60.85 s | rate:0.93612
+
+[2022-01-03 22:52:49.431100]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_10:200.pth 
+
+[2022-01-03 22:52:49.504340]: Best Classification Report:
+----------------------
+[2022-01-03 22:52:49.504376]:               precision    recall  f1-score   support
+
+    positive       0.98      0.97      0.98       200
+    negative       0.97      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 22:52:49.504401]: > epoch 11/200:
+[2022-01-03 22:52:49.504424]:   >> Learning (wip) 
+[2022-01-03 22:53:50.652717]:   >> Testing (wip) 
+[2022-01-03 22:53:51.616071]:     epoch 11 > Training: [LOSS: -0.9596 | ACC: 0.9627] | Testing: [LOSS: -0.9092 | ACC: 0.9175] Ellapsed: 61.15 s | rate:0.96315
+
+[2022-01-03 22:53:51.636023]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_11:200.pth 
+
+[2022-01-03 22:53:51.713220]: Best Classification Report:
+----------------------
+[2022-01-03 22:53:51.713253]:               precision    recall  f1-score   support
+
+    positive       0.93      0.90      0.92       200
+    negative       0.90      0.94      0.92       200
+
+    accuracy                           0.92       400
+   macro avg       0.92      0.92      0.92       400
+weighted avg       0.92      0.92      0.92       400
+
+[2022-01-03 22:53:51.713279]: > epoch 12/200:
+[2022-01-03 22:53:51.713302]:   >> Learning (wip) 
+[2022-01-03 22:54:53.201004]:   >> Testing (wip) 
+[2022-01-03 22:54:54.152764]:     epoch 12 > Training: [LOSS: -0.9596 | ACC: 0.9627] | Testing: [LOSS: -0.9566 | ACC: 0.9675] Ellapsed: 61.49 s | rate:0.95156
+
+[2022-01-03 22:54:54.169435]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_12:200.pth 
+
+[2022-01-03 22:54:54.243151]: Best Classification Report:
+----------------------
+[2022-01-03 22:54:54.243186]:               precision    recall  f1-score   support
+
+    positive       0.97      0.96      0.97       200
+    negative       0.96      0.97      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2022-01-03 22:54:54.243212]: > epoch 13/200:
+[2022-01-03 22:54:54.243235]:   >> Learning (wip) 
+[2022-01-03 22:55:55.685245]:   >> Testing (wip) 
+[2022-01-03 22:55:56.648250]:     epoch 13 > Training: [LOSS: -0.9640 | ACC: 0.9666] | Testing: [LOSS: -0.9713 | ACC: 0.9775] Ellapsed: 61.44 s | rate:0.96279
+
+[2022-01-03 22:55:56.665046]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_13:200.pth 
+
+[2022-01-03 22:55:56.738664]: Best Classification Report:
+----------------------
+[2022-01-03 22:55:56.738702]:               precision    recall  f1-score   support
+
+    positive       0.98      0.97      0.98       200
+    negative       0.97      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 22:55:56.738735]: > epoch 14/200:
+[2022-01-03 22:55:56.738760]:   >> Learning (wip) 
+[2022-01-03 22:56:58.609576]:   >> Testing (wip) 
+[2022-01-03 22:56:59.555076]:     epoch 14 > Training: [LOSS: -0.9640 | ACC: 0.9669] | Testing: [LOSS: -0.9734 | ACC: 0.9775] Ellapsed: 61.87 s | rate:0.94528
+
+[2022-01-03 22:56:59.571666]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_14:200.pth 
+
+[2022-01-03 22:56:59.644738]: Best Classification Report:
+----------------------
+[2022-01-03 22:56:59.644778]:               precision    recall  f1-score   support
+
+    positive       0.98      0.97      0.98       200
+    negative       0.98      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 22:56:59.644808]: > epoch 15/200:
+[2022-01-03 22:56:59.644832]:   >> Learning (wip) 
+[2022-01-03 22:58:00.914999]:   >> Testing (wip) 
+[2022-01-03 22:58:01.845598]:     epoch 15 > Training: [LOSS: -0.9647 | ACC: 0.9676] | Testing: [LOSS: -0.9662 | ACC: 0.9775] Ellapsed: 61.27 s | rate:0.93039
+
+[2022-01-03 22:58:01.862067]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_15:200.pth 
+
+[2022-01-03 22:58:01.935424]: Best Classification Report:
+----------------------
+[2022-01-03 22:58:01.935458]:               precision    recall  f1-score   support
+
+    positive       0.98      0.97      0.98       200
+    negative       0.98      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 22:58:01.935484]: > epoch 16/200:
+[2022-01-03 22:58:01.935507]:   >> Learning (wip) 
+[2022-01-03 22:59:02.896843]:   >> Testing (wip) 
+[2022-01-03 22:59:03.854022]:     epoch 16 > Training: [LOSS: -0.9654 | ACC: 0.9681] | Testing: [LOSS: -0.9466 | ACC: 0.9500] Ellapsed: 60.96 s | rate:0.95697
+
+[2022-01-03 22:59:03.874063]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_16:200.pth 
+
+[2022-01-03 22:59:03.947005]: Best Classification Report:
+----------------------
+[2022-01-03 22:59:03.947044]:               precision    recall  f1-score   support
+
+    positive       0.95      0.95      0.95       200
+    negative       0.95      0.94      0.95       200
+
+    accuracy                           0.95       400
+   macro avg       0.95      0.95      0.95       400
+weighted avg       0.95      0.95      0.95       400
+
+[2022-01-03 22:59:03.947071]: > epoch 17/200:
+[2022-01-03 22:59:03.947095]:   >> Learning (wip) 
+[2022-01-03 23:00:04.067448]:   >> Testing (wip) 
+[2022-01-03 23:00:05.029732]:     epoch 17 > Training: [LOSS: -0.9664 | ACC: 0.9687] | Testing: [LOSS: -0.9384 | ACC: 0.9475] Ellapsed: 60.12 s | rate:0.96208
+
+[2022-01-03 23:00:05.029789]: > epoch 18/200:
+[2022-01-03 23:00:05.029815]:   >> Learning (wip) 
+[2022-01-03 23:01:05.499576]:   >> Testing (wip) 
+[2022-01-03 23:01:06.468596]:     epoch 18 > Training: [LOSS: -0.9676 | ACC: 0.9698] | Testing: [LOSS: -0.8934 | ACC: 0.8950] Ellapsed: 60.47 s | rate:0.96882
+
+[2022-01-03 23:01:06.468651]: > epoch 19/200:
+[2022-01-03 23:01:06.468676]:   >> Learning (wip) 
+[2022-01-03 23:02:06.987131]:   >> Testing (wip) 
+[2022-01-03 23:02:07.956693]:     epoch 19 > Training: [LOSS: -0.9672 | ACC: 0.9700] | Testing: [LOSS: -0.9521 | ACC: 0.9625] Ellapsed: 60.52 s | rate:0.96935
+
+[2022-01-03 23:02:07.976706]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_19:200.pth 
+
+[2022-01-03 23:02:08.049888]: Best Classification Report:
+----------------------
+[2022-01-03 23:02:08.049932]:               precision    recall  f1-score   support
+
+    positive       0.96      0.96      0.96       200
+    negative       0.96      0.96      0.96       200
+
+    accuracy                           0.96       400
+   macro avg       0.96      0.96      0.96       400
+weighted avg       0.96      0.96      0.96       400
+
+[2022-01-03 23:02:08.049960]: > epoch 20/200:
+[2022-01-03 23:02:08.049986]:   >> Learning (wip) 
+[2022-01-03 23:03:08.626481]:   >> Testing (wip) 
+[2022-01-03 23:03:09.564643]:     epoch 20 > Training: [LOSS: -0.9701 | ACC: 0.9726] | Testing: [LOSS: -0.9720 | ACC: 0.9825] Ellapsed: 60.58 s | rate:0.93793
+
+[2022-01-03 23:03:09.580905]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_20:200.pth 
+
+[2022-01-03 23:03:09.654590]: Best Classification Report:
+----------------------
+[2022-01-03 23:03:09.654630]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:03:09.654663]: > epoch 21/200:
+[2022-01-03 23:03:09.654690]:   >> Learning (wip) 
+[2022-01-03 23:04:09.878879]:   >> Testing (wip) 
+[2022-01-03 23:04:10.818162]:     epoch 21 > Training: [LOSS: -0.9699 | ACC: 0.9726] | Testing: [LOSS: -0.9487 | ACC: 0.9575] Ellapsed: 60.22 s | rate:0.93906
+
+[2022-01-03 23:04:10.818222]: > epoch 22/200:
+[2022-01-03 23:04:10.818248]:   >> Learning (wip) 
+[2022-01-03 23:05:11.309051]:   >> Testing (wip) 
+[2022-01-03 23:05:12.268635]:     epoch 22 > Training: [LOSS: -0.9710 | ACC: 0.9740] | Testing: [LOSS: -0.9809 | ACC: 0.9875] Ellapsed: 60.49 s | rate:0.95938
+
+[2022-01-03 23:05:12.285402]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_22:200.pth 
+
+[2022-01-03 23:05:12.358139]: Best Classification Report:
+----------------------
+[2022-01-03 23:05:12.358174]:               precision    recall  f1-score   support
+
+    positive       0.99      0.99      0.99       200
+    negative       0.99      0.98      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2022-01-03 23:05:12.358199]: > epoch 23/200:
+[2022-01-03 23:05:12.358222]:   >> Learning (wip) 
+[2022-01-03 23:06:13.361719]:   >> Testing (wip) 
+[2022-01-03 23:06:14.300186]:     epoch 23 > Training: [LOSS: -0.9710 | ACC: 0.9737] | Testing: [LOSS: -0.9745 | ACC: 0.9775] Ellapsed: 61.00 s | rate:0.93824
+
+[2022-01-03 23:06:14.316269]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_23:200.pth 
+
+[2022-01-03 23:06:14.389681]: Best Classification Report:
+----------------------
+[2022-01-03 23:06:14.389714]:               precision    recall  f1-score   support
+
+    positive       0.97      0.98      0.98       200
+    negative       0.98      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:06:14.389739]: > epoch 24/200:
+[2022-01-03 23:06:14.389764]:   >> Learning (wip) 
+[2022-01-03 23:07:14.858353]:   >> Testing (wip) 
+[2022-01-03 23:07:15.792999]:     epoch 24 > Training: [LOSS: -0.9712 | ACC: 0.9734] | Testing: [LOSS: -0.9502 | ACC: 0.9575] Ellapsed: 60.47 s | rate:0.93443
+
+[2022-01-03 23:07:15.793065]: > epoch 25/200:
+[2022-01-03 23:07:15.793098]:   >> Learning (wip) 
+[2022-01-03 23:08:16.061716]:   >> Testing (wip) 
+[2022-01-03 23:08:17.021291]:     epoch 25 > Training: [LOSS: -0.9716 | ACC: 0.9737] | Testing: [LOSS: -0.9614 | ACC: 0.9675] Ellapsed: 60.27 s | rate:0.95937
+
+[2022-01-03 23:08:17.040556]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_25:200.pth 
+
+[2022-01-03 23:08:17.113353]: Best Classification Report:
+----------------------
+[2022-01-03 23:08:17.113389]:               precision    recall  f1-score   support
+
+    positive       0.97      0.96      0.97       200
+    negative       0.97      0.97      0.97       200
+
+    accuracy                           0.97       400
+   macro avg       0.97      0.97      0.97       400
+weighted avg       0.97      0.97      0.97       400
+
+[2022-01-03 23:08:17.113414]: > epoch 26/200:
+[2022-01-03 23:08:17.113437]:   >> Learning (wip) 
+[2022-01-03 23:09:17.378951]:   >> Testing (wip) 
+[2022-01-03 23:09:18.316895]:     epoch 26 > Training: [LOSS: -0.9724 | ACC: 0.9742] | Testing: [LOSS: -0.9589 | ACC: 0.9650] Ellapsed: 60.27 s | rate:0.93770
+
+[2022-01-03 23:09:18.316955]: > epoch 27/200:
+[2022-01-03 23:09:18.316980]:   >> Learning (wip) 
+[2022-01-03 23:10:18.414925]:   >> Testing (wip) 
+[2022-01-03 23:10:19.372702]:     epoch 27 > Training: [LOSS: -0.9718 | ACC: 0.9741] | Testing: [LOSS: -0.9355 | ACC: 0.9475] Ellapsed: 60.10 s | rate:0.95755
+
+[2022-01-03 23:10:19.372761]: > epoch 28/200:
+[2022-01-03 23:10:19.372792]:   >> Learning (wip) 
+[2022-01-03 23:11:20.067946]:   >> Testing (wip) 
+[2022-01-03 23:11:21.015676]:     epoch 28 > Training: [LOSS: -0.9733 | ACC: 0.9753] | Testing: [LOSS: -0.9589 | ACC: 0.9675] Ellapsed: 60.69 s | rate:0.94748
+
+[2022-01-03 23:11:21.015731]: > epoch 29/200:
+[2022-01-03 23:11:21.015757]:   >> Learning (wip) 
+[2022-01-03 23:12:21.544588]:   >> Testing (wip) 
+[2022-01-03 23:12:22.502297]:     epoch 29 > Training: [LOSS: -0.9752 | ACC: 0.9776] | Testing: [LOSS: -0.9797 | ACC: 0.9800] Ellapsed: 60.53 s | rate:0.95748
+
+[2022-01-03 23:12:22.518653]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_29:200.pth 
+
+[2022-01-03 23:12:22.591970]: Best Classification Report:
+----------------------
+[2022-01-03 23:12:22.592006]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:12:22.592032]: > epoch 30/200:
+[2022-01-03 23:12:22.592054]:   >> Learning (wip) 
+[2022-01-03 23:13:23.319503]:   >> Testing (wip) 
+[2022-01-03 23:13:24.259779]:     epoch 30 > Training: [LOSS: -0.9749 | ACC: 0.9769] | Testing: [LOSS: -0.9843 | ACC: 0.9875] Ellapsed: 60.73 s | rate:0.94003
+
+[2022-01-03 23:13:24.275889]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_30:200.pth 
+
+[2022-01-03 23:13:24.349180]: Best Classification Report:
+----------------------
+[2022-01-03 23:13:24.349214]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.98      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2022-01-03 23:13:24.349240]: > epoch 31/200:
+[2022-01-03 23:13:24.349263]:   >> Learning (wip) 
+[2022-01-03 23:14:25.325156]:   >> Testing (wip) 
+[2022-01-03 23:14:26.272692]:     epoch 31 > Training: [LOSS: -0.9749 | ACC: 0.9765] | Testing: [LOSS: -0.9828 | ACC: 0.9850] Ellapsed: 60.98 s | rate:0.94733
+
+[2022-01-03 23:14:26.289011]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_31:200.pth 
+
+[2022-01-03 23:14:26.361586]: Best Classification Report:
+----------------------
+[2022-01-03 23:14:26.361620]:               precision    recall  f1-score   support
+
+    positive       0.99      0.98      0.98       200
+    negative       0.98      0.99      0.99       200
+
+    accuracy                           0.98       400
+   macro avg       0.99      0.98      0.98       400
+weighted avg       0.99      0.98      0.98       400
+
+[2022-01-03 23:14:26.361652]: > epoch 32/200:
+[2022-01-03 23:14:26.361676]:   >> Learning (wip) 
+[2022-01-03 23:15:27.695857]:   >> Testing (wip) 
+[2022-01-03 23:15:28.634966]:     epoch 32 > Training: [LOSS: -0.9747 | ACC: 0.9770] | Testing: [LOSS: -0.9591 | ACC: 0.9650] Ellapsed: 61.33 s | rate:0.93889
+
+[2022-01-03 23:15:28.635024]: > epoch 33/200:
+[2022-01-03 23:15:28.635051]:   >> Learning (wip) 
+[2022-01-03 23:16:29.026659]:   >> Testing (wip) 
+[2022-01-03 23:16:29.960459]:     epoch 33 > Training: [LOSS: -0.9756 | ACC: 0.9775] | Testing: [LOSS: -0.9821 | ACC: 0.9875] Ellapsed: 60.39 s | rate:0.93359
+
+[2022-01-03 23:16:29.976471]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_33:200.pth 
+
+[2022-01-03 23:16:30.050748]: Best Classification Report:
+----------------------
+[2022-01-03 23:16:30.050784]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.98      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2022-01-03 23:16:30.050810]: > epoch 34/200:
+[2022-01-03 23:16:30.050833]:   >> Learning (wip) 
+[2022-01-03 23:17:30.896922]:   >> Testing (wip) 
+[2022-01-03 23:17:31.851767]:     epoch 34 > Training: [LOSS: -0.9760 | ACC: 0.9778] | Testing: [LOSS: -0.9818 | ACC: 0.9850] Ellapsed: 60.85 s | rate:0.95461
+
+[2022-01-03 23:17:31.868273]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_34:200.pth 
+
+[2022-01-03 23:17:31.948775]: Best Classification Report:
+----------------------
+[2022-01-03 23:17:31.948830]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.99      0.98      0.98       400
+weighted avg       0.99      0.98      0.98       400
+
+[2022-01-03 23:17:31.948870]: > epoch 35/200:
+[2022-01-03 23:17:31.948907]:   >> Learning (wip) 
+[2022-01-03 23:18:33.363359]:   >> Testing (wip) 
+[2022-01-03 23:18:34.303915]:     epoch 35 > Training: [LOSS: -0.9755 | ACC: 0.9774] | Testing: [LOSS: -0.9772 | ACC: 0.9800] Ellapsed: 61.41 s | rate:0.94034
+
+[2022-01-03 23:18:34.320066]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_35:200.pth 
+
+[2022-01-03 23:18:34.392800]: Best Classification Report:
+----------------------
+[2022-01-03 23:18:34.392834]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:18:34.392859]: > epoch 36/200:
+[2022-01-03 23:18:34.392882]:   >> Learning (wip) 
+[2022-01-03 23:19:35.497248]:   >> Testing (wip) 
+[2022-01-03 23:19:36.455329]:     epoch 36 > Training: [LOSS: -0.9758 | ACC: 0.9779] | Testing: [LOSS: -0.9752 | ACC: 0.9825] Ellapsed: 61.10 s | rate:0.95785
+
+[2022-01-03 23:19:36.471639]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_36:200.pth 
+
+[2022-01-03 23:19:36.544898]: Best Classification Report:
+----------------------
+[2022-01-03 23:19:36.544933]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.98       200
+    negative       0.99      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:19:36.544965]: > epoch 37/200:
+[2022-01-03 23:19:36.544988]:   >> Learning (wip) 
+[2022-01-03 23:20:37.591005]:   >> Testing (wip) 
+[2022-01-03 23:20:38.541831]:     epoch 37 > Training: [LOSS: -0.9771 | ACC: 0.9789] | Testing: [LOSS: -0.9465 | ACC: 0.9550] Ellapsed: 61.05 s | rate:0.95060
+
+[2022-01-03 23:20:38.541886]: > epoch 38/200:
+[2022-01-03 23:20:38.541913]:   >> Learning (wip) 
+[2022-01-03 23:21:39.716684]:   >> Testing (wip) 
+[2022-01-03 23:21:40.657003]:     epoch 38 > Training: [LOSS: -0.9778 | ACC: 0.9793] | Testing: [LOSS: -0.9737 | ACC: 0.9800] Ellapsed: 61.17 s | rate:0.94011
+
+[2022-01-03 23:21:40.673506]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_38:200.pth 
+
+[2022-01-03 23:21:40.747032]: Best Classification Report:
+----------------------
+[2022-01-03 23:21:40.747066]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:21:40.747092]: > epoch 39/200:
+[2022-01-03 23:21:40.747114]:   >> Learning (wip) 
+[2022-01-03 23:22:41.665251]:   >> Testing (wip) 
+[2022-01-03 23:22:42.593433]:     epoch 39 > Training: [LOSS: -0.9768 | ACC: 0.9783] | Testing: [LOSS: -0.9788 | ACC: 0.9800] Ellapsed: 60.92 s | rate:0.92796
+
+[2022-01-03 23:22:42.609842]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_39:200.pth 
+
+[2022-01-03 23:22:42.683166]: Best Classification Report:
+----------------------
+[2022-01-03 23:22:42.683202]:               precision    recall  f1-score   support
+
+    positive       0.97      0.99      0.98       200
+    negative       0.99      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:22:42.683227]: > epoch 40/200:
+[2022-01-03 23:22:42.683250]:   >> Learning (wip) 
+[2022-01-03 23:23:43.677027]:   >> Testing (wip) 
+[2022-01-03 23:23:44.633373]:     epoch 40 > Training: [LOSS: -0.9780 | ACC: 0.9797] | Testing: [LOSS: -0.9839 | ACC: 0.9925] Ellapsed: 60.99 s | rate:0.95612
+
+[2022-01-03 23:23:44.649422]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_40:200.pth 
+
+[2022-01-03 23:23:44.728149]: Best Classification Report:
+----------------------
+[2022-01-03 23:23:44.728184]:               precision    recall  f1-score   support
+
+    positive       0.99      0.99      0.99       200
+    negative       0.99      0.99      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2022-01-03 23:23:44.728210]: > epoch 41/200:
+[2022-01-03 23:23:44.728233]:   >> Learning (wip) 
+[2022-01-03 23:24:45.599917]:   >> Testing (wip) 
+[2022-01-03 23:24:46.537304]:     epoch 41 > Training: [LOSS: -0.9780 | ACC: 0.9796] | Testing: [LOSS: -0.9740 | ACC: 0.9800] Ellapsed: 60.87 s | rate:0.93718
+
+[2022-01-03 23:24:46.553418]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_41:200.pth 
+
+[2022-01-03 23:24:46.626464]: Best Classification Report:
+----------------------
+[2022-01-03 23:24:46.626500]:               precision    recall  f1-score   support
+
+    positive       0.98      0.98      0.98       200
+    negative       0.98      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:24:46.626530]: > epoch 42/200:
+[2022-01-03 23:24:46.626554]:   >> Learning (wip) 
+[2022-01-03 23:25:48.116569]:   >> Testing (wip) 
+[2022-01-03 23:25:49.054807]:     epoch 42 > Training: [LOSS: -0.9775 | ACC: 0.9790] | Testing: [LOSS: -0.9839 | ACC: 0.9950] Ellapsed: 61.49 s | rate:0.93802
+
+[2022-01-03 23:25:49.070950]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_42:200.pth 
+
+[2022-01-03 23:25:49.147503]: Best Classification Report:
+----------------------
+[2022-01-03 23:25:49.147537]:               precision    recall  f1-score   support
+
+    positive       0.99      1.00      1.00       200
+    negative       1.00      0.99      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       1.00      0.99      0.99       400
+weighted avg       1.00      0.99      0.99       400
+
+[2022-01-03 23:25:49.147563]: > epoch 43/200:
+[2022-01-03 23:25:49.147586]:   >> Learning (wip) 
+[2022-01-03 23:26:50.579576]:   >> Testing (wip) 
+[2022-01-03 23:26:51.519294]:     epoch 43 > Training: [LOSS: -0.9795 | ACC: 0.9807] | Testing: [LOSS: -0.9432 | ACC: 0.9475] Ellapsed: 61.43 s | rate:0.93949
+
+[2022-01-03 23:26:51.519356]: > epoch 44/200:
+[2022-01-03 23:26:51.519384]:   >> Learning (wip) 
+[2022-01-03 23:27:52.602813]:   >> Testing (wip) 
+[2022-01-03 23:27:53.530615]:     epoch 44 > Training: [LOSS: -0.9793 | ACC: 0.9811] | Testing: [LOSS: -0.9794 | ACC: 0.9850] Ellapsed: 61.08 s | rate:0.92760
+
+[2022-01-03 23:27:53.546715]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_44:200.pth 
+
+[2022-01-03 23:27:53.619176]: Best Classification Report:
+----------------------
+[2022-01-03 23:27:53.619211]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.98      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.99      0.98      0.98       400
+weighted avg       0.99      0.98      0.98       400
+
+[2022-01-03 23:27:53.619237]: > epoch 45/200:
+[2022-01-03 23:27:53.619260]:   >> Learning (wip) 
+[2022-01-03 23:28:54.182321]:   >> Testing (wip) 
+[2022-01-03 23:28:55.111343]:     epoch 45 > Training: [LOSS: -0.9777 | ACC: 0.9798] | Testing: [LOSS: -0.9619 | ACC: 0.9650] Ellapsed: 60.56 s | rate:0.92879
+
+[2022-01-03 23:28:55.111406]: > epoch 46/200:
+[2022-01-03 23:28:55.111432]:   >> Learning (wip) 
+[2022-01-03 23:29:56.032769]:   >> Testing (wip) 
+[2022-01-03 23:29:56.968039]:     epoch 46 > Training: [LOSS: -0.9789 | ACC: 0.9803] | Testing: [LOSS: -0.9781 | ACC: 0.9800] Ellapsed: 60.92 s | rate:0.93504
+
+[2022-01-03 23:29:56.987521]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_46:200.pth 
+
+[2022-01-03 23:29:57.059820]: Best Classification Report:
+----------------------
+[2022-01-03 23:29:57.059854]:               precision    recall  f1-score   support
+
+    positive       0.97      0.99      0.98       200
+    negative       0.99      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:29:57.059880]: > epoch 47/200:
+[2022-01-03 23:29:57.059902]:   >> Learning (wip) 
+[2022-01-03 23:30:58.070262]:   >> Testing (wip) 
+[2022-01-03 23:30:59.021110]:     epoch 47 > Training: [LOSS: -0.9788 | ACC: 0.9802] | Testing: [LOSS: -0.9574 | ACC: 0.9625] Ellapsed: 61.01 s | rate:0.95060
+
+[2022-01-03 23:30:59.021170]: > epoch 48/200:
+[2022-01-03 23:30:59.021198]:   >> Learning (wip) 
+[2022-01-03 23:32:00.249257]:   >> Testing (wip) 
+[2022-01-03 23:32:01.199279]:     epoch 48 > Training: [LOSS: -0.9801 | ACC: 0.9816] | Testing: [LOSS: -0.9530 | ACC: 0.9575] Ellapsed: 61.23 s | rate:0.94982
+
+[2022-01-03 23:32:01.199343]: > epoch 49/200:
+[2022-01-03 23:32:01.199368]:   >> Learning (wip) 
+[2022-01-03 23:33:02.829013]:   >> Testing (wip) 
+[2022-01-03 23:33:03.771757]:     epoch 49 > Training: [LOSS: -0.9802 | ACC: 0.9815] | Testing: [LOSS: -0.9627 | ACC: 0.9675] Ellapsed: 61.63 s | rate:0.94251
+
+[2022-01-03 23:33:03.771812]: > epoch 50/200:
+[2022-01-03 23:33:03.771839]:   >> Learning (wip) 
+[2022-01-03 23:34:05.470247]:   >> Testing (wip) 
+[2022-01-03 23:34:06.421123]:     epoch 50 > Training: [LOSS: -0.9813 | ACC: 0.9829] | Testing: [LOSS: -0.9547 | ACC: 0.9575] Ellapsed: 61.70 s | rate:0.95064
+
+[2022-01-03 23:34:06.421174]: > epoch 51/200:
+[2022-01-03 23:34:06.421199]:   >> Learning (wip) 
+[2022-01-03 23:35:08.127582]:   >> Testing (wip) 
+[2022-01-03 23:35:09.075326]:     epoch 51 > Training: [LOSS: -0.9810 | ACC: 0.9821] | Testing: [LOSS: -0.9601 | ACC: 0.9600] Ellapsed: 61.71 s | rate:0.94750
+
+[2022-01-03 23:35:09.075387]: > epoch 52/200:
+[2022-01-03 23:35:09.075414]:   >> Learning (wip) 
+[2022-01-03 23:36:10.167908]:   >> Testing (wip) 
+[2022-01-03 23:36:11.123288]:     epoch 52 > Training: [LOSS: -0.9801 | ACC: 0.9816] | Testing: [LOSS: -0.9669 | ACC: 0.9725] Ellapsed: 61.09 s | rate:0.95515
+
+[2022-01-03 23:36:11.123345]: > epoch 53/200:
+[2022-01-03 23:36:11.123373]:   >> Learning (wip) 
+[2022-01-03 23:37:12.940973]:   >> Testing (wip) 
+[2022-01-03 23:37:13.873864]:     epoch 53 > Training: [LOSS: -0.9803 | ACC: 0.9816] | Testing: [LOSS: -0.9768 | ACC: 0.9825] Ellapsed: 61.82 s | rate:0.93264
+
+[2022-01-03 23:37:13.890423]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_53:200.pth 
+
+[2022-01-03 23:37:13.963528]: Best Classification Report:
+----------------------
+[2022-01-03 23:37:13.963563]:               precision    recall  f1-score   support
+
+    positive       0.97      0.99      0.98       200
+    negative       0.99      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:37:13.963589]: > epoch 54/200:
+[2022-01-03 23:37:13.963612]:   >> Learning (wip) 
+[2022-01-03 23:38:15.825623]:   >> Testing (wip) 
+[2022-01-03 23:38:16.775254]:     epoch 54 > Training: [LOSS: -0.9817 | ACC: 0.9832] | Testing: [LOSS: -0.9330 | ACC: 0.9425] Ellapsed: 61.86 s | rate:0.94937
+
+[2022-01-03 23:38:16.775315]: > epoch 55/200:
+[2022-01-03 23:38:16.775340]:   >> Learning (wip) 
+[2022-01-03 23:39:18.856316]:   >> Testing (wip) 
+[2022-01-03 23:39:19.804848]:     epoch 55 > Training: [LOSS: -0.9817 | ACC: 0.9828] | Testing: [LOSS: -0.9439 | ACC: 0.9575] Ellapsed: 62.08 s | rate:0.94829
+
+[2022-01-03 23:39:19.804916]: > epoch 56/200:
+[2022-01-03 23:39:19.804951]:   >> Learning (wip) 
+[2022-01-03 23:40:22.053555]:   >> Testing (wip) 
+[2022-01-03 23:40:23.010517]:     epoch 56 > Training: [LOSS: -0.9810 | ACC: 0.9826] | Testing: [LOSS: -0.9787 | ACC: 0.9825] Ellapsed: 62.25 s | rate:0.95672
+
+[2022-01-03 23:40:23.030266]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_56:200.pth 
+
+[2022-01-03 23:40:23.103465]: Best Classification Report:
+----------------------
+[2022-01-03 23:40:23.103501]:               precision    recall  f1-score   support
+
+    positive       0.97      0.99      0.98       200
+    negative       0.99      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.98      0.98      0.98       400
+weighted avg       0.98      0.98      0.98       400
+
+[2022-01-03 23:40:23.103527]: > epoch 57/200:
+[2022-01-03 23:40:23.103549]:   >> Learning (wip) 
+[2022-01-03 23:41:24.746829]:   >> Testing (wip) 
+[2022-01-03 23:41:25.683170]:     epoch 57 > Training: [LOSS: -0.9818 | ACC: 0.9835] | Testing: [LOSS: -0.9770 | ACC: 0.9800] Ellapsed: 61.64 s | rate:0.93611
+
+[2022-01-03 23:41:25.683231]: > epoch 58/200:
+[2022-01-03 23:41:25.683266]:   >> Learning (wip) 
+[2022-01-03 23:42:27.395368]:   >> Testing (wip) 
+[2022-01-03 23:42:28.324791]:     epoch 58 > Training: [LOSS: -0.9837 | ACC: 0.9849] | Testing: [LOSS: -0.9678 | ACC: 0.9700] Ellapsed: 61.71 s | rate:0.92918
+
+[2022-01-03 23:42:28.324853]: > epoch 59/200:
+[2022-01-03 23:42:28.324880]:   >> Learning (wip) 
+[2022-01-03 23:43:29.256961]:   >> Testing (wip) 
+[2022-01-03 23:43:30.184552]:     epoch 59 > Training: [LOSS: -0.9832 | ACC: 0.9841] | Testing: [LOSS: -0.9709 | ACC: 0.9725] Ellapsed: 60.93 s | rate:0.92735
+
+[2022-01-03 23:43:30.184608]: > epoch 60/200:
+[2022-01-03 23:43:30.184634]:   >> Learning (wip) 
+[2022-01-03 23:44:31.677446]:   >> Testing (wip) 
+[2022-01-03 23:44:32.622648]:     epoch 60 > Training: [LOSS: -0.9828 | ACC: 0.9837] | Testing: [LOSS: -0.9608 | ACC: 0.9650] Ellapsed: 61.49 s | rate:0.94493
+
+[2022-01-03 23:44:32.622712]: > epoch 61/200:
+[2022-01-03 23:44:32.622750]:   >> Learning (wip) 
+[2022-01-03 23:45:35.317818]:   >> Testing (wip) 
+[2022-01-03 23:45:36.252753]:     epoch 61 > Training: [LOSS: -0.9827 | ACC: 0.9840] | Testing: [LOSS: -0.9519 | ACC: 0.9625] Ellapsed: 62.69 s | rate:0.93467
+
+[2022-01-03 23:45:36.252814]: > epoch 62/200:
+[2022-01-03 23:45:36.252850]:   >> Learning (wip) 
+[2022-01-03 23:46:37.703710]:   >> Testing (wip) 
+[2022-01-03 23:46:38.638233]:     epoch 62 > Training: [LOSS: -0.9837 | ACC: 0.9846] | Testing: [LOSS: -0.9767 | ACC: 0.9825] Ellapsed: 61.45 s | rate:0.93428
+
+[2022-01-03 23:46:38.638289]: > epoch 63/200:
+[2022-01-03 23:46:38.638317]:   >> Learning (wip) 
+[2022-01-03 23:47:39.932805]:   >> Testing (wip) 
+[2022-01-03 23:47:40.874026]:     epoch 63 > Training: [LOSS: -0.9835 | ACC: 0.9849] | Testing: [LOSS: -0.9533 | ACC: 0.9525] Ellapsed: 61.29 s | rate:0.94096
+
+[2022-01-03 23:47:40.874086]: > epoch 64/200:
+[2022-01-03 23:47:40.874114]:   >> Learning (wip) 
+[2022-01-03 23:48:42.251899]:   >> Testing (wip) 
+[2022-01-03 23:48:43.187916]:     epoch 64 > Training: [LOSS: -0.9836 | ACC: 0.9846] | Testing: [LOSS: -0.9642 | ACC: 0.9700] Ellapsed: 61.38 s | rate:0.93579
+
+[2022-01-03 23:48:43.187972]: > epoch 65/200:
+[2022-01-03 23:48:43.187998]:   >> Learning (wip) 
+[2022-01-03 23:49:44.594430]:   >> Testing (wip) 
+[2022-01-03 23:49:45.535240]:     epoch 65 > Training: [LOSS: -0.9841 | ACC: 0.9849] | Testing: [LOSS: -0.9387 | ACC: 0.9475] Ellapsed: 61.41 s | rate:0.94058
+
+[2022-01-03 23:49:45.535296]: > epoch 66/200:
+[2022-01-03 23:49:45.535321]:   >> Learning (wip) 
+[2022-01-03 23:50:47.259936]:   >> Testing (wip) 
+[2022-01-03 23:50:48.215019]:     epoch 66 > Training: [LOSS: -0.9848 | ACC: 0.9857] | Testing: [LOSS: -0.9447 | ACC: 0.9500] Ellapsed: 61.72 s | rate:0.95482
+
+[2022-01-03 23:50:48.215083]: > epoch 67/200:
+[2022-01-03 23:50:48.215112]:   >> Learning (wip) 
+[2022-01-03 23:51:49.159094]:   >> Testing (wip) 
+[2022-01-03 23:51:50.101881]:     epoch 67 > Training: [LOSS: -0.9849 | ACC: 0.9862] | Testing: [LOSS: -0.9346 | ACC: 0.9425] Ellapsed: 60.94 s | rate:0.94254
+
+[2022-01-03 23:51:50.101943]: > epoch 68/200:
+[2022-01-03 23:51:50.101971]:   >> Learning (wip) 
+[2022-01-03 23:52:50.968090]:   >> Testing (wip) 
+[2022-01-03 23:52:51.910309]:     epoch 68 > Training: [LOSS: -0.9845 | ACC: 0.9856] | Testing: [LOSS: -0.9747 | ACC: 0.9800] Ellapsed: 60.87 s | rate:0.94196
+
+[2022-01-03 23:52:51.910370]: > epoch 69/200:
+[2022-01-03 23:52:51.910396]:   >> Learning (wip) 
+[2022-01-03 23:53:52.683389]:   >> Testing (wip) 
+[2022-01-03 23:53:53.631349]:     epoch 69 > Training: [LOSS: -0.9847 | ACC: 0.9860] | Testing: [LOSS: -0.9569 | ACC: 0.9600] Ellapsed: 60.77 s | rate:0.94771
+
+[2022-01-03 23:53:53.631404]: > epoch 70/200:
+[2022-01-03 23:53:53.631431]:   >> Learning (wip) 
+[2022-01-03 23:54:54.265801]:   >> Testing (wip) 
+[2022-01-03 23:54:55.210057]:     epoch 70 > Training: [LOSS: -0.9846 | ACC: 0.9858] | Testing: [LOSS: -0.9328 | ACC: 0.9400] Ellapsed: 60.63 s | rate:0.94401
+
+[2022-01-03 23:54:55.210118]: > epoch 71/200:
+[2022-01-03 23:54:55.210144]:   >> Learning (wip) 
+[2022-01-03 23:55:56.290146]:   >> Testing (wip) 
+[2022-01-03 23:55:57.223340]:     epoch 71 > Training: [LOSS: -0.9848 | ACC: 0.9860] | Testing: [LOSS: -0.9693 | ACC: 0.9775] Ellapsed: 61.08 s | rate:0.93295
+
+[2022-01-03 23:55:57.223396]: > epoch 72/200:
+[2022-01-03 23:55:57.223423]:   >> Learning (wip) 
+[2022-01-03 23:56:58.219536]:   >> Testing (wip) 
+[2022-01-03 23:56:59.182434]:     epoch 72 > Training: [LOSS: -0.9850 | ACC: 0.9859] | Testing: [LOSS: -0.9763 | ACC: 0.9850] Ellapsed: 61.00 s | rate:0.96266
+
+[2022-01-03 23:56:59.202324]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_72:200.pth 
+
+[2022-01-03 23:56:59.290756]: Best Classification Report:
+----------------------
+[2022-01-03 23:56:59.290792]:               precision    recall  f1-score   support
+
+    positive       0.98      0.99      0.99       200
+    negative       0.99      0.97      0.98       200
+
+    accuracy                           0.98       400
+   macro avg       0.99      0.98      0.98       400
+weighted avg       0.99      0.98      0.98       400
+
+[2022-01-03 23:56:59.290818]: > epoch 73/200:
+[2022-01-03 23:56:59.290842]:   >> Learning (wip) 
+[2022-01-03 23:58:00.465656]:   >> Testing (wip) 
+[2022-01-03 23:58:01.398458]:     epoch 73 > Training: [LOSS: -0.9848 | ACC: 0.9858] | Testing: [LOSS: -0.9537 | ACC: 0.9625] Ellapsed: 61.17 s | rate:0.93254
+
+[2022-01-03 23:58:01.398523]: > epoch 74/200:
+[2022-01-03 23:58:01.398562]:   >> Learning (wip) 
+[2022-01-03 23:59:02.356482]:   >> Testing (wip) 
+[2022-01-03 23:59:03.293562]:     epoch 74 > Training: [LOSS: -0.9838 | ACC: 0.9853] | Testing: [LOSS: -0.9658 | ACC: 0.9725] Ellapsed: 60.96 s | rate:0.93686
+
+[2022-01-03 23:59:03.293618]: > epoch 75/200:
+[2022-01-03 23:59:03.293644]:   >> Learning (wip) 
+[2022-01-04 00:00:04.553499]:   >> Testing (wip) 
+[2022-01-04 00:00:05.502929]:     epoch 75 > Training: [LOSS: -0.9854 | ACC: 0.9864] | Testing: [LOSS: -0.9602 | ACC: 0.9675] Ellapsed: 61.26 s | rate:0.94918
+
+[2022-01-04 00:00:05.502988]: > epoch 76/200:
+[2022-01-04 00:00:05.503015]:   >> Learning (wip) 
+[2022-01-04 00:01:07.481026]:   >> Testing (wip) 
+[2022-01-04 00:01:08.414672]:     epoch 76 > Training: [LOSS: -0.9839 | ACC: 0.9850] | Testing: [LOSS: -0.9676 | ACC: 0.9750] Ellapsed: 61.98 s | rate:0.93341
+
+[2022-01-04 00:01:08.414728]: > epoch 77/200:
+[2022-01-04 00:01:08.414754]:   >> Learning (wip) 
+[2022-01-04 00:02:09.838861]:   >> Testing (wip) 
+[2022-01-04 00:02:10.779365]:     epoch 77 > Training: [LOSS: -0.9844 | ACC: 0.9855] | Testing: [LOSS: -0.9427 | ACC: 0.9475] Ellapsed: 61.42 s | rate:0.94027
+
+[2022-01-04 00:02:10.779420]: > epoch 78/200:
+[2022-01-04 00:02:10.779448]:   >> Learning (wip) 
+[2022-01-04 00:03:11.580097]:   >> Testing (wip) 
+[2022-01-04 00:03:12.516874]:     epoch 78 > Training: [LOSS: -0.9848 | ACC: 0.9863] | Testing: [LOSS: -0.9840 | ACC: 0.9875] Ellapsed: 60.80 s | rate:0.93653
+
+[2022-01-04 00:03:12.533398]: > Found Best Model State Dict saved @/home/jx/JX_Project/covid-xray-detection/output/CUSTOM-MODEL/latest-v8-reduced-model/models/best_state_dict_78:200.pth 
+
+[2022-01-04 00:03:12.609813]: Best Classification Report:
+----------------------
+[2022-01-04 00:03:12.609855]:               precision    recall  f1-score   support
+
+    positive       0.98      1.00      0.99       200
+    negative       1.00      0.97      0.99       200
+
+    accuracy                           0.99       400
+   macro avg       0.99      0.99      0.99       400
+weighted avg       0.99      0.99      0.99       400
+
+[2022-01-04 00:03:12.609883]: > epoch 79/200:
+[2022-01-04 00:03:12.609907]:   >> Learning (wip) 
+[2022-01-04 00:04:14.038166]:   >> Testing (wip) 
+[2022-01-04 00:04:14.977684]:     epoch 79 > Training: [LOSS: -0.9845 | ACC: 0.9854] | Testing: [LOSS: -0.9652 | ACC: 0.9725] Ellapsed: 61.43 s | rate:0.93928
+
+[2022-01-04 00:04:14.977739]: > epoch 80/200:
+[2022-01-04 00:04:14.977766]:   >> Learning (wip) 
+[2022-01-04 00:05:16.179734]:   >> Testing (wip) 
+[2022-01-04 00:05:17.128219]:     epoch 80 > Training: [LOSS: -0.9862 | ACC: 0.9874] | Testing: [LOSS: -0.9335 | ACC: 0.9350] Ellapsed: 61.20 s | rate:0.94826
+
+[2022-01-04 00:05:17.128276]: > epoch 81/200:
+[2022-01-04 00:05:17.128304]:   >> Learning (wip) 
+[2022-01-04 00:06:18.676159]:   >> Testing (wip) 
+[2022-01-04 00:06:19.638787]:     epoch 81 > Training: [LOSS: -0.9868 | ACC: 0.9876] | Testing: [LOSS: -0.9603 | ACC: 0.9700] Ellapsed: 61.55 s | rate:0.96240
+
+[2022-01-04 00:06:19.638843]: > epoch 82/200:
+[2022-01-04 00:06:19.638870]:   >> Learning (wip) 
+[2022-01-04 00:07:21.195436]:   >> Testing (wip) 
+[2022-01-04 00:07:22.124685]:     epoch 82 > Training: [LOSS: -0.9859 | ACC: 0.9873] | Testing: [LOSS: -0.9598 | ACC: 0.9600] Ellapsed: 61.56 s | rate:0.92900
+
+[2022-01-04 00:07:22.124743]: > epoch 83/200:
+[2022-01-04 00:07:22.124781]:   >> Learning (wip) 
+[2022-01-04 00:08:23.152830]:   >> Testing (wip) 
+[2022-01-04 00:08:24.091183]:     epoch 83 > Training: [LOSS: -0.9860 | ACC: 0.9872] | Testing: [LOSS: -0.9491 | ACC: 0.9525] Ellapsed: 61.03 s | rate:0.93811
+
+[2022-01-04 00:08:24.091234]: > epoch 84/200:
+[2022-01-04 00:08:24.091260]:   >> Learning (wip) 
+[2022-01-04 00:09:25.385451]:   >> Testing (wip) 
+[2022-01-04 00:09:26.328670]:     epoch 84 > Training: [LOSS: -0.9867 | ACC: 0.9877] | Testing: [LOSS: -0.9520 | ACC: 0.9550] Ellapsed: 61.29 s | rate:0.94297
+
+[2022-01-04 00:09:26.328730]: > epoch 85/200:
+[2022-01-04 00:09:26.328757]:   >> Learning (wip) 
+[2022-01-04 00:10:27.547699]:   >> Testing (wip) 
+[2022-01-04 00:10:28.484893]:     epoch 85 > Training: [LOSS: -0.9864 | ACC: 0.9871] | Testing: [LOSS: -0.9657 | ACC: 0.9700] Ellapsed: 61.22 s | rate:0.93694
+
+[2022-01-04 00:10:28.484952]: > epoch 86/200:
+[2022-01-04 00:10:28.484980]:   >> Learning (wip) 
+[2022-01-04 00:11:29.894156]:   >> Testing (wip) 
+[2022-01-04 00:11:30.838385]:     epoch 86 > Training: [LOSS: -0.9877 | ACC: 0.9887] | Testing: [LOSS: -0.9662 | ACC: 0.9750] Ellapsed: 61.41 s | rate:0.94396
+
+[2022-01-04 00:11:30.838448]: > epoch 87/200:
+[2022-01-04 00:11:30.838487]:   >> Learning (wip) 
+[2022-01-04 00:12:32.179530]:   >> Testing (wip) 
+[2022-01-04 00:12:33.113590]:     epoch 87 > Training: [LOSS: -0.9865 | ACC: 0.9874] | Testing: [LOSS: -0.9598 | ACC: 0.9675] Ellapsed: 61.34 s | rate:0.93379
+
+[2022-01-04 00:12:33.113649]: > epoch 88/200:
+[2022-01-04 00:12:33.113677]:   >> Learning (wip) 
+[2022-01-04 00:13:33.828191]:   >> Testing (wip) 
+[2022-01-04 00:13:34.770815]:     epoch 88 > Training: [LOSS: -0.9872 | ACC: 0.9885] | Testing: [LOSS: -0.9456 | ACC: 0.9550] Ellapsed: 60.71 s | rate:0.94237
+
+[2022-01-04 00:13:34.770873]: > epoch 89/200:
+[2022-01-04 00:13:34.770900]:   >> Learning (wip) 
+[2022-01-04 00:14:35.552680]:   >> Testing (wip) 
+[2022-01-04 00:14:36.474474]:     epoch 89 > Training: [LOSS: -0.9879 | ACC: 0.9888] | Testing: [LOSS: -0.8794 | ACC: 0.8775] Ellapsed: 60.78 s | rate:0.92153
+
+[2022-01-04 00:14:36.474536]: > epoch 90/200:
+[2022-01-04 00:14:36.474568]:   >> Learning (wip) 
+[2022-01-04 00:15:37.335735]:   >> Testing (wip) 
+[2022-01-04 00:15:38.272364]:     epoch 90 > Training: [LOSS: -0.9887 | ACC: 0.9897] | Testing: [LOSS: -0.9503 | ACC: 0.9550] Ellapsed: 60.86 s | rate:0.93638
+
+[2022-01-04 00:15:38.272424]: > epoch 91/200:
+[2022-01-04 00:15:38.272450]:   >> Learning (wip) 
+[2022-01-04 00:16:38.934029]:   >> Testing (wip) 
+[2022-01-04 00:16:39.858284]:     epoch 91 > Training: [LOSS: -0.9877 | ACC: 0.9887] | Testing: [LOSS: -0.9456 | ACC: 0.9550] Ellapsed: 60.66 s | rate:0.92401
+
+[2022-01-04 00:16:39.858340]: > epoch 92/200:
+[2022-01-04 00:16:39.858367]:   >> Learning (wip) 
+[2022-01-04 00:17:41.145483]:   >> Testing (wip) 
+[2022-01-04 00:17:42.079426]:     epoch 92 > Training: [LOSS: -0.9874 | ACC: 0.9885] | Testing: [LOSS: -0.9514 | ACC: 0.9575] Ellapsed: 61.29 s | rate:0.93370
+
+[2022-01-04 00:17:42.079481]: > epoch 93/200:
+[2022-01-04 00:17:42.079509]:   >> Learning (wip) 
+[2022-01-04 00:18:42.831212]:   >> Testing (wip) 
+[2022-01-04 00:18:43.761657]:     epoch 93 > Training: [LOSS: -0.9881 | ACC: 0.9893] | Testing: [LOSS: -0.9269 | ACC: 0.9325] Ellapsed: 60.75 s | rate:0.93019
+
+[2022-01-04 00:18:43.761714]: > epoch 94/200:
+[2022-01-04 00:18:43.761751]:   >> Learning (wip) 
+[2022-01-04 00:19:45.114006]:   >> Testing (wip) 
+[2022-01-04 00:19:46.060203]:     epoch 94 > Training: [LOSS: -0.9863 | ACC: 0.9871] | Testing: [LOSS: -0.9148 | ACC: 0.9225] Ellapsed: 61.35 s | rate:0.94593
+
+[2022-01-04 00:19:46.060266]: > epoch 95/200:
+[2022-01-04 00:19:46.060303]:   >> Learning (wip) 
+[2022-01-04 00:20:47.476249]:   >> Testing (wip) 
+[2022-01-04 00:20:48.417404]:     epoch 95 > Training: [LOSS: -0.9887 | ACC: 0.9894] | Testing: [LOSS: -0.9439 | ACC: 0.9575] Ellapsed: 61.42 s | rate:0.94090
+
+[2022-01-04 00:20:48.417465]: > epoch 96/200:
+[2022-01-04 00:20:48.417494]:   >> Learning (wip) 
+[2022-01-04 00:21:50.009302]:   >> Testing (wip) 
+[2022-01-04 00:21:50.932647]:     epoch 96 > Training: [LOSS: -0.9884 | ACC: 0.9897] | Testing: [LOSS: -0.9433 | ACC: 0.9500] Ellapsed: 61.59 s | rate:0.92310
+
+[2022-01-04 00:21:50.932703]: > epoch 97/200:
+[2022-01-04 00:21:50.932730]:   >> Learning (wip) 
+[2022-01-04 00:22:52.056712]:   >> Testing (wip) 
+[2022-01-04 00:22:52.986082]:     epoch 97 > Training: [LOSS: -0.9887 | ACC: 0.9899] | Testing: [LOSS: -0.9328 | ACC: 0.9325] Ellapsed: 61.12 s | rate:0.92911
+
+[2022-01-04 00:22:52.986138]: > epoch 98/200:
+[2022-01-04 00:22:52.986164]:   >> Learning (wip) 
+[2022-01-04 00:23:53.542422]:   >> Testing (wip) 
+[2022-01-04 00:23:54.489241]:     epoch 98 > Training: [LOSS: -0.9888 | ACC: 0.9897] | Testing: [LOSS: -0.9634 | ACC: 0.9675] Ellapsed: 60.56 s | rate:0.94656
+
+[2022-01-04 00:23:54.489298]: > epoch 99/200:
+[2022-01-04 00:23:54.489339]:   >> Learning (wip) 
+[2022-01-04 00:24:56.292444]:   >> Testing (wip) 
+[2022-01-04 00:24:57.237405]:     epoch 99 > Training: [LOSS: -0.9895 | ACC: 0.9906] | Testing: [LOSS: -0.9601 | ACC: 0.9650] Ellapsed: 61.80 s | rate:0.94471
+
+[2022-01-04 00:24:57.237460]: > epoch 100/200:
+[2022-01-04 00:24:57.237489]:   >> Learning (wip) 
+[2022-01-04 00:25:59.306951]:   >> Testing (wip) 
+[2022-01-04 00:26:00.244501]:     epoch 100 > Training: [LOSS: -0.9890 | ACC: 0.9901] | Testing: [LOSS: -0.9568 | ACC: 0.9650] Ellapsed: 62.07 s | rate:0.93729
+
+[2022-01-04 00:26:00.244560]: > epoch 101/200:
+[2022-01-04 00:26:00.244588]:   >> Learning (wip) 
+[2022-01-04 00:27:01.701882]:   >> Testing (wip) 
+[2022-01-04 00:27:02.661785]:     epoch 101 > Training: [LOSS: -0.9890 | ACC: 0.9899] | Testing: [LOSS: -0.9464 | ACC: 0.9575] Ellapsed: 61.46 s | rate:0.95965
+
+[2022-01-04 00:27:02.661843]: > epoch 102/200:
+[2022-01-04 00:27:02.661873]:   >> Learning (wip) 
+[2022-01-04 00:28:04.286246]:   >> Testing (wip) 
+[2022-01-04 00:28:05.213939]:     epoch 102 > Training: [LOSS: -0.9886 | ACC: 0.9894] | Testing: [LOSS: -0.9358 | ACC: 0.9450] Ellapsed: 61.62 s | rate:0.92744
+
+[2022-01-04 00:28:05.213991]: > epoch 103/200:
+[2022-01-04 00:28:05.214018]:   >> Learning (wip) 
+[2022-01-04 00:29:06.542536]:   >> Testing (wip) 
+[2022-01-04 00:29:07.491103]:     epoch 103 > Training: [LOSS: -0.9898 | ACC: 0.9907] | Testing: [LOSS: -0.9491 | ACC: 0.9575] Ellapsed: 61.33 s | rate:0.94833
+
+[2022-01-04 00:29:07.491163]: > epoch 104/200:
+[2022-01-04 00:29:07.491189]:   >> Learning (wip) 
+[2022-01-04 00:30:08.625340]:   >> Testing (wip) 
+[2022-01-04 00:30:09.549230]:     epoch 104 > Training: [LOSS: -0.9894 | ACC: 0.9904] | Testing: [LOSS: -0.9461 | ACC: 0.9525] Ellapsed: 61.13 s | rate:0.92365
+
+[2022-01-04 00:30:09.549289]: > epoch 105/200:
+[2022-01-04 00:30:09.549316]:   >> Learning (wip) 
+[2022-01-04 00:31:10.970335]:   >> Testing (wip) 
+[2022-01-04 00:31:11.923972]:     epoch 105 > Training: [LOSS: -0.9899 | ACC: 0.9908] | Testing: [LOSS: -0.9306 | ACC: 0.9425] Ellapsed: 61.42 s | rate:0.95340
+
+[2022-01-04 00:31:11.924027]: > epoch 106/200:
+[2022-01-04 00:31:11.924054]:   >> Learning (wip) 
+[2022-01-04 00:32:13.198961]:   >> Testing (wip) 
+[2022-01-04 00:32:14.131382]:     epoch 106 > Training: [LOSS: -0.9900 | ACC: 0.9912] | Testing: [LOSS: -0.9389 | ACC: 0.9400] Ellapsed: 61.27 s | rate:0.93217
+
+[2022-01-04 00:32:14.131445]: > epoch 107/200:
+[2022-01-04 00:32:14.131473]:   >> Learning (wip) 
+[2022-01-04 00:33:14.543257]:   >> Testing (wip) 
+[2022-01-04 00:33:15.473524]:     epoch 107 > Training: [LOSS: -0.9904 | ACC: 0.9914] | Testing: [LOSS: -0.9368 | ACC: 0.9475] Ellapsed: 60.41 s | rate:0.93000
+
+[2022-01-04 00:33:15.473583]: > epoch 108/200:
+[2022-01-04 00:33:15.473609]:   >> Learning (wip) 
+[2022-01-04 00:34:15.989911]:   >> Testing (wip) 
+[2022-01-04 00:34:16.909971]:     epoch 108 > Training: [LOSS: -0.9904 | ACC: 0.9914] | Testing: [LOSS: -0.9393 | ACC: 0.9425] Ellapsed: 60.52 s | rate:0.91981
+
+[2022-01-04 00:34:16.910035]: > epoch 109/200:
+[2022-01-04 00:34:16.910064]:   >> Learning (wip) 
+[2022-01-04 00:35:18.494239]:   >> Testing (wip) 
+[2022-01-04 00:35:19.421008]:     epoch 109 > Training: [LOSS: -0.9899 | ACC: 0.9912] | Testing: [LOSS: -0.9545 | ACC: 0.9575] Ellapsed: 61.58 s | rate:0.92647
+
+[2022-01-04 00:35:19.421065]: [WARNING] EARLY STOPPING ===== 
+[2022-01-04 00:35:19.438408]: => TOTAL Training + Validation Time: 112.808 min
