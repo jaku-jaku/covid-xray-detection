@@ -4,6 +4,7 @@
 - Competition Details: https://r7.ieee.org/montreal-sight/ai-against-covid-19/#Dates
 - Dataset (Kaggle): https://www.kaggle.com/andyczhao/covidx-cxr2
 - eval.ai (Submission): https://eval.ai/web/challenges/challenge-page/925/evaluation
+- second round report: https://github.com/jaku-jaku/covid-xray-detection/blob/usr/jack/round-two/%5BWaterlooKids%5DAI_against_COVID_19_Round2_Report.pdf
 
 ### Opening Ceremony Notes:
 
