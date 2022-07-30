@@ -13,7 +13,6 @@ import torchvision.transforms as ttf
 from torchvision.datasets import MNIST
 from sklearn.metrics import confusion_matrix, classification_report
 import jx_lib
-import pandas as pd
 
 #######################
 ##### Functions #######
@@ -125,9 +124,6 @@ class ProgressReport:
             plt.close(fig)
         return fig
 
-    def save(self, OUT_DIR, tag):
-        df = pd.DataFrame.from_dict(self.history)
-        df.to_csv("{}/training_history[{}].csv".format(OUT_DIR, tag), index = False, header=True)
 
 class AddGaussianNoise(object):
     def __init__(self, mean=0., std=1., p=1):
@@ -334,10 +330,6 @@ class CNN_MODEL_TRAINER:
         best_test_acc = 0
         best_net = None
         t_start = time.time()
-
-        _print("=== SUMMARY ===")
-        _print(jx_lib.summary(net, (3,320,320)))
-
         # Cross entropy
         try:
             for epoch in range(num_epochs):
